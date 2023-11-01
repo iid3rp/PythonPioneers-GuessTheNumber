@@ -1,0 +1,10 @@
+C:\Users\Administrator\source\repos\GuessTheNumberGame\bin\Debug\GuessTheNumberGame.exe.config
+C:\Users\Administrator\source\repos\GuessTheNumberGame\bin\Debug\GuessTheNumberGame.exe
+C:\Users\Administrator\source\repos\GuessTheNumberGame\bin\Debug\GuessTheNumberGame.pdb
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.MainMenuForm.resources
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.Properties.Resources.resources
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.exe
+C:\Users\Administrator\source\repos\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.pdb
