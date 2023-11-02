@@ -63,46 +63,6 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ForestWallpaperPanel {
-            get {
-                object obj = ResourceManager.GetObject("ForestWallpaperPanel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ForestWallpaperPanel_2 {
-            get {
-                object obj = ResourceManager.GetObject("ForestWallpaperPanel_2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ForestWallpaperPanel1 {
-            get {
-                object obj = ResourceManager.GetObject("ForestWallpaperPanel1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap HeartImageLogo {
-            get {
-                object obj = ResourceManager.GetObject("HeartImageLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap MainMenuBackgroud {
             get {
                 object obj = ResourceManager.GetObject("MainMenuBackgroud", resourceCulture);
