@@ -117,4 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>* The player must pay before playing.
+
+* The player must guess the number within a certain
+attempt or till the timer has ran out.
+
+* If the player has guessed the number, they get
+
+the prizes based on the difficulty that has guessed.
+
+* Have fun! :3
+
+
+</value>
+  </data>
 </root>

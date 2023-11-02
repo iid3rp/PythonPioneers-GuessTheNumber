@@ -104,5 +104,8 @@
   <ItemGroup>
     <None Include="Resources\MainMenuBackground720p.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\github-mark-white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

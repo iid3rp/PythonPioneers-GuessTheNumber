@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace GuessTheNumberGame
 {
@@ -17,28 +18,43 @@ namespace GuessTheNumberGame
                      IsNormal = true,
                      IsMaximized = false;
 
-        private Point offset,
-                      DifficultyCurrentLocation;
+        private Point offset;
         public StartDifficultyForm(Point CurrentLocation, 
                                    bool IsMaximizedMain,
                                    bool IsNormalMain)
         {
             InitializeComponent();
             this.Location = CurrentLocation;
-            DifficultyCurrentLocation = CurrentLocation;
             IsNormal = IsNormalMain;
             IsMaximized = IsMaximizedMain;
-            WindowChecking();
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void StartDifficultyLoad(object sender, EventArgs e)
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.None;
             typeof(Panel).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null, this.DifficultyPanel, new object[] { true });
-
-            this.FormBorderStyle = FormBorderStyle.None;
+            if (IsNormal && !(IsMaximized))
+            {
+                IsNormal = false;
+                IsMaximized = true;
+                WindowLabel.Text = "[]]";
+                this.WindowState = FormWindowState.Maximized;
+                this.DifficultyPanel.BackgroundImage = Properties.Resources.MainMenuBackgroud;
+            }
+            else
+            {
+                IsNormal = true;
+                IsMaximized = false;
+                WindowLabel.Text = "[]";
+                this.WindowState = FormWindowState.Normal;
+                this.DifficultyPanel.BackgroundImage = Properties.Resources.MainMenuBackground720p;
+                this.Size = new Size(1280, 720);
+            }
+            label2.BackColor = Color.FromArgb(60, Color.White);
         }
 
         private void WindowClick(object sender, EventArgs e)
@@ -86,7 +102,7 @@ namespace GuessTheNumberGame
 
         private void Label1_Click(object sender, EventArgs e)
         {
-            MainMenuForm Form1 = new MainMenuForm();
+            MainMenuForm Form1 = new MainMenuForm(IsNormal, IsMaximized);
             Form1.Show();
             this.Close();
         }

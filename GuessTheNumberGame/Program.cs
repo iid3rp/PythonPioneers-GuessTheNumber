@@ -9,6 +9,8 @@ namespace GuessTheNumberGame
 {
     internal static class Program
     {
+        private readonly static bool IsNormal = true,
+                                     IsMaximized = false;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,7 +19,7 @@ namespace GuessTheNumberGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenuForm());
+            Application.Run(new MainMenuForm(IsNormal, IsMaximized));
         }
     }
 }
