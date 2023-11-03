@@ -32,77 +32,32 @@ namespace GuessTheNumberGame
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.PressAnyButtonLabel = new System.Windows.Forms.Label();
-            this.ClosingLabel = new System.Windows.Forms.Label();
-            this.WindowLabel = new System.Windows.Forms.Label();
-            this.MinimizeLabel = new System.Windows.Forms.Label();
+            this.TimeToday = new System.Windows.Forms.Timer(this.components);
+            this.FadingBackground = new System.Windows.Forms.Timer(this.components);
             this.MainMenuPanel = new System.Windows.Forms.Panel();
             this.GuessTheNumberLogo = new System.Windows.Forms.PictureBox();
             this.GitHubPicture = new System.Windows.Forms.PictureBox();
             this.TimeLabel = new System.Windows.Forms.Label();
-            this.TimeToday = new System.Windows.Forms.Timer(this.components);
+            this.MinimizeLabel = new System.Windows.Forms.Label();
+            this.WindowLabel = new System.Windows.Forms.Label();
+            this.ClosingLabel = new System.Windows.Forms.Label();
+            this.PressAnyButtonLabel = new System.Windows.Forms.Label();
+            this.ClosingTime = new System.Windows.Forms.Timer(this.components);
+            this.OpeningTime = new System.Windows.Forms.Timer(this.components);
             this.MainMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GuessTheNumberLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GitHubPicture)).BeginInit();
             this.SuspendLayout();
             // 
-            // PressAnyButtonLabel
+            // TimeToday
             // 
-            this.PressAnyButtonLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PressAnyButtonLabel.AutoSize = true;
-            this.PressAnyButtonLabel.BackColor = System.Drawing.Color.Transparent;
-            this.PressAnyButtonLabel.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PressAnyButtonLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.PressAnyButtonLabel.Location = new System.Drawing.Point(372, 607);
-            this.PressAnyButtonLabel.Name = "PressAnyButtonLabel";
-            this.PressAnyButtonLabel.Size = new System.Drawing.Size(535, 45);
-            this.PressAnyButtonLabel.TabIndex = 0;
-            this.PressAnyButtonLabel.Text = "-  Press Any Button to Continue   -";
-            this.PressAnyButtonLabel.Click += new System.EventHandler(this.Label1_Click);
+            this.TimeToday.Interval = 1000;
+            this.TimeToday.Tick += new System.EventHandler(this.TimeTicking);
             // 
-            // ClosingLabel
+            // FadingBackground
             // 
-            this.ClosingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClosingLabel.AutoSize = true;
-            this.ClosingLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ClosingLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClosingLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ClosingLabel.Location = new System.Drawing.Point(1241, 5);
-            this.ClosingLabel.Name = "ClosingLabel";
-            this.ClosingLabel.Size = new System.Drawing.Size(20, 20);
-            this.ClosingLabel.TabIndex = 1;
-            this.ClosingLabel.Text = "X";
-            this.ClosingLabel.Click += new System.EventHandler(this.ClosingLabelClick);
-            // 
-            // WindowLabel
-            // 
-            this.WindowLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.WindowLabel.AutoSize = true;
-            this.WindowLabel.BackColor = System.Drawing.Color.Transparent;
-            this.WindowLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WindowLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.WindowLabel.Location = new System.Drawing.Point(1217, 5);
-            this.WindowLabel.Name = "WindowLabel";
-            this.WindowLabel.Size = new System.Drawing.Size(18, 18);
-            this.WindowLabel.TabIndex = 3;
-            this.WindowLabel.Text = "[]";
-            this.WindowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.WindowLabel.Click += new System.EventHandler(this.WindowLabelClick);
-            // 
-            // MinimizeLabel
-            // 
-            this.MinimizeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MinimizeLabel.AutoSize = true;
-            this.MinimizeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.MinimizeLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimizeLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.MinimizeLabel.Location = new System.Drawing.Point(1188, 5);
-            this.MinimizeLabel.Name = "MinimizeLabel";
-            this.MinimizeLabel.Size = new System.Drawing.Size(23, 18);
-            this.MinimizeLabel.TabIndex = 4;
-            this.MinimizeLabel.Text = "---";
-            this.MinimizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MinimizeLabel.Click += new System.EventHandler(this.MinimizeLabelClick);
+            this.FadingBackground.Interval = 1;
+            this.FadingBackground.Tick += new System.EventHandler(this.FadingTick);
             // 
             // MainMenuPanel
             // 
@@ -162,10 +117,73 @@ namespace GuessTheNumberGame
             this.TimeLabel.UseCompatibleTextRendering = true;
             this.TimeLabel.UseMnemonic = false;
             // 
-            // TimeToday
+            // MinimizeLabel
             // 
-            this.TimeToday.Interval = 1000;
-            this.TimeToday.Tick += new System.EventHandler(this.TimeTicking);
+            this.MinimizeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MinimizeLabel.AutoSize = true;
+            this.MinimizeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MinimizeLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimizeLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.MinimizeLabel.Location = new System.Drawing.Point(1188, 5);
+            this.MinimizeLabel.Name = "MinimizeLabel";
+            this.MinimizeLabel.Size = new System.Drawing.Size(23, 18);
+            this.MinimizeLabel.TabIndex = 4;
+            this.MinimizeLabel.Text = "---";
+            this.MinimizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MinimizeLabel.Click += new System.EventHandler(this.MinimizeLabelClick);
+            // 
+            // WindowLabel
+            // 
+            this.WindowLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.WindowLabel.AutoSize = true;
+            this.WindowLabel.BackColor = System.Drawing.Color.Transparent;
+            this.WindowLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WindowLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.WindowLabel.Location = new System.Drawing.Point(1217, 5);
+            this.WindowLabel.Name = "WindowLabel";
+            this.WindowLabel.Size = new System.Drawing.Size(18, 18);
+            this.WindowLabel.TabIndex = 3;
+            this.WindowLabel.Text = "[]";
+            this.WindowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.WindowLabel.Click += new System.EventHandler(this.WindowLabelClick);
+            // 
+            // ClosingLabel
+            // 
+            this.ClosingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClosingLabel.AutoSize = true;
+            this.ClosingLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ClosingLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClosingLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.ClosingLabel.Location = new System.Drawing.Point(1241, 5);
+            this.ClosingLabel.Name = "ClosingLabel";
+            this.ClosingLabel.Size = new System.Drawing.Size(20, 20);
+            this.ClosingLabel.TabIndex = 1;
+            this.ClosingLabel.Text = "X";
+            this.ClosingLabel.Click += new System.EventHandler(this.ClosingLabelClick);
+            // 
+            // PressAnyButtonLabel
+            // 
+            this.PressAnyButtonLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.PressAnyButtonLabel.AutoSize = true;
+            this.PressAnyButtonLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PressAnyButtonLabel.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PressAnyButtonLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.PressAnyButtonLabel.Location = new System.Drawing.Point(372, 607);
+            this.PressAnyButtonLabel.Name = "PressAnyButtonLabel";
+            this.PressAnyButtonLabel.Size = new System.Drawing.Size(535, 45);
+            this.PressAnyButtonLabel.TabIndex = 0;
+            this.PressAnyButtonLabel.Text = "-  Press Any Button to Continue   -";
+            this.PressAnyButtonLabel.Click += new System.EventHandler(this.Label1_Click);
+            // 
+            // ClosingTime
+            // 
+            this.ClosingTime.Interval = 5;
+            this.ClosingTime.Tick += new System.EventHandler(this.ClosingTick);
+            // 
+            // OpeningTime
+            // 
+            this.OpeningTime.Interval = 5;
+            this.OpeningTime.Tick += new System.EventHandler(this.OpeningTick);
             // 
             // MainMenuForm
             // 
@@ -201,6 +219,9 @@ namespace GuessTheNumberGame
         private Label TimeLabel;
         private PictureBox GitHubPicture;
         private PictureBox GuessTheNumberLogo;
+        private Timer FadingBackground;
+        private Timer ClosingTime;
+        private Timer OpeningTime;
     }
 }
 

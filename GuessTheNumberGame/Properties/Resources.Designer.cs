@@ -63,6 +63,16 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DarkBackground {
+            get {
+                object obj = ResourceManager.GetObject("DarkBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GitHub40p {
             get {
                 object obj = ResourceManager.GetObject("GitHub40p", resourceCulture);

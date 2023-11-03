@@ -19,11 +19,14 @@ namespace GuessTheNumberGame
         private readonly PictureBox Background;
         private bool IsDragging = false,
                      IsInMain = true;
+        private int OpacityValue = 1;
 
         private Point NewLocation,
                       Offset,
                       MainCurrentLocation;
         #region Difficulty Interface Section  |  Private Objects goes here :3
+
+         
 
         #endregion
 
@@ -35,9 +38,8 @@ namespace GuessTheNumberGame
         {
             InitializeComponent(); // the main menu panel :3
 
-            this.StartPosition = FormStartPosition.CenterScreen; ;
-            Background = new PictureBox();
-            Background = CreateBackground();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Opacity = 0;
         }
 
         #region Main Menu stuff goes here :3
@@ -48,19 +50,16 @@ namespace GuessTheNumberGame
             this.FormBorderStyle = FormBorderStyle.None;
             this.BackgroundImage = Properties.Resources.MainMenuBackgroud;
             this.BackColor = Color.White;
+            
 
             typeof(Form).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null, this.MainMenuPanel, new object[] { true }); // double buffer the form
 
-            TimeToday.Start(); // starting the time and date process :3
-        }
+            Thread.Sleep(100); // just not pausing the smoothness :3
 
-        private PictureBox CreateBackground()
-        {
-            Background.Image = Properties.Resources.MainMenuBackgroud;
-            Background.SizeMode = PictureBoxSizeMode.StretchImage;
-            return Background;
+            TimeToday.Start(); // starting the time and date process :3
+            OpeningTime.Start();
         }
 
         private void WindowDown(object sender, MouseEventArgs e)
@@ -96,9 +95,7 @@ namespace GuessTheNumberGame
 
             if (result == DialogResult.Yes)
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                Application.Exit();
+                ClosingTime.Start();
             }
         }
 
@@ -132,7 +129,7 @@ namespace GuessTheNumberGame
             //this.Hide();
             if (IsInMain)
             {
-                DifficultyInterface();
+                FadingBackground.Start();
             }
             else
             {
@@ -143,6 +140,30 @@ namespace GuessTheNumberGame
         private void WindowLabelClick(object sender, EventArgs e)
         {
             WindowChecking();
+        }
+
+        private void FadingTick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ClosingTick(object sender, EventArgs e)
+        {
+            this.Opacity -= .04;
+            if(this.Opacity == 0)
+            {
+                ClosingTime.Stop();
+                Application.Exit();
+            }
+        }
+
+        private void OpeningTick(object sender, EventArgs e)
+        {
+            this.Opacity += 0.1;
+            if(this.Opacity == 1)
+            {
+                OpeningTime.Stop();
+            }
         }
 
         private void WindowChecking()

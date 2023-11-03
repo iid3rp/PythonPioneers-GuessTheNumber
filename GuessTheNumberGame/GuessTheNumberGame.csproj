@@ -137,5 +137,11 @@
   <ItemGroup>
     <None Include="Resources\GuessTheNumberLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FadeBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DarkBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

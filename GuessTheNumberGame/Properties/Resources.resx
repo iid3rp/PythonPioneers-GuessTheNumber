@@ -124,10 +124,13 @@
   <data name="MainMenuBackground720p" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainMenuBackground720p.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GuessTheNumberLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GuessTheNumberLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MainMenuBackgroud" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainMenuBackgroud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GuessTheNumberLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GuessTheNumberLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DarkBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DarkBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
