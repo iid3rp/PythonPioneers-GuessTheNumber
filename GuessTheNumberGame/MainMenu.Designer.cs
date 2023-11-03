@@ -195,6 +195,7 @@ namespace GuessTheNumberGame
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.MainMenuPanel);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "MainMenuForm";
             this.Text = "Python Pioneers | Guess The Number";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));

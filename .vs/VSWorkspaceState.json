@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GuessTheNumberGame"
   ],
+  "SelectedNode": "\\GuessTheNumberGame\\MainMenu.cs",
   "PreviewInSolutionExplorer": false
 }

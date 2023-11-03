@@ -65,7 +65,7 @@ namespace GuessTheNumberGame
                 IsMaximized = true;
                 WindowLabel.Text = "[]]";
                 this.WindowState = FormWindowState.Maximized;
-                this.StartPanel.BackgroundImage = Properties.Resources.MainMenuBackgroud;
+                this.StartPanel.BackgroundImage = Properties.Resources.MainMenuBackground;
             }
             else
             {

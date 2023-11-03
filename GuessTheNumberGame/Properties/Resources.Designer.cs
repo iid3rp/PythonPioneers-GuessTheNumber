@@ -93,9 +93,9 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MainMenuBackgroud {
+        internal static System.Drawing.Bitmap MainMenuBackground {
             get {
-                object obj = ResourceManager.GetObject("MainMenuBackgroud", resourceCulture);
+                object obj = ResourceManager.GetObject("MainMenuBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

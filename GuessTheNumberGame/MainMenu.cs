@@ -48,7 +48,7 @@ namespace GuessTheNumberGame
             //the initialization of the form itself :3
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.BackgroundImage = Properties.Resources.MainMenuBackgroud;
+            this.BackgroundImage = Properties.Resources.MainMenuBackground;
             this.BackColor = Color.White;
             
 
