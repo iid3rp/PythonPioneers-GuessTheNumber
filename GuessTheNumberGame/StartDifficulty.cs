@@ -14,19 +14,13 @@ namespace GuessTheNumberGame
 {
     public partial class StartDifficultyForm : Form
     {
-        private bool IsDragging = false,
-                     IsNormal = true,
-                     IsMaximized = false;
+        private bool IsDragging = false;
 
         private Point offset;
-        public StartDifficultyForm(Point CurrentLocation, 
-                                   bool IsMaximizedMain,
-                                   bool IsNormalMain)
+        public StartDifficultyForm(Point CurrentLocation)
         {
             InitializeComponent();
             this.Location = CurrentLocation;
-            IsNormal = IsNormalMain;
-            IsMaximized = IsMaximizedMain;
             this.FormBorderStyle = FormBorderStyle.None;
         }
 
@@ -37,21 +31,15 @@ namespace GuessTheNumberGame
             typeof(Panel).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null, this.DifficultyPanel, new object[] { true });
-            if (IsNormal && !(IsMaximized))
+            if (this.WindowState == FormWindowState.Normal)
             {
-                IsNormal = false;
-                IsMaximized = true;
                 WindowLabel.Text = "[]]";
                 this.WindowState = FormWindowState.Maximized;
-                this.DifficultyPanel.BackgroundImage = Properties.Resources.MainMenuBackgroud;
             }
             else
             {
-                IsNormal = true;
-                IsMaximized = false;
                 WindowLabel.Text = "[]";
                 this.WindowState = FormWindowState.Normal;
-                this.DifficultyPanel.BackgroundImage = Properties.Resources.MainMenuBackground720p;
                 this.Size = new Size(1280, 720);
             }
             label2.BackColor = Color.FromArgb(60, Color.White);
@@ -81,28 +69,12 @@ namespace GuessTheNumberGame
 
         private void WindowChecking()
         {
-            if (IsNormal && !(IsMaximized))
-            {
-                IsNormal = false;
-                IsMaximized = true;
-                WindowLabel.Text = "[]]";
-                this.WindowState = FormWindowState.Maximized;
-                this.DifficultyPanel.BackgroundImage = Properties.Resources.MainMenuBackgroud;
-            }
-            else
-            {
-                IsNormal = true;
-                IsMaximized = false;
-                WindowLabel.Text = "[]";
-                this.WindowState = FormWindowState.Normal;
-                this.DifficultyPanel.BackgroundImage = Properties.Resources.MainMenuBackground720p;
-                this.Size = new Size(1280, 720);
-            }
+
         }
 
         private void Label1_Click(object sender, EventArgs e)
         {
-            MainMenuForm Form1 = new MainMenuForm(IsNormal, IsMaximized);
+            MainMenuForm Form1 = new MainMenuForm();
             Form1.Show();
             this.Close();
         }

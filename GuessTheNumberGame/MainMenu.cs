@@ -18,50 +18,42 @@ namespace GuessTheNumberGame
     {
         private readonly PictureBox Background;
         private bool IsDragging = false,
-                     IsNormal = true,
-                     IsMaximized = false;
+                     IsInMain = true;
 
         private Point NewLocation,
                       Offset,
                       MainCurrentLocation;
+        #region Difficulty Interface Section  |  Private Objects goes here :3
 
-        public MainMenuForm(bool IsMaximizedForm,
-                            bool IsNormalForm)
+        #endregion
+
+        #region Guess The Number Interface Section  |  Private Objects goes here :3
+
+        #endregion
+
+        public MainMenuForm()
         {
-            InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            IsNormal = IsNormalForm;
-            IsMaximized = IsMaximizedForm;
+            InitializeComponent(); // the main menu panel :3
+
+            this.StartPosition = FormStartPosition.CenterScreen; ;
             Background = new PictureBox();
             Background = CreateBackground();
         }
 
+        #region Main Menu stuff goes here :3
         private void MainMenuLoad(object sender, EventArgs e)
         {
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            //the initialization of the form itself :3
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.FormBorderStyle = FormBorderStyle.None;
-            typeof(Panel).InvokeMember("DoubleBuffered",
+            this.BackgroundImage = Properties.Resources.MainMenuBackgroud;
+            this.BackColor = Color.White;
+
+            typeof(Form).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-            null, this.MainMenuPanel, new object[] { true });
-            this.MainMenuPanel.BackgroundImage = Properties.Resources.MainMenuBackground720p;
-            if (IsNormal && !(IsMaximized))
-            {
-                IsNormal = false;
-                IsMaximized = true;
-                WindowLabel.Text = "[]]";
-                this.WindowState = FormWindowState.Maximized;
-                this.MainMenuPanel.BackgroundImage = Properties.Resources.MainMenuBackgroud;
-            }
-            else
-            {
-                IsNormal = true;
-                IsMaximized = false;
-                WindowLabel.Text = "[]";
-                this.WindowState = FormWindowState.Normal;
-                this.MainMenuPanel.BackgroundImage = Properties.Resources.MainMenuBackground720p;
-                this.Size = new Size(1280, 720);
-            }
-            TimeToday.Start();
+            null, this.MainMenuPanel, new object[] { true }); // double buffer the form
+
+            TimeToday.Start(); // starting the time and date process :3
         }
 
         private PictureBox CreateBackground()
@@ -120,7 +112,7 @@ namespace GuessTheNumberGame
             TimeLabel.Text = DateTime.Now.ToString("dddd, M/d/yyyy | HH:mm:ss");
         }
 
-        private void GitHubPictureLink(object sender, EventArgs e)
+        private void GitHubPictureClick(object sender, EventArgs e)
         {
             Process.Start("https://github.com/iid3rp/PythonPioneers-GuessTheNumber");
         }
@@ -128,18 +120,24 @@ namespace GuessTheNumberGame
         private void Label1_Click(object sender, EventArgs e)
         {
             MainCurrentLocation = this.Location;
-            var StartDifficultyForm = new StartDifficultyForm(MainCurrentLocation, 
-                                                              IsNormal,
-                                                              IsMaximized);
+            var StartDifficultyForm = new StartDifficultyForm(MainCurrentLocation);
             StartDifficultyForm.Show();
             this.Hide();
         }
 
         private void MainMenuPress(object sender, KeyEventArgs e)
         {
-            StartForm GuessTheGameStart = new StartForm();
-            GuessTheGameStart.Show();
-            this.Hide();
+            //StartForm GuessTheGameStart = new StartForm();
+            //GuessTheGameStart.Show();
+            //this.Hide();
+            if (IsInMain)
+            {
+                DifficultyInterface();
+            }
+            else
+            {
+                MainMenuShow();
+            }
         }
 
         private void WindowLabelClick(object sender, EventArgs e)
@@ -149,27 +147,55 @@ namespace GuessTheNumberGame
 
         private void WindowChecking()
         {
-            if (IsNormal && !(IsMaximized))
+            if (this.WindowState == FormWindowState.Normal)
             {
-                IsNormal = false;
-                IsMaximized = true;
                 WindowLabel.Text = "[]]";
+                GitHubPicture.Size = new Size(40, 40);
+                GitHubPicture.Location = new Point(GitHubPicture.Location.X, (GitHubPicture.Location.Y - 20));
+                GuessTheNumberLogo.Size = new Size(1280, 640);
                 this.WindowState = FormWindowState.Maximized;
-                this.MainMenuPanel.BackgroundImage = Properties.Resources.MainMenuBackgroud;
-                Background.Size = this.ClientSize;
-                this.FormBorderStyle = FormBorderStyle.None;
             }
             else
             {
-                IsNormal = true;
-                IsMaximized = false;
                 WindowLabel.Text = "[]";
+                GuessTheNumberLogo.Size = new Size(720, 360);
+                GitHubPicture.Size = new Size(20, 20);
+                GitHubPicture.Location = new Point(GitHubPicture.Location.X, (GitHubPicture.Location.Y + 20));
                 this.WindowState = FormWindowState.Normal;
-                this.MainMenuPanel.BackgroundImage = Properties.Resources.MainMenuBackground720p;
                 this.Size = new Size(1280, 720);
-                this.FormBorderStyle = FormBorderStyle.None;
-                Background.Size = this.ClientSize;
             }
+            GuessTheNumberLogo.Location = new Point(((this.Size.Width / 2) - GuessTheNumberLogo.Width / 2), -35);
         }
+        #endregion
+
+        #region Diificulty Choices stuff goes here :3
+        private void DifficultyInterface()
+        {
+            IsInMain = false;
+            GitHubPicture.Hide();
+            GuessTheNumberLogo.Hide();
+            PressAnyButtonLabel.Hide();
+
+
+        }
+
+        #endregion
+
+        #region Main Menu Opening Stuff goes here :3
+
+        private void MainMenuShow()
+        {
+            IsInMain = true;
+            GitHubPicture.Show();
+            GuessTheNumberLogo.Show();
+            PressAnyButtonLabel.Show();
+        }
+
+        #endregion
+
+        #region Starting Process of Guess The Number Game goes here :3
+
+        #endregion
+
     }
 }
