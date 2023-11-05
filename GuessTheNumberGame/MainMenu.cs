@@ -17,34 +17,43 @@ namespace GuessTheNumberGame
 {
     public partial class MainMenuForm : Form
     {
-        private readonly PictureBox Background;
-        private bool IsDragging = false,
-                     IsInMain = true;
-        private int OpacityValue = 1,
-                    LogoKeypoint = 0;
+        private readonly PictureBox Background; // this is kinda useless tbh
 
-        private Point NewLocation,
-                      Offset,
-                      MainCurrentLocation;
+        #region Private values goes here: :3
+        private bool
+        IsDragging = false; // the dragging boolean for the form moving in normal form size
+        
+        private int 
+        OpacityValue = 1, // opacity value for the form itself when it opens/closes
+        LogoKeypoint = 0; // GuessTheNumberLogo height keypoint initialization
 
-        private int[] ExpoTransition =
+        // guessing number variables
+        CurrentNumber = 0, // current number holder
+        GuessingLimit = 0, // guessing limit numebr to use the limit in the number guess
+        minutesLeft = 0, // minutes left of the timer
+        secondsLeft = 0, // seconds left of the timer
+        int Attempts = 0, // amount of attempts of the game
+        int RandomNumber = 0; // the random number which the player will guess
+
+        private Point 
+        NewLocation, // New location of the form when the form moves each time
+        Offset, // the offset location that will track each time the cursor moves
+        MainCurrentLocation; // deprecated variable
+
+        private int[] 
+        ExpoTransition =
         {
              0, 0, 0, 4, 6, 12, 16, 24, 30, 40, 48, 60, 70, 84, 96, 112, 126, 144, 160, 180,
              198, 220, 240, 264, 286, 300
-        };
-        #region Difficulty Interface Section  |  Private Objects goes here :3
+        }; // the values of the keypoints :3 (unused variable)
 
-         
-
+        
+        
         #endregion
 
-        #region Guess The Number Interface Section  |  Private Objects goes here :3
-
-        #endregion
-
-        public MainMenuForm()
+        public MainMenuForm() // the main menu public class :3
         {
-            InitializeComponent(); // the main menu panel :3
+            InitializeComponent(); // the main menu panel interface goes here :3
 
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Opacity = 0;
@@ -52,13 +61,14 @@ namespace GuessTheNumberGame
         }
 
         #region Main Menu stuff goes here :3
-        private void MainMenuLoad(object sender, EventArgs e)
+        private void MainMenuLoad(object sender, EventArgs e) // main form loading..
         {
             //the initialization of the form itself :3
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.BackgroundImage = Properties.Resources.MainMenuBackground;
-            this.BackColor = Color.White;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // avoid resizing of the form
+            this.FormBorderStyle = FormBorderStyle.None; // game-styled form
+            this.BackgroundImage = Properties.Resources.MainMenuBackground; // the bg image 
+            //(it needs to initialized for avoid lag in designer)
+            this.BackColor = Color.White; // background color being white bc why not :3
             
 
             typeof(Form).InvokeMember("DoubleBuffered",
@@ -71,9 +81,10 @@ namespace GuessTheNumberGame
             OpeningTime.Start(); // fading in within the form itself
             OpeningTransition.Start(); // opening transitions
 
-            CountdownTimer.Start();
+            CountdownTimer.Start(); // countdown timer of the guessing game (will be moved in fuutre sessions)
         }
 
+        #region window form location moving and stuff goes here :3
         private void WindowDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -100,6 +111,7 @@ namespace GuessTheNumberGame
                 IsDragging = false;
             }
         }
+        #endregion
 
         private void ClosingLabelClick(object sender, EventArgs e)
         {
@@ -248,12 +260,6 @@ namespace GuessTheNumberGame
             
         }
 
-        private int CurrentNumber = 0;
-        private int GuessingLimit = 250;
-        private int minutesLeft = 2;
-        private int secondsLeft = 0;
-        private int Attempts = 4;
-
         private void CountdownTick(object sender, EventArgs e)
         {
             if (minutesLeft == 0 && secondsLeft == 0)
@@ -280,8 +286,6 @@ namespace GuessTheNumberGame
                 MiddleChecking();
             }
         }
-
-        private int RandomNumber = new Random().Next(0, 250);
 
         private void MainMenuDown(object sender, KeyEventArgs e)
         {
