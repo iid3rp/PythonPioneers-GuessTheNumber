@@ -18,5 +18,3 @@ C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\GuessTh
 C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.exe
 C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.pdb
-C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.StartDifficultyForm.resources
-C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\GuessTheNumberGame\obj\Debug\GuessTheNumberGame.StartForm.resources

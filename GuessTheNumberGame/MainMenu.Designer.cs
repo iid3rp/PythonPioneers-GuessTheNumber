@@ -32,11 +32,21 @@ namespace GuessTheNumberGame
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
             this.TimeToday = new System.Windows.Forms.Timer(this.components);
-            this.FadingBackground = new System.Windows.Forms.Timer(this.components);
             this.MainMenuPanel = new System.Windows.Forms.Panel();
-            this.GuidingLabel = new System.Windows.Forms.Label();
+            this.CountingDownLabel = new System.Windows.Forms.Label();
+            this.HardLabel = new System.Windows.Forms.Label();
+            this.NormalLabel = new System.Windows.Forms.Label();
+            this.EasyLabel = new System.Windows.Forms.Label();
+            this.DifficultyPageLabel = new System.Windows.Forms.Label();
+            this.RightLabel = new System.Windows.Forms.Label();
+            this.LeftLabel = new System.Windows.Forms.Label();
+            this.DifficultyTextLabel = new System.Windows.Forms.Label();
+            this.DifficultyTypeLabel = new System.Windows.Forms.Label();
             this.NumberHolderLabel = new System.Windows.Forms.Label();
+            this.CountdownLabel = new System.Windows.Forms.Label();
+            this.GuidingLabel = new System.Windows.Forms.Label();
             this.GuessTheNumberLogo = new System.Windows.Forms.PictureBox();
             this.GitHubPicture = new System.Windows.Forms.PictureBox();
             this.TimeLabel = new System.Windows.Forms.Label();
@@ -44,13 +54,11 @@ namespace GuessTheNumberGame
             this.WindowLabel = new System.Windows.Forms.Label();
             this.ClosingLabel = new System.Windows.Forms.Label();
             this.PressAnyButtonLabel = new System.Windows.Forms.Label();
-            this.UnderlineLabel = new System.Windows.Forms.Label();
             this.ClosingTime = new System.Windows.Forms.Timer(this.components);
             this.OpeningTime = new System.Windows.Forms.Timer(this.components);
             this.OpeningTransition = new System.Windows.Forms.Timer(this.components);
-            this.WaitingTimer = new System.Windows.Forms.Timer(this.components);
-            this.CountdownLabel = new System.Windows.Forms.Label();
             this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
+            this.CountingDownTimer = new System.Windows.Forms.Timer(this.components);
             this.MainMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GuessTheNumberLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GitHubPicture)).BeginInit();
@@ -61,17 +69,21 @@ namespace GuessTheNumberGame
             this.TimeToday.Interval = 1000;
             this.TimeToday.Tick += new System.EventHandler(this.TimeTicking);
             // 
-            // FadingBackground
-            // 
-            this.FadingBackground.Interval = 1;
-            this.FadingBackground.Tick += new System.EventHandler(this.FadingTick);
-            // 
             // MainMenuPanel
             // 
             this.MainMenuPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainMenuPanel.Controls.Add(this.CountingDownLabel);
+            this.MainMenuPanel.Controls.Add(this.HardLabel);
+            this.MainMenuPanel.Controls.Add(this.NormalLabel);
+            this.MainMenuPanel.Controls.Add(this.EasyLabel);
+            this.MainMenuPanel.Controls.Add(this.DifficultyPageLabel);
+            this.MainMenuPanel.Controls.Add(this.RightLabel);
+            this.MainMenuPanel.Controls.Add(this.LeftLabel);
+            this.MainMenuPanel.Controls.Add(this.DifficultyTextLabel);
+            this.MainMenuPanel.Controls.Add(this.DifficultyTypeLabel);
+            this.MainMenuPanel.Controls.Add(this.NumberHolderLabel);
             this.MainMenuPanel.Controls.Add(this.CountdownLabel);
             this.MainMenuPanel.Controls.Add(this.GuidingLabel);
-            this.MainMenuPanel.Controls.Add(this.NumberHolderLabel);
             this.MainMenuPanel.Controls.Add(this.GuessTheNumberLogo);
             this.MainMenuPanel.Controls.Add(this.GitHubPicture);
             this.MainMenuPanel.Controls.Add(this.TimeLabel);
@@ -79,7 +91,6 @@ namespace GuessTheNumberGame
             this.MainMenuPanel.Controls.Add(this.WindowLabel);
             this.MainMenuPanel.Controls.Add(this.ClosingLabel);
             this.MainMenuPanel.Controls.Add(this.PressAnyButtonLabel);
-            this.MainMenuPanel.Controls.Add(this.UnderlineLabel);
             this.MainMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainMenuPanel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuPanel.ForeColor = System.Drawing.Color.Transparent;
@@ -87,32 +98,139 @@ namespace GuessTheNumberGame
             this.MainMenuPanel.Name = "MainMenuPanel";
             this.MainMenuPanel.Size = new System.Drawing.Size(1264, 681);
             this.MainMenuPanel.TabIndex = 0;
+            this.MainMenuPanel.Click += new System.EventHandler(this.MainMenuClick);
             this.MainMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WindowDown);
             this.MainMenuPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WindowMove);
             this.MainMenuPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WindowUp);
             // 
-            // GuidingLabel
+            // CountingDownLabel
             // 
-            this.GuidingLabel.AutoSize = true;
-            this.GuidingLabel.Location = new System.Drawing.Point(550, 509);
-            this.GuidingLabel.Name = "GuidingLabel";
-            this.GuidingLabel.Size = new System.Drawing.Size(181, 23);
-            this.GuidingLabel.TabIndex = 9;
-            this.GuidingLabel.Text = "Number must be 0-250";
-            this.GuidingLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.CountingDownLabel.AutoSize = true;
+            this.CountingDownLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountingDownLabel.Location = new System.Drawing.Point(608, 278);
+            this.CountingDownLabel.Name = "CountingDownLabel";
+            this.CountingDownLabel.Size = new System.Drawing.Size(77, 90);
+            this.CountingDownLabel.TabIndex = 22;
+            this.CountingDownLabel.Text = "3";
+            this.CountingDownLabel.Visible = false;
+            // 
+            // HardLabel
+            // 
+            this.HardLabel.AutoSize = true;
+            this.HardLabel.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HardLabel.Location = new System.Drawing.Point(942, 428);
+            this.HardLabel.Name = "HardLabel";
+            this.HardLabel.Size = new System.Drawing.Size(142, 67);
+            this.HardLabel.TabIndex = 21;
+            this.HardLabel.Text = "Hard";
+            this.HardLabel.Click += new System.EventHandler(this.HardLabelClick);
+            // 
+            // NormalLabel
+            // 
+            this.NormalLabel.AutoSize = true;
+            this.NormalLabel.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NormalLabel.Location = new System.Drawing.Point(912, 320);
+            this.NormalLabel.Name = "NormalLabel";
+            this.NormalLabel.Size = new System.Drawing.Size(190, 67);
+            this.NormalLabel.TabIndex = 20;
+            this.NormalLabel.Text = "Normal";
+            this.NormalLabel.Click += new System.EventHandler(this.NormalLabelClick);
+            // 
+            // EasyLabel
+            // 
+            this.EasyLabel.AutoSize = true;
+            this.EasyLabel.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EasyLabel.Location = new System.Drawing.Point(942, 209);
+            this.EasyLabel.Name = "EasyLabel";
+            this.EasyLabel.Size = new System.Drawing.Size(132, 67);
+            this.EasyLabel.TabIndex = 19;
+            this.EasyLabel.Text = "Easy";
+            this.EasyLabel.Click += new System.EventHandler(this.EasyLabelClick);
+            // 
+            // DifficultyPageLabel
+            // 
+            this.DifficultyPageLabel.AutoSize = true;
+            this.DifficultyPageLabel.Font = new System.Drawing.Font("Comic Sans MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DifficultyPageLabel.Location = new System.Drawing.Point(162, 568);
+            this.DifficultyPageLabel.Name = "DifficultyPageLabel";
+            this.DifficultyPageLabel.Size = new System.Drawing.Size(122, 52);
+            this.DifficultyPageLabel.TabIndex = 18;
+            this.DifficultyPageLabel.Text = "1 of 3";
+            this.DifficultyPageLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // RightLabel
+            // 
+            this.RightLabel.AutoSize = true;
+            this.RightLabel.Font = new System.Drawing.Font("Comic Sans MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightLabel.Location = new System.Drawing.Point(290, 568);
+            this.RightLabel.Name = "RightLabel";
+            this.RightLabel.Size = new System.Drawing.Size(36, 52);
+            this.RightLabel.TabIndex = 17;
+            this.RightLabel.Text = ">";
+            this.RightLabel.Click += new System.EventHandler(this.RightLabelClick);
+            // 
+            // LeftLabel
+            // 
+            this.LeftLabel.AutoSize = true;
+            this.LeftLabel.Font = new System.Drawing.Font("Comic Sans MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LeftLabel.Location = new System.Drawing.Point(120, 568);
+            this.LeftLabel.Name = "LeftLabel";
+            this.LeftLabel.Size = new System.Drawing.Size(36, 52);
+            this.LeftLabel.TabIndex = 16;
+            this.LeftLabel.Text = "<";
+            this.LeftLabel.Click += new System.EventHandler(this.LeftLabelClick);
+            // 
+            // DifficultyTextLabel
+            // 
+            this.DifficultyTextLabel.AutoSize = true;
+            this.DifficultyTextLabel.Location = new System.Drawing.Point(116, 157);
+            this.DifficultyTextLabel.Name = "DifficultyTextLabel";
+            this.DifficultyTextLabel.Size = new System.Drawing.Size(306, 253);
+            this.DifficultyTextLabel.TabIndex = 15;
+            this.DifficultyTextLabel.Text = resources.GetString("DifficultyTextLabel.Text");
+            // 
+            // DifficultyTypeLabel
+            // 
+            this.DifficultyTypeLabel.AutoSize = true;
+            this.DifficultyTypeLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DifficultyTypeLabel.Location = new System.Drawing.Point(113, 100);
+            this.DifficultyTypeLabel.Name = "DifficultyTypeLabel";
+            this.DifficultyTypeLabel.Size = new System.Drawing.Size(117, 38);
+            this.DifficultyTypeLabel.TabIndex = 14;
+            this.DifficultyTypeLabel.Text = "Tutorial";
             // 
             // NumberHolderLabel
             // 
             this.NumberHolderLabel.AutoSize = true;
-            this.NumberHolderLabel.Font = new System.Drawing.Font("Comic Sans MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumberHolderLabel.Location = new System.Drawing.Point(406, 432);
+            this.NumberHolderLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumberHolderLabel.ForeColor = System.Drawing.Color.White;
+            this.NumberHolderLabel.Location = new System.Drawing.Point(384, 902);
             this.NumberHolderLabel.Name = "NumberHolderLabel";
-            this.NumberHolderLabel.Size = new System.Drawing.Size(468, 60);
-            this.NumberHolderLabel.TabIndex = 8;
-            this.NumberHolderLabel.Text = "                                        ";
+            this.NumberHolderLabel.Size = new System.Drawing.Size(513, 90);
+            this.NumberHolderLabel.TabIndex = 13;
+            this.NumberHolderLabel.Text = "type to guess :3";
             this.NumberHolderLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.NumberHolderLabel.UseCompatibleTextRendering = true;
-            this.NumberHolderLabel.UseMnemonic = false;
+            // 
+            // CountdownLabel
+            // 
+            this.CountdownLabel.AutoSize = true;
+            this.CountdownLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountdownLabel.Location = new System.Drawing.Point(521, 846);
+            this.CountdownLabel.Name = "CountdownLabel";
+            this.CountdownLabel.Size = new System.Drawing.Size(239, 38);
+            this.CountdownLabel.TabIndex = 11;
+            this.CountdownLabel.Text = "Timer Goes Here:";
+            this.CountdownLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // GuidingLabel
+            // 
+            this.GuidingLabel.AutoSize = true;
+            this.GuidingLabel.Location = new System.Drawing.Point(546, 1009);
+            this.GuidingLabel.Name = "GuidingLabel";
+            this.GuidingLabel.Size = new System.Drawing.Size(191, 23);
+            this.GuidingLabel.TabIndex = 9;
+            this.GuidingLabel.Text = "Number must be 0 - 250";
+            this.GuidingLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // GuessTheNumberLogo
             // 
@@ -142,11 +260,11 @@ namespace GuessTheNumberGame
             this.TimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.TimeLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.TimeLabel.Location = new System.Drawing.Point(12, 5);
+            this.TimeLabel.Location = new System.Drawing.Point(12, 9);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(152, 23);
+            this.TimeLabel.Size = new System.Drawing.Size(209, 23);
             this.TimeLabel.TabIndex = 5;
-            this.TimeLabel.Text = "Time & Date Goes Here";
+            this.TimeLabel.Text = "<DayType>, <DayNum> | <Time24>";
             this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.TimeLabel.UseCompatibleTextRendering = true;
             this.TimeLabel.UseMnemonic = false;
@@ -207,16 +325,6 @@ namespace GuessTheNumberGame
             this.PressAnyButtonLabel.Size = new System.Drawing.Size(535, 45);
             this.PressAnyButtonLabel.TabIndex = 0;
             this.PressAnyButtonLabel.Text = "-  Press Any Button to Continue   -";
-            this.PressAnyButtonLabel.Click += new System.EventHandler(this.Label1_Click);
-            // 
-            // UnderlineLabel
-            // 
-            this.UnderlineLabel.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UnderlineLabel.Location = new System.Drawing.Point(435, 472);
-            this.UnderlineLabel.Name = "UnderlineLabel";
-            this.UnderlineLabel.Size = new System.Drawing.Size(420, 37);
-            this.UnderlineLabel.TabIndex = 10;
-            this.UnderlineLabel.Text = "_______________________________";
             // 
             // ClosingTime
             // 
@@ -231,28 +339,17 @@ namespace GuessTheNumberGame
             // OpeningTransition
             // 
             this.OpeningTransition.Interval = 1;
-            this.OpeningTransition.Tick += new System.EventHandler(this.OpningTransitionTick);
-            // 
-            // WaitingTimer
-            // 
-            this.WaitingTimer.Interval = 1000;
-            this.WaitingTimer.Tick += new System.EventHandler(this.WaitingTick);
-            // 
-            // CountdownLabel
-            // 
-            this.CountdownLabel.AutoSize = true;
-            this.CountdownLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CountdownLabel.Location = new System.Drawing.Point(524, 346);
-            this.CountdownLabel.Name = "CountdownLabel";
-            this.CountdownLabel.Size = new System.Drawing.Size(239, 38);
-            this.CountdownLabel.TabIndex = 11;
-            this.CountdownLabel.Text = "Timer Goes Here:";
-            this.CountdownLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.OpeningTransition.Tick += new System.EventHandler(this.OpeningTransitionTick);
             // 
             // CountdownTimer
             // 
             this.CountdownTimer.Interval = 1000;
             this.CountdownTimer.Tick += new System.EventHandler(this.CountdownTick);
+            // 
+            // CountingDownTimer
+            // 
+            this.CountingDownTimer.Interval = 1;
+            this.CountingDownTimer.Tick += new System.EventHandler(this.CountingDownTick);
             // 
             // MainMenuForm
             // 
@@ -267,7 +364,7 @@ namespace GuessTheNumberGame
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "MainMenuForm";
             this.Text = "Python Pioneers | Guess The Number";
-            this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.TransparencyKey = System.Drawing.SystemColors.ActiveBorder;
             this.Load += new System.EventHandler(this.MainMenuLoad);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainMenuDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainMenuPress);
@@ -290,16 +387,23 @@ namespace GuessTheNumberGame
         private Label TimeLabel;
         private PictureBox GitHubPicture;
         private PictureBox GuessTheNumberLogo;
-        private Timer FadingBackground;
         private Timer ClosingTime;
         private Timer OpeningTime;
         private Timer OpeningTransition;
         private Label GuidingLabel;
-        private Label UnderlineLabel;
-        private Label NumberHolderLabel;
-        private Timer WaitingTimer;
         private Label CountdownLabel;
         private Timer CountdownTimer;
+        private Label NumberHolderLabel;
+        private Label DifficultyTextLabel;
+        private Label DifficultyTypeLabel;
+        private Label DifficultyPageLabel;
+        private Label RightLabel;
+        private Label LeftLabel;
+        private Label HardLabel;
+        private Label NormalLabel;
+        private Label EasyLabel;
+        private Label CountingDownLabel;
+        private Timer CountingDownTimer;
     }
 }
 
