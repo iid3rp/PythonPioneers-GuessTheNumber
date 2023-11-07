@@ -38,7 +38,6 @@ namespace GuessTheNumberGame
             this.DifficultyTextLabel = new System.Windows.Forms.Label();
             this.DifficultyTypeLabel = new System.Windows.Forms.Label();
             this.DifficultyPageLabel = new System.Windows.Forms.Label();
-            this.CountingDownLabel = new System.Windows.Forms.Label();
             this.LeftLabel = new System.Windows.Forms.Label();
             this.HardLabel = new System.Windows.Forms.Label();
             this.RightLabel = new System.Windows.Forms.Label();
@@ -47,8 +46,6 @@ namespace GuessTheNumberGame
             this.NumberHolderLabel = new System.Windows.Forms.Label();
             this.CountdownLabel = new System.Windows.Forms.Label();
             this.GuidingLabel = new System.Windows.Forms.Label();
-            this.GuessTheNumberLogo = new System.Windows.Forms.PictureBox();
-            this.GitHubPicture = new System.Windows.Forms.PictureBox();
             this.TimeLabel = new System.Windows.Forms.Label();
             this.MinimizeLabel = new System.Windows.Forms.Label();
             this.WindowLabel = new System.Windows.Forms.Label();
@@ -59,7 +56,12 @@ namespace GuessTheNumberGame
             this.OpeningTransition = new System.Windows.Forms.Timer(this.components);
             this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
             this.CountingDownTimer = new System.Windows.Forms.Timer(this.components);
+            this.DifficultySectionPicture = new System.Windows.Forms.PictureBox();
+            this.CountingDownLabel = new System.Windows.Forms.Label();
+            this.GuessTheNumberLogo = new System.Windows.Forms.PictureBox();
+            this.GitHubPicture = new System.Windows.Forms.PictureBox();
             this.MainMenuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DifficultySectionPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GuessTheNumberLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GitHubPicture)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +74,7 @@ namespace GuessTheNumberGame
             // MainMenuPanel
             // 
             this.MainMenuPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainMenuPanel.Controls.Add(this.DifficultySectionPicture);
             this.MainMenuPanel.Controls.Add(this.DifficultyTextLabel);
             this.MainMenuPanel.Controls.Add(this.DifficultyTypeLabel);
             this.MainMenuPanel.Controls.Add(this.DifficultyPageLabel);
@@ -134,18 +137,6 @@ namespace GuessTheNumberGame
             this.DifficultyPageLabel.TabIndex = 18;
             this.DifficultyPageLabel.Text = "1 of 3";
             this.DifficultyPageLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // CountingDownLabel
-            // 
-            this.CountingDownLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CountingDownLabel.AutoSize = true;
-            this.CountingDownLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CountingDownLabel.Location = new System.Drawing.Point(298, 36);
-            this.CountingDownLabel.Name = "CountingDownLabel";
-            this.CountingDownLabel.Size = new System.Drawing.Size(77, 90);
-            this.CountingDownLabel.TabIndex = 22;
-            this.CountingDownLabel.Text = "3";
-            this.CountingDownLabel.Visible = false;
             // 
             // LeftLabel
             // 
@@ -241,28 +232,6 @@ namespace GuessTheNumberGame
             this.GuidingLabel.TabIndex = 9;
             this.GuidingLabel.Text = "Number must be 0 - 250";
             this.GuidingLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // GuessTheNumberLogo
-            // 
-            this.GuessTheNumberLogo.Image = global::GuessTheNumberGame.Properties.Resources.GuessTheNumberLogo;
-            this.GuessTheNumberLogo.Location = new System.Drawing.Point(280, -1035);
-            this.GuessTheNumberLogo.Name = "GuessTheNumberLogo";
-            this.GuessTheNumberLogo.Size = new System.Drawing.Size(720, 360);
-            this.GuessTheNumberLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.GuessTheNumberLogo.TabIndex = 7;
-            this.GuessTheNumberLogo.TabStop = false;
-            // 
-            // GitHubPicture
-            // 
-            this.GitHubPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.GitHubPicture.Image = global::GuessTheNumberGame.Properties.Resources.GitHub40p;
-            this.GitHubPicture.Location = new System.Drawing.Point(12, 649);
-            this.GitHubPicture.Name = "GitHubPicture";
-            this.GitHubPicture.Size = new System.Drawing.Size(20, 20);
-            this.GitHubPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.GitHubPicture.TabIndex = 6;
-            this.GitHubPicture.TabStop = false;
-            this.GitHubPicture.Click += new System.EventHandler(this.GitHubPictureClick);
             // 
             // TimeLabel
             // 
@@ -361,6 +330,50 @@ namespace GuessTheNumberGame
             this.CountingDownTimer.Interval = 1;
             this.CountingDownTimer.Tick += new System.EventHandler(this.CountingDownTick);
             // 
+            // DifficultySectionPicture
+            // 
+            this.DifficultySectionPicture.Image = global::GuessTheNumberGame.Properties.Resources.TutorialImage;
+            this.DifficultySectionPicture.Location = new System.Drawing.Point(205, 77);
+            this.DifficultySectionPicture.Name = "DifficultySectionPicture";
+            this.DifficultySectionPicture.Size = new System.Drawing.Size(383, 519);
+            this.DifficultySectionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DifficultySectionPicture.TabIndex = 23;
+            this.DifficultySectionPicture.TabStop = false;
+            // 
+            // CountingDownLabel
+            // 
+            this.CountingDownLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CountingDownLabel.AutoSize = true;
+            this.CountingDownLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountingDownLabel.Location = new System.Drawing.Point(633, 47);
+            this.CountingDownLabel.Name = "CountingDownLabel";
+            this.CountingDownLabel.Size = new System.Drawing.Size(77, 90);
+            this.CountingDownLabel.TabIndex = 22;
+            this.CountingDownLabel.Text = "3";
+            this.CountingDownLabel.Visible = false;
+            // 
+            // GuessTheNumberLogo
+            // 
+            this.GuessTheNumberLogo.Image = global::GuessTheNumberGame.Properties.Resources.GuessTheNumberLogo;
+            this.GuessTheNumberLogo.Location = new System.Drawing.Point(280, -1035);
+            this.GuessTheNumberLogo.Name = "GuessTheNumberLogo";
+            this.GuessTheNumberLogo.Size = new System.Drawing.Size(720, 360);
+            this.GuessTheNumberLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GuessTheNumberLogo.TabIndex = 7;
+            this.GuessTheNumberLogo.TabStop = false;
+            // 
+            // GitHubPicture
+            // 
+            this.GitHubPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.GitHubPicture.Image = global::GuessTheNumberGame.Properties.Resources.GitHub40p;
+            this.GitHubPicture.Location = new System.Drawing.Point(12, 649);
+            this.GitHubPicture.Name = "GitHubPicture";
+            this.GitHubPicture.Size = new System.Drawing.Size(20, 20);
+            this.GitHubPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GitHubPicture.TabIndex = 6;
+            this.GitHubPicture.TabStop = false;
+            this.GitHubPicture.Click += new System.EventHandler(this.GitHubPictureClick);
+            // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,6 +386,7 @@ namespace GuessTheNumberGame
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainMenuForm";
             this.Text = "Python Pioneers | Guess The Number";
             this.TransparencyKey = System.Drawing.SystemColors.ActiveBorder;
@@ -381,6 +395,7 @@ namespace GuessTheNumberGame
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainMenuPress);
             this.MainMenuPanel.ResumeLayout(false);
             this.MainMenuPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DifficultySectionPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GuessTheNumberLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GitHubPicture)).EndInit();
             this.ResumeLayout(false);
@@ -415,6 +430,7 @@ namespace GuessTheNumberGame
         private Label EasyLabel;
         private Label CountingDownLabel;
         private Timer CountingDownTimer;
+        private PictureBox DifficultySectionPicture;
     }
 }
 

@@ -45,38 +45,11 @@ namespace GuessTheNumberGame
         NewLocation, // New location of the form when the form moves each time
         Offset; // the offset location that will track each time the cursor moves
 
-        private readonly string[][]
-        DifficultyText =
+        private readonly Image[] DifficultyImages = 
         {
-            new string[]
-            {
-                "\u2022 You must pay before playing." + "\n\n" +
-                "\u2022 Pick a difficulty of your choice." + "\n\n" +
-                "\u2022 Guess the number based on the range." + "\n" +
-                     "  Strategize your guessing." + "\n\n" +
-                "\u2022 Guess the number until the countdown" + "\n" +
-                     "  ran out of time or ran out of attempts." + "\n\n" +
-                "\u2022 Enjoy!" + "\n",
-
-                "\u2022 Easy" + "\n" +
-                    "  Numbers range from 0 - 250." + "\n" +
-                    "  Attempts: 4" + "\n" +
-                    "  Time Alotted: 1 minute" + "\n\n" +
-                 "\u2022 Normal" + "\n" +
-                    "  Numbers range from 0 - 500." + "\n" +
-                    "  Attempts: 6" + "\n" +
-                    "  Time Alotted: 1 minute, 30 seconds" + "\n\n" +
-                "\u2022 Hard" + "\n" +
-                     "  Numbers range from 0 - 100." + "\n" +
-                     "  Attempts: 8" + "\n" +
-                     "  Time Alotted: 2 minutes" + "\n\n",
-
-                 "Prizes will announce soon :3"
-            },
-            new string[]
-            {
-                "Tutorial", "Difficulty", "Prizes"
-            }
+            Properties.Resources.TutorialImage,
+            Properties.Resources.DifficultiesImage,
+            Properties.Resources.PrizesImage
         };
 
         private static string
@@ -240,15 +213,14 @@ namespace GuessTheNumberGame
         private void DifficultyDownPage()
         {
             DifficultyPage = Math.Max(DifficultyPage - 1, 0);
-            DifficultyTextLabel.Text = DifficultyText[0][DifficultyPage];
-            DifficultyTypeLabel.Text = DifficultyText[1][DifficultyPage];
+            DifficultySectionPicture.Image = DifficultyImages[DifficultyPage];
         }
 
         private void DifficultyUpPage()
         {
             DifficultyPage = Math.Min(DifficultyPage + 1, DifficultyText.Length);
-            DifficultyTextLabel.Text = DifficultyText[0][DifficultyPage];
-            DifficultyTypeLabel.Text = DifficultyText[1][DifficultyPage];
+            DifficultySectionPicture.Image = DifficultyImages[DifficultyPage];
+            
         }
 
         private void DifficultyPageLabelVoid()

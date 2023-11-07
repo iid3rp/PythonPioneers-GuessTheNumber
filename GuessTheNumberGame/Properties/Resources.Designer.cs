@@ -73,9 +73,29 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DifficultiesImage {
+            get {
+                object obj = ResourceManager.GetObject("DifficultiesImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GitHub40p {
             get {
                 object obj = ResourceManager.GetObject("GitHub40p", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gradient {
+            get {
+                object obj = ResourceManager.GetObject("Gradient", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +126,26 @@ namespace GuessTheNumberGame.Properties {
         internal static System.Drawing.Bitmap MainMenuBackground720p {
             get {
                 object obj = ResourceManager.GetObject("MainMenuBackground720p", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PrizesImage {
+            get {
+                object obj = ResourceManager.GetObject("PrizesImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TutorialImage {
+            get {
+                object obj = ResourceManager.GetObject("TutorialImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

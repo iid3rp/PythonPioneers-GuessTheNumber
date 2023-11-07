@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>PythonPioneersGuessTheGameLogo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -133,6 +136,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DarkMainMenuBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PythonPioneersGuessTheGameLogo.ico" />
+    <None Include="Resources\Gradient.png" />
+    <None Include="Resources\PrizesImage.png" />
+    <None Include="Resources\DifficultiesImage.png" />
+    <None Include="Resources\TutorialImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
