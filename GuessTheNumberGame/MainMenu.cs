@@ -82,6 +82,18 @@ namespace GuessTheNumberGame
         private static string
         StringHolder = "";
 
+        private double MainRatio()
+        {
+            double ratio = this.Height / 720;
+            return MainRatio();
+        }
+
+        private double MiddleLocation()
+        {
+            double middle = this.Width / 2;
+            return MiddleLocation();
+        }
+
         #endregion
 
         public MainMenuForm() // the main menu public class :3
@@ -98,41 +110,67 @@ namespace GuessTheNumberGame
             switch(MainMenuSwitch)
             {
                 case 1: // the main menu stuff.
-                break;
+                    MainMenuInterface();
+                    break;
                 case 2: // the difficulty section
-                break;
+                    DifficultyMenuInterface();
+                    break;
                 case 3: // the starting process
-                break;
+                    GuessingGameInterface();
+                    break;
             }
+        }
+
+        private void MainMenuInterface()
+        {
+            GuessTheNumberLogo.Location = new Point(280, -35);
+            PressAnyButtonLabel.Location = new Point(373, 507);
+        }
+
+        private void DifficultyMenuInterface()
+        {
+            IsDifficultySection = true;
+
+            GuessTheNumberLogo.Location = new Point(280, -1035);
+            PressAnyButtonLabel.Location = new Point(373, -507);
+
+            DifficultyTypeLabel.Location = new Point(110, 87);
+            DifficultyTextLabel.Location = new Point(113, 150);
+            DifficultyPageLabel.Location = new Point(148, 496);
+
+            EasyLabel.Location = new Point(942, 209);
+            NormalLabel.Location = new Point(912, 320);
+            HardLabel.Location = new Point(942, 428);
+
+            LeftLabel.Location = new Point(117, 496);
+            RightLabel.Location = new Point(276, 496);
+
+
+        }
+
+        private void GuessingGameInterface()
+        {
+            IsGuessingProcess = true;
+
+            GuidingLabel.Location = new Point(GuidingLabel.Location.X, 559);
+            CountdownLabel.Location = new Point(CountdownLabel.Location.X, 346);
+            NumberHolderLabel.Location = new Point(NumberHolderLabel.Location.X, 452);
+            this.BackgroundImage = Properties.Resources.MainMenuBackground;
+            CountingDownLabel.Hide();
+            CountdownTimer.Start(); // countdown timer of the guessing game (will be moved in fuutre sessions)
+            CountingDownTimer.Stop();
         }
 
         #region Main Menu stuff goes here :3
         private void MainMenuLoad(object sender, EventArgs e) // main form loading..
         {
-            //the initialization of the form itself :3
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; // avoid resizing of the form
-            this.FormBorderStyle = FormBorderStyle.None; // game-styled form
-            this.BackgroundImage = Properties.Resources.MainMenuBackground; // the bg image 
-            //(it needs to initialized for avoid lag in designer)
-            this.BackColor = Color.White; // background color being white bc why not :3
+            this.BackgroundImage = Properties.Resources.MainMenuBackground; // initialize the background beforehand
 
-            GuessTheNumberLogo.Location = new Point(GuessTheNumberLogo.Location.X, -35); // guess the number logo main location
-            PressAnyButtonLabel.Location = new Point(373, 507); // press anything to start main location
-            DifficultyPageLabel.Hide();
-            DifficultyTextLabel.Hide();
-            DifficultyTypeLabel.Hide();
-            LeftLabel.Hide();
-            RightLabel.Hide();
-            EasyLabel.Hide();
-            NormalLabel.Hide();
-            HardLabel.Hide();
-
-
-            typeof(Form).InvokeMember("DoubleBuffered",
+            typeof(Panel).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-            null, this.MainMenuPanel, new object[] { true }); // double buffer the form
+            null, this.MainMenuPanel, new object[] { true });
 
-            Thread.Sleep(100); // just not pausing the smoothness :3
+            MainMenuInterface();
 
             TimeToday.Start(); // starting the time and date process :3
             OpeningTime.Start(); // fading in within the form itself
@@ -272,30 +310,26 @@ namespace GuessTheNumberGame
 
             if(CountingDownStart > -1)
             {
-                if(CountingDownStart == 0)
+                if (CountingDownStart == 0)
                 {
                     CountingDownLabel.Text = "Start Guessing!";
                 }
-
-                CountingDownLabel.Text = CountingDownStart.ToString();
+                else
+                {
+                    CountingDownLabel.Text = CountingDownStart.ToString();
+                }
                 CountingDownStart--;
             }
             else
             {
-                IsGuessingProcess = true;
-                GuidingLabel.Location = new Point(GuidingLabel.Location.X, 559);
-                CountdownLabel.Location = new Point(CountdownLabel.Location.X, 346);
-                NumberHolderLabel.Location = new Point(NumberHolderLabel.Location.X, 452);
-                this.BackgroundImage = Properties.Resources.MainMenuBackground;
-                CountingDownLabel.Hide();
-                CountdownTimer.Start(); // countdown timer of the guessing game (will be moved in fuutre sessions)
-                CountingDownTimer.Stop();
+                GuessingGameInterface();
             }
             MiddleChecking();
         }
 
         private void TimeTicking(object sender, EventArgs e)
         {
+            TimeToday.Interval = 1000;
             TimeLabel.Text = DateTime.Now.ToString("dddd, M/d/yyyy | HH:mm:ss");
         }
         #endregion
@@ -518,17 +552,8 @@ namespace GuessTheNumberGame
             }
             else
             {
-                IsDifficultySection = true;
-                DifficultyPageLabel.Show();
-                DifficultyTextLabel.Show();
-                DifficultyTypeLabel.Show();
-                LeftLabel.Show();
-                RightLabel.Show();
-                EasyLabel.Show();
-                NormalLabel.Show();
-                HardLabel.Show();
-                GuessTheNumberLogo.Location = new Point(280, -335);
-                PressAnyButtonLabel.Location = new Point(373, 807);
+                MainMenuSwitch = 2;
+                MainMenuProcess();
             }
             MiddleChecking();
         }
@@ -538,6 +563,41 @@ namespace GuessTheNumberGame
             GuidingLabel.Location = new Point((this.Width / 2) - (GuidingLabel.Width / 2), GuidingLabel.Location.Y);
             CountdownLabel.Location = new Point((this.Width / 2) - (CountdownLabel.Width / 2), CountdownLabel.Location.Y);
             CountingDownLabel.Location = new Point((this.Width / 2) - (CountingDownLabel.Width / 2), CountingDownLabel.Location.Y);
+        }
+
+        private void ConsistentInterface()
+        {
+            if (this.WindowState == FormWindowState.Normal) // fullscreen interface :3
+            {
+                WindowLabel.Text = "[]]";
+                GitHubPicture.Size = new Size(40, 40);
+                GitHubPicture.Location = new Point(GitHubPicture.Location.X, (GitHubPicture.Location.Y - 20));
+                GuessTheNumberLogo.Size = new Size((int)(GuessTheNumberLogo.Location.X * MainRatio()),
+                                                   (int)(GuessTheNumberLogo.Location.Y * MainRatio()));
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else // normal window interface
+            {
+                WindowLabel.Text = "[]";
+
+                // the normal size references..
+                GuessTheNumberLogo.Size = new Size(720, 360);
+                GitHubPicture.Size = new Size(20, 20);
+                LeftLabel.Font = new Font("Comic Sans MS", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+                LeftLabel.Location = new Point(117, 1496);
+                RightLabel.Font = new Font("Comic Sans MS", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+                RightLabel.Location = new Point(276, 1496);
+
+                ///picturebox of the tutorial
+                ///3 picturebox of the difficulties
+                ///and other stuff
+
+                GitHubPicture.Location = new Point(GitHubPicture.Location.X, (GitHubPicture.Location.Y + 20));
+
+                this.WindowState = FormWindowState.Normal;
+                this.Size = new Size(1280, 720);
+            }
+            GuessTheNumberLogo.Location = new Point(((this.Size.Width / 2) - GuessTheNumberLogo.Width / 2), -35);
         }
 
         #endregion

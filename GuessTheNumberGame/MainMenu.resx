@@ -134,18 +134,18 @@
 • Enjoy!</value>
   </data>
   <metadata name="ClosingTime.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>282, 17</value>
+    <value>259, 20</value>
   </metadata>
   <metadata name="OpeningTime.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>402, 17</value>
+    <value>365, 22</value>
   </metadata>
   <metadata name="OpeningTransition.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>528, 17</value>
+    <value>117, 19</value>
   </metadata>
   <metadata name="CountdownTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
+    <value>481, 21</value>
   </metadata>
   <metadata name="CountingDownTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>679, 17</value>
+    <value>618, 23</value>
   </metadata>
 </root>
