@@ -189,14 +189,14 @@ namespace GuessTheNumberGame
         {
             DifficultyPage = Math.Max(DifficultyPage - 1, 0);
             DifficultyTextLabel.Text = DifficultyText[0][DifficultyPage];
-            DifficultyPageLabel.Text = DifficultyText[1][DifficultyPage];
+            DifficultyTypeLabel.Text = DifficultyText[1][DifficultyPage];
         }
 
         private void DifficultyUpPage()
         {
             DifficultyPage = Math.Min(DifficultyPage + 1, DifficultyText.Length);
             DifficultyTextLabel.Text = DifficultyText[0][DifficultyPage];
-            DifficultyPageLabel.Text = DifficultyText[1][DifficultyPage];
+            DifficultyTypeLabel.Text = DifficultyText[1][DifficultyPage];
         }
 
         private void DifficultyPageLabelVoid()
@@ -256,7 +256,7 @@ namespace GuessTheNumberGame
             NormalLabel.Hide();
             HardLabel.Hide();
 
-            if(CountingDownStart > 0)
+            if(CountingDownStart > -1)
             {
                 if(CountingDownStart == 0)
                 {
@@ -277,7 +277,7 @@ namespace GuessTheNumberGame
                 CountdownTimer.Start(); // countdown timer of the guessing game (will be moved in fuutre sessions)
                 CountingDownTimer.Stop();
             }
-
+            MiddleChecking();
         }
 
         private void TimeTicking(object sender, EventArgs e)
@@ -330,6 +330,8 @@ namespace GuessTheNumberGame
                 OpeningTransition.Stop();
             }
             */
+
+            // were not gonna use this anymore :P it will be  deprecated
         }
 
         private void WindowChecking()
