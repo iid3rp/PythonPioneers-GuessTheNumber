@@ -28,6 +28,7 @@ namespace GuessTheNumberGame
         private int
         LogoKeypoint = 0, // GuessTheNumberLogo height keypoint initialization
         DifficultyPage = 0, // difficulty process of the pages.,.,
+        MainMenuSwitch = 1, // the main menu interface number holder for the methods.
         CountingDownStart = 3, // counting down when the guessing starts.
 
         // guessing number variables
@@ -90,6 +91,19 @@ namespace GuessTheNumberGame
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Opacity = 0;
             LogoKeypoint = GuessTheNumberLogo.Location.Y;
+        }
+
+        private void MainMenuProcess() // the whole form process goes here :3
+        {
+            switch(MainMenuSwitch)
+            {
+                case 1: // the main menu stuff.
+                break;
+                case 2: // the difficulty section
+                break;
+                case 3: // the starting process
+                break;
+            }
         }
 
         #region Main Menu stuff goes here :3
