@@ -71,11 +71,45 @@ namespace GuessTheNumberGame
 
         public MainMenuForm() // the main menu public class :3
         {
+            InitializeFiles(); // the program files of this program to determine the winners and stuff
             InitializeComponent(); // the main menu panel interface goes here :3
 
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Opacity = 0;
             LogoKeypoint = GuessTheNumberLogo.Location.Y;
+        }
+
+        private void InitializeFiles()
+        {
+            string programFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "PythonPioneers-GuessTheNumber");
+            string WinnersFilePath = Path.Combine(programFolderPath, "Winners.ini");
+            string DistributionFilePath = Path.Combine(programFolderPath, "Distribution.ini");
+            for(;;)
+            {
+                if (!Directory.Exists(programFolderPath))
+                {
+                    Directory.CreateDirectory(programFolderPath);
+                }
+                else
+                {
+                    if (!File.Exists(iniFilePath))
+                    {
+                        // Create the "config.ini" file
+                        using (File.Create(WinnersFilePath))
+                        {
+                            // Optionally, you can write some initial content to the file here
+                        }
+                    }
+                    else if(!File.Exists(DistributionFilePath))
+                    {
+                        using(File.Create(DistributionFilePath))
+                        {
+                            
+                        }
+                    }
+                    else break;
+                }
+            }
         }
 
         private void MainMenuProcess() // the whole form process goes here :3
