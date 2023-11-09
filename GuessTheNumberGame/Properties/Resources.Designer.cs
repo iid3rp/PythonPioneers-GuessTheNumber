@@ -73,9 +73,29 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DifficultiesImage {
+        internal static System.Drawing.Bitmap DifficultyImage {
             get {
-                object obj = ResourceManager.GetObject("DifficultiesImage", resourceCulture);
+                object obj = ResourceManager.GetObject("DifficultyImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EasyPicture {
+            get {
+                object obj = ResourceManager.GetObject("EasyPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GameBasics {
+            get {
+                object obj = ResourceManager.GetObject("GameBasics", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +106,16 @@ namespace GuessTheNumberGame.Properties {
         internal static System.Drawing.Bitmap GitHub40p {
             get {
                 object obj = ResourceManager.GetObject("GitHub40p", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GoHome {
+            get {
+                object obj = ResourceManager.GetObject("GoHome", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,6 +143,16 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap HardPicture {
+            get {
+                object obj = ResourceManager.GetObject("HardPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MainMenuBackground {
             get {
                 object obj = ResourceManager.GetObject("MainMenuBackground", resourceCulture);
@@ -133,19 +173,9 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PrizesImage {
+        internal static System.Drawing.Bitmap NormalPicture {
             get {
-                object obj = ResourceManager.GetObject("PrizesImage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TutorialImage {
-            get {
-                object obj = ResourceManager.GetObject("TutorialImage", resourceCulture);
+                object obj = ResourceManager.GetObject("NormalPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

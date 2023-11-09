@@ -139,6 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PythonPioneersGuessTheGameLogo.ico" />
+    <None Include="Resources\GoHome.png" />
+    <None Include="Resources\HardPicture.png" />
+    <None Include="Resources\NormalPicture.png" />
+    <None Include="Resources\EasyPicture.png" />
+    <None Include="Resources\DifficultyImage.png" />
+    <None Include="Resources\GameBasics.png" />
     <None Include="Resources\Gradient.png" />
     <None Include="Resources\PrizesImage.png" />
     <None Include="Resources\DifficultiesImage.png" />
