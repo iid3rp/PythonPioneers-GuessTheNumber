@@ -103,6 +103,16 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GameOver {
+            get {
+                object obj = ResourceManager.GetObject("GameOver", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GitHub40p {
             get {
                 object obj = ResourceManager.GetObject("GitHub40p", resourceCulture);
@@ -126,6 +136,26 @@ namespace GuessTheNumberGame.Properties {
         internal static System.Drawing.Bitmap Gradient {
             get {
                 object obj = ResourceManager.GetObject("Gradient", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GuessAgain {
+            get {
+                object obj = ResourceManager.GetObject("GuessAgain", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GuessingBackground {
+            get {
+                object obj = ResourceManager.GetObject("GuessingBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

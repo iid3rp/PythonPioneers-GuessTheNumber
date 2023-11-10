@@ -35,6 +35,8 @@ namespace GuessTheNumberGame
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
             this.TimeToday = new System.Windows.Forms.Timer(this.components);
             this.MainMenuPanel = new System.Windows.Forms.Panel();
+            this.GuessAgainPicture = new System.Windows.Forms.PictureBox();
+            this.GameOverPicture = new System.Windows.Forms.PictureBox();
             this.GoHome = new System.Windows.Forms.PictureBox();
             this.HardPicture = new System.Windows.Forms.PictureBox();
             this.NormalPicture = new System.Windows.Forms.PictureBox();
@@ -57,6 +59,8 @@ namespace GuessTheNumberGame
             this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
             this.CountingDownTimer = new System.Windows.Forms.Timer(this.components);
             this.MainMenuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GuessAgainPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GameOverPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GoHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HardPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NormalPicture)).BeginInit();
@@ -74,6 +78,9 @@ namespace GuessTheNumberGame
             // MainMenuPanel
             // 
             this.MainMenuPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainMenuPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MainMenuPanel.Controls.Add(this.GuessAgainPicture);
+            this.MainMenuPanel.Controls.Add(this.GameOverPicture);
             this.MainMenuPanel.Controls.Add(this.GoHome);
             this.MainMenuPanel.Controls.Add(this.HardPicture);
             this.MainMenuPanel.Controls.Add(this.NormalPicture);
@@ -102,9 +109,29 @@ namespace GuessTheNumberGame
             this.MainMenuPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WindowMove);
             this.MainMenuPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WindowUp);
             // 
+            // GuessAgainPicture
+            // 
+            this.GuessAgainPicture.Image = global::GuessTheNumberGame.Properties.Resources.GuessAgain;
+            this.GuessAgainPicture.Location = new System.Drawing.Point(711, 1549);
+            this.GuessAgainPicture.Name = "GuessAgainPicture";
+            this.GuessAgainPicture.Size = new System.Drawing.Size(294, 100);
+            this.GuessAgainPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GuessAgainPicture.TabIndex = 34;
+            this.GuessAgainPicture.TabStop = false;
+            // 
+            // GameOverPicture
+            // 
+            this.GameOverPicture.Image = global::GuessTheNumberGame.Properties.Resources.GameOver;
+            this.GameOverPicture.Location = new System.Drawing.Point(343, 1109);
+            this.GameOverPicture.Name = "GameOverPicture";
+            this.GameOverPicture.Size = new System.Drawing.Size(531, 180);
+            this.GameOverPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GameOverPicture.TabIndex = 33;
+            this.GameOverPicture.TabStop = false;
+            // 
             // GoHome
             // 
-            this.GoHome.Image = global::GuessTheNumberGame.Properties.Resources.GoHome;
+            this.GoHome.Image = ((System.Drawing.Image)(resources.GetObject("GoHome.Image")));
             this.GoHome.Location = new System.Drawing.Point(12, 1619);
             this.GoHome.Name = "GoHome";
             this.GoHome.Size = new System.Drawing.Size(147, 50);
@@ -116,7 +143,7 @@ namespace GuessTheNumberGame
             // HardPicture
             // 
             this.HardPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.HardPicture.Image = global::GuessTheNumberGame.Properties.Resources.HardPicture;
+            this.HardPicture.Image = ((System.Drawing.Image)(resources.GetObject("HardPicture.Image")));
             this.HardPicture.Location = new System.Drawing.Point(830, 1430);
             this.HardPicture.Name = "HardPicture";
             this.HardPicture.Size = new System.Drawing.Size(295, 100);
@@ -128,7 +155,7 @@ namespace GuessTheNumberGame
             // NormalPicture
             // 
             this.NormalPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.NormalPicture.Image = global::GuessTheNumberGame.Properties.Resources.NormalPicture;
+            this.NormalPicture.Image = ((System.Drawing.Image)(resources.GetObject("NormalPicture.Image")));
             this.NormalPicture.Location = new System.Drawing.Point(830, 1288);
             this.NormalPicture.Name = "NormalPicture";
             this.NormalPicture.Size = new System.Drawing.Size(295, 100);
@@ -140,7 +167,7 @@ namespace GuessTheNumberGame
             // EasyPicture
             // 
             this.EasyPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EasyPicture.Image = global::GuessTheNumberGame.Properties.Resources.EasyPicture;
+            this.EasyPicture.Image = ((System.Drawing.Image)(resources.GetObject("EasyPicture.Image")));
             this.EasyPicture.Location = new System.Drawing.Point(830, 1145);
             this.EasyPicture.Name = "EasyPicture";
             this.EasyPicture.Size = new System.Drawing.Size(295, 100);
@@ -152,7 +179,7 @@ namespace GuessTheNumberGame
             // DifficultySectionPicture
             // 
             this.DifficultySectionPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.DifficultySectionPicture.Image = global::GuessTheNumberGame.Properties.Resources.GameBasics;
+            this.DifficultySectionPicture.Image = ((System.Drawing.Image)(resources.GetObject("DifficultySectionPicture.Image")));
             this.DifficultySectionPicture.Location = new System.Drawing.Point(78, 1077);
             this.DifficultySectionPicture.Name = "DifficultySectionPicture";
             this.DifficultySectionPicture.Size = new System.Drawing.Size(500, 500);
@@ -166,7 +193,8 @@ namespace GuessTheNumberGame
             this.CountingDownLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CountingDownLabel.AutoSize = true;
             this.CountingDownLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CountingDownLabel.Location = new System.Drawing.Point(633, 47);
+            this.CountingDownLabel.ForeColor = System.Drawing.Color.PaleGreen;
+            this.CountingDownLabel.Location = new System.Drawing.Point(624, 1290);
             this.CountingDownLabel.Name = "CountingDownLabel";
             this.CountingDownLabel.Size = new System.Drawing.Size(77, 90);
             this.CountingDownLabel.TabIndex = 22;
@@ -178,12 +206,12 @@ namespace GuessTheNumberGame
             this.NumberHolderLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NumberHolderLabel.AutoSize = true;
             this.NumberHolderLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumberHolderLabel.ForeColor = System.Drawing.Color.White;
-            this.NumberHolderLabel.Location = new System.Drawing.Point(384, 902);
+            this.NumberHolderLabel.ForeColor = System.Drawing.Color.PaleGreen;
+            this.NumberHolderLabel.Location = new System.Drawing.Point(492, 353);
             this.NumberHolderLabel.Name = "NumberHolderLabel";
-            this.NumberHolderLabel.Size = new System.Drawing.Size(513, 90);
+            this.NumberHolderLabel.Size = new System.Drawing.Size(272, 90);
             this.NumberHolderLabel.TabIndex = 13;
-            this.NumberHolderLabel.Text = "type to guess :3";
+            this.NumberHolderLabel.Text = "---------";
             this.NumberHolderLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // CountdownLabel
@@ -191,7 +219,8 @@ namespace GuessTheNumberGame
             this.CountdownLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CountdownLabel.AutoSize = true;
             this.CountdownLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CountdownLabel.Location = new System.Drawing.Point(521, 846);
+            this.CountdownLabel.ForeColor = System.Drawing.Color.PaleGreen;
+            this.CountdownLabel.Location = new System.Drawing.Point(511, 129);
             this.CountdownLabel.Name = "CountdownLabel";
             this.CountdownLabel.Size = new System.Drawing.Size(239, 38);
             this.CountdownLabel.TabIndex = 11;
@@ -201,7 +230,8 @@ namespace GuessTheNumberGame
             // GuidingLabel
             // 
             this.GuidingLabel.AutoSize = true;
-            this.GuidingLabel.Location = new System.Drawing.Point(546, 1009);
+            this.GuidingLabel.ForeColor = System.Drawing.Color.PaleGreen;
+            this.GuidingLabel.Location = new System.Drawing.Point(530, 462);
             this.GuidingLabel.Name = "GuidingLabel";
             this.GuidingLabel.Size = new System.Drawing.Size(191, 23);
             this.GuidingLabel.TabIndex = 9;
@@ -312,11 +342,6 @@ namespace GuessTheNumberGame
             this.OpeningTime.Interval = 5;
             this.OpeningTime.Tick += new System.EventHandler(this.OpeningTick);
             // 
-            // OpeningTransition
-            // 
-            this.OpeningTransition.Interval = 1;
-            this.OpeningTransition.Tick += new System.EventHandler(this.OpeningTransitionTick);
-            // 
             // CountdownTimer
             // 
             this.CountdownTimer.Interval = 1000;
@@ -348,6 +373,8 @@ namespace GuessTheNumberGame
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainMenuPress);
             this.MainMenuPanel.ResumeLayout(false);
             this.MainMenuPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GuessAgainPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GameOverPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GoHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HardPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NormalPicture)).EndInit();
@@ -377,9 +404,6 @@ namespace GuessTheNumberGame
         private Label CountdownLabel;
         private Timer CountdownTimer;
         private Label NumberHolderLabel;
-        private Label DifficultyTextLabel;
-        private Label DifficultyTypeLabel;
-        private Label DifficultyPageLabel;
         private Label CountingDownLabel;
         private Timer CountingDownTimer;
         private PictureBox DifficultySectionPicture;
@@ -387,6 +411,8 @@ namespace GuessTheNumberGame
         private PictureBox NormalPicture;
         private PictureBox EasyPicture;
         private PictureBox GoHome;
+        private PictureBox GameOverPicture;
+        private PictureBox GuessAgainPicture;
     }
 }
 

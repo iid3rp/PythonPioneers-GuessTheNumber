@@ -121,37 +121,46 @@
   <data name="MainMenuBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainMenuBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GameBasics" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GameBasics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="DarkBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DarkBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GuessTheNumberLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GuessTheNumberLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EasyPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EasyPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MainMenuBackground720p" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainMenuBackground720p.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DifficultyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DifficultyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HardPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HardPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NormalPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NormalPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="GitHub40p" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GitHub40p.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DifficultyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DifficultyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EasyPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EasyPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GameBasics" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GameBasics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GameOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GameOver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="GoHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GoHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GuessAgain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GuessAgain.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GuessingBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GuessingBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HardPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HardPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NormalPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NormalPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
