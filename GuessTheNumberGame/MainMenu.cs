@@ -134,7 +134,7 @@ namespace GuessTheNumberGame
         private void MainMenuInterface()
         {
             // main menu
-            GuessTheNumberLogo.Location = new Point(280, -35);
+            GuessTheNumberLogo.Location = new Point(264, 35);
             PressAnyButtonLabel.Location = new Point(373, 507);
 
             // difficulty stuff
@@ -144,7 +144,17 @@ namespace GuessTheNumberGame
             HardPicture.Location = new Point(830, 1430);
             GoHome.Location = new Point(12, 1619);
 
+            //guessing game stuff
+            CountdownLabel.Location = new Point((this.Width / 2) -
+                                                (CountdownLabel.Width /2), 1129);
+            NumberHolderLabel.Location = new Point((this.Width / 2) -
+                                                  (NumberHolderLabel.Width / 2), 1353);
+            GuidingLabel.Location = new Point((this.Width / 2) -
+                                              (GuidingLabel.Width / 2), 1462);
+
             // game over stuff
+
+            //
         }
 
         private void DifficultyMenuInterface()
@@ -168,10 +178,13 @@ namespace GuessTheNumberGame
             this.BackgroundImage = Properties.Resources.GuessingBackground;
 
             // guessing game stuff
-            GuidingLabel.Location = new Point(GuidingLabel.Location.X, 559);
-            CountdownLabel.Location = new Point(CountdownLabel.Location.X, 346);
-            NumberHolderLabel.Location = new Point(NumberHolderLabel.Location.X, 452);
-            CountingDownLabel.Location = new Point(624, 1290);
+            CountdownLabel.Location = new Point(511, 129);
+            CountdownLabel.Location = new Point((this.Width / 2) -
+                                                (CountdownLabel.Width / 2), 129);
+            NumberHolderLabel.Location = new Point((this.Width / 2) -
+                                                  (NumberHolderLabel.Width / 2), 353);
+            GuidingLabel.Location = new Point((this.Width / 2) -
+                                              (GuidingLabel.Width / 2), 462);
             CountdownTimer.Start(); // countdown timer of the guessing game
             CountingDownTimer.Stop();
 
@@ -240,7 +253,8 @@ namespace GuessTheNumberGame
 
         private void ClosingLabelClick(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Do you wish to exit?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Do you wish to exit?", 
+            "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -271,7 +285,7 @@ namespace GuessTheNumberGame
             CountingDownLabel.Location = new Point(624, 290);
 
             this.BackgroundImage = Properties.Resources.DarkBackground;
-
+            CountingDownLabel.Show();
             CountingDownTimer.Start();
         }
 
@@ -556,20 +570,17 @@ namespace GuessTheNumberGame
                     StringHolder = StringHolder.Remove(StringHolder.Length - 1);
                     NumberHolderLabel.Text = StringHolder;
                 }
+                MiddleChecking();
             }
             else
             {
                 MainMenuSwitch = 2;
                 MainMenuProcess();
             }
-            MiddleChecking();
+            
         }
         private void MiddleChecking()
         {
-            NumberHolderLabel.Location = new Point((this.Width / 2) - (NumberHolderLabel.Width / 2), 252);
-            GuidingLabel.Location = new Point((this.Width / 2) - (GuidingLabel.Width / 2), 450);
-            CountdownLabel.Location = new Point((this.Width / 2) - (CountdownLabel.Width / 2), 129);
-            CountingDownLabel.Location = new Point((this.Width / 2) - (CountingDownLabel.Width / 2), 462);
         }
 
         private void ConsistentInterface()

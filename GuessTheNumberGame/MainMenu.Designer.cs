@@ -207,7 +207,7 @@ namespace GuessTheNumberGame
             this.NumberHolderLabel.AutoSize = true;
             this.NumberHolderLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumberHolderLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.NumberHolderLabel.Location = new System.Drawing.Point(492, 353);
+            this.NumberHolderLabel.Location = new System.Drawing.Point(492, 1353);
             this.NumberHolderLabel.Name = "NumberHolderLabel";
             this.NumberHolderLabel.Size = new System.Drawing.Size(272, 90);
             this.NumberHolderLabel.TabIndex = 13;
@@ -220,7 +220,7 @@ namespace GuessTheNumberGame
             this.CountdownLabel.AutoSize = true;
             this.CountdownLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CountdownLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.CountdownLabel.Location = new System.Drawing.Point(511, 129);
+            this.CountdownLabel.Location = new System.Drawing.Point(511, 1129);
             this.CountdownLabel.Name = "CountdownLabel";
             this.CountdownLabel.Size = new System.Drawing.Size(239, 38);
             this.CountdownLabel.TabIndex = 11;
@@ -231,7 +231,7 @@ namespace GuessTheNumberGame
             // 
             this.GuidingLabel.AutoSize = true;
             this.GuidingLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.GuidingLabel.Location = new System.Drawing.Point(530, 462);
+            this.GuidingLabel.Location = new System.Drawing.Point(530, 1462);
             this.GuidingLabel.Name = "GuidingLabel";
             this.GuidingLabel.Size = new System.Drawing.Size(191, 23);
             this.GuidingLabel.TabIndex = 9;
@@ -240,10 +240,10 @@ namespace GuessTheNumberGame
             // 
             // GuessTheNumberLogo
             // 
-            this.GuessTheNumberLogo.Image = global::GuessTheNumberGame.Properties.Resources.GuessTheNumberLogo;
-            this.GuessTheNumberLogo.Location = new System.Drawing.Point(280, -1035);
+            this.GuessTheNumberLogo.Image = ((System.Drawing.Image)(resources.GetObject("GuessTheNumberLogo.Image")));
+            this.GuessTheNumberLogo.Location = new System.Drawing.Point(264, 35);
             this.GuessTheNumberLogo.Name = "GuessTheNumberLogo";
-            this.GuessTheNumberLogo.Size = new System.Drawing.Size(720, 360);
+            this.GuessTheNumberLogo.Size = new System.Drawing.Size(753, 300);
             this.GuessTheNumberLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.GuessTheNumberLogo.TabIndex = 7;
             this.GuessTheNumberLogo.TabStop = false;
