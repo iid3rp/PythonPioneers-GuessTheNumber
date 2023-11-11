@@ -153,9 +153,9 @@ namespace GuessTheNumberGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GuessingBackground {
+        internal static System.Drawing.Bitmap GuessingPanel {
             get {
-                object obj = ResourceManager.GetObject("GuessingBackground", resourceCulture);
+                object obj = ResourceManager.GetObject("GuessingPanel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,16 +186,6 @@ namespace GuessTheNumberGame.Properties {
         internal static System.Drawing.Bitmap MainMenuBackground {
             get {
                 object obj = ResourceManager.GetObject("MainMenuBackground", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MainMenuBackground720p {
-            get {
-                object obj = ResourceManager.GetObject("MainMenuBackground720p", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

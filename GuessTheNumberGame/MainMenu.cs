@@ -133,9 +133,12 @@ namespace GuessTheNumberGame
 
         private void MainMenuInterface()
         {
+            this.BackgroundImage = Properties.Resources.MainMenuBackground;
+            IsGuessingProcess = false;
+
             // main menu
             GuessTheNumberLogo.Location = new Point(264, 35);
-            PressAnyButtonLabel.Location = new Point(373, 507);
+            PressAnyButtonLabel.Location = new Point(373, 577);
 
             // difficulty stuff
             DifficultySectionPicture.Location = new Point(78, 1077);
@@ -145,16 +148,17 @@ namespace GuessTheNumberGame
             GoHome.Location = new Point(12, 1619);
 
             //guessing game stuff
-            CountdownLabel.Location = new Point((this.Width / 2) -
-                                                (CountdownLabel.Width /2), 1129);
-            NumberHolderLabel.Location = new Point((this.Width / 2) -
-                                                  (NumberHolderLabel.Width / 2), 1353);
-            GuidingLabel.Location = new Point((this.Width / 2) -
-                                              (GuidingLabel.Width / 2), 1462);
+            GuessingPanel.Hide();
 
             // game over stuff
+            CountdownLabel.Text = "0:00";
+            CountingDownLabel.Hide();
+            GameOverPicture.Location = new Point(343, 1109);
+            GoHome.Size = new Size(294, 1100);
+            GoHome.Location = new Point((MainMenuPanel.Width / 2) -
+                                        (GoHome.Width / 2), 1549);
+            GameOverLabel.Location = new Point(446, 1360);
 
-            //
         }
 
         private void DifficultyMenuInterface()
@@ -168,23 +172,20 @@ namespace GuessTheNumberGame
             EasyPicture.Location = new Point(830, 145);
             NormalPicture.Location = new Point(830, 288);
             HardPicture.Location = new Point(830, 430);
+            GoHome.Size = new Size(147, 50);
             GoHome.Location = new Point(12, 619);
-
         }
 
         private void GuessingGameInterface()
         {
             IsGuessingProcess = true;
-            this.BackgroundImage = Properties.Resources.GuessingBackground;
+            this.BackgroundImage = Properties.Resources.MainMenuBackground;
 
             // guessing game stuff
-            CountdownLabel.Location = new Point(511, 129);
-            CountdownLabel.Location = new Point((this.Width / 2) -
-                                                (CountdownLabel.Width / 2), 129);
-            NumberHolderLabel.Location = new Point((this.Width / 2) -
-                                                  (NumberHolderLabel.Width / 2), 353);
-            GuidingLabel.Location = new Point((this.Width / 2) -
-                                              (GuidingLabel.Width / 2), 462);
+            StringHolder = "";
+            NumberHolderLabel.Text = "-------";
+            GuidingLabel.Text = "Enter number from 0 - " + GuessingLimit;
+            GuessingPanel.Show(); // the panel shows
             CountdownTimer.Start(); // countdown timer of the guessing game
             CountingDownTimer.Stop();
 
@@ -194,22 +195,24 @@ namespace GuessTheNumberGame
 
         private void GameOver()
         {
-            // gohome 207, 549
-            // guess again 711, 549
-            // gameover 343, 109
+            GuessingPanel.Hide();
 
             this.BackgroundImage = Properties.Resources.DarkBackground;
-            GoHome.Location = new Point(207, 549);
+            CountingDownLabel.Hide();
             GameOverPicture.Location = new Point(343, 109);
-            GuessAgainPicture.Location = new Point(711, 549);
-            GoHome.Location = new Point(207, 549);
             GoHome.Size = new Size(294, 100);
+            GoHome.Location = new Point((MainMenuPanel.Width / 2) -
+                                        (GoHome.Width / 2), 549);
+            GameOverLabel.Location = new Point((this.Width / 2) -
+                                               (GameOverLabel.Width / 2), 360);
         }
 
         #region Main Menu stuff goes here :3
         private void MainMenuLoad(object sender, EventArgs e) // main form loading..
         {
             this.BackgroundImage = Properties.Resources.MainMenuBackground; // initialize the background beforehand
+
+            GuessingPanel.Location = new Point(382, 72);
 
             typeof(Panel).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
@@ -276,6 +279,7 @@ namespace GuessTheNumberGame
 
         private void GuessingGameStart()
         {
+            IsGuessingProcess = true;
             // difficulty stuff
             DifficultySectionPicture.Location = new Point(78, 1077);
             EasyPicture.Location = new Point(830, 1145);
@@ -285,6 +289,9 @@ namespace GuessTheNumberGame
             CountingDownLabel.Location = new Point(624, 290);
 
             this.BackgroundImage = Properties.Resources.DarkBackground;
+            CountingDownStart = 3;
+            CountingDownLabel.Text = CountingDownStart.ToString();
+            CountingDownTimer.Interval = 1;
             CountingDownLabel.Show();
             CountingDownTimer.Start();
         }
@@ -350,6 +357,7 @@ namespace GuessTheNumberGame
                 if (CountingDownStart == 0)
                 {
                     CountingDownLabel.Text = "Start Guessing!";
+                    AttemptLabel.Text = "Attempts: " + Attempts;
                 }
                 else
                 {
@@ -359,9 +367,15 @@ namespace GuessTheNumberGame
             }
             else
             {
+                CountingDownLabel.Location = new Point(624, 1290);
                 GuessingGameInterface();
             }
             MiddleChecking();
+        }
+
+        private void GuessAgainClick(object sender, EventArgs e)
+        {
+            GuessingGameStart();
         }
 
         private void TimeTicking(object sender, EventArgs e)
@@ -448,8 +462,7 @@ namespace GuessTheNumberGame
                     secondsLeft--;
                 }
 
-                CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n" +
-                                      "Attempts: " + Attempts;
+                CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n";
             }
             MiddleChecking();
         }
@@ -458,7 +471,7 @@ namespace GuessTheNumberGame
         {
             if (IsGuessingProcess)
             {
-                if (StringHolder.Length > 16)
+                if (StringHolder.Length > 6)
                 {
                     e.Handled = true;
                 }
@@ -497,7 +510,7 @@ namespace GuessTheNumberGame
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if (NumberHolderLabel.Text == "getnumericalvalue") // cheat code for number reference. this should not be abused.
+                    if (NumberHolderLabel.Text == "getnum") // cheat code for number reference. this should not be abused.
                     {
                         GuidingLabel.Text = "Random Number: " + RandomNumber.ToString();
                     }
@@ -520,16 +533,16 @@ namespace GuessTheNumberGame
                                 GuidingLabel.Text = "Hint: Current number is greater\nthan the random number.\n" +
                                                     "Current Number: " + CurrentNumber.ToString();
                                 Attempts--;
-                                CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n" +
-                                          "Attempts: " + Attempts;
+                                CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n";
+                                AttemptLabel.Text = "Attempts: " + Attempts;
                             }
                             else if (CurrentNumber < RandomNumber)
                             {
                                 GuidingLabel.Text = GuidingLabel.Text = "Hint: Current number is less\nthan the random number.\n" +
                                                     "Current Number: " + CurrentNumber;
                                 Attempts--;
-                                CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n" +
-                                          "Attempts: " + Attempts;
+                                CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n";
+                                AttemptLabel.Text = "Attempts: " + Attempts;
                             }
                             else
                             {
@@ -541,19 +554,18 @@ namespace GuessTheNumberGame
 
                             if (Attempts == 0)
                             {
-                                if (RandomNumber + 3 <= CurrentNumber || RandomNumber - 3 >= CurrentNumber)
+                                if (Math.Abs(CurrentNumber - RandomNumber) <= 3)
                                 {
-                                    GuidingLabel.Text = "You ran out of attempts :<\n" +
+                                    GameOverLabel.Text = "You are so close!!!\n" +
                                                         "Current Number = " + CurrentNumber + "\n" +
-                                                        "Correct Number = " + RandomNumber + "\n" +
-                                                        "Game Over.";
+                                                        "Correct Number = " + RandomNumber;
                                 }
-                                else 
-                                { 
+                                else
+                                {
                                     CountdownLabel.Text = "";
-                                    GuidingLabel.Text = "You ran out of attempts :<\n" +
-                                                        "Correct Number = " + RandomNumber + "\n" +
-                                                        "Game Over.";
+                                    GameOverLabel.Text = "You ran out of attempts :<\n" +
+                                                         "Current Number = " + CurrentNumber + "\n" +
+                                                         "Correct Number = " + RandomNumber;
                                 }
                                 IsANumber = false;
                                 GameOver();
@@ -574,13 +586,19 @@ namespace GuessTheNumberGame
             }
             else
             {
-                MainMenuSwitch = 2;
-                MainMenuProcess();
+                DifficultyMenuInterface();
             }
             
         }
         private void MiddleChecking()
         {
+            Point centerPoint = new Point(GuessingPanel.Width / 2, 0);
+            Point screenCenterPoint = GuessingPanel.PointToScreen(centerPoint);
+
+            CountingDownLabel.Location = new Point((MainMenuPanel.Width / 2) - (CountingDownLabel.Width / 2), 290);
+            CountdownLabel.Location = new Point(centerPoint.X - (CountdownLabel.Width / 2), 55);
+            NumberHolderLabel.Location = new Point(centerPoint.X - (NumberHolderLabel.Width / 2), 244);
+            GuidingLabel.Location = new Point(centerPoint.X - (GuidingLabel.Width / 2), 360);
         }
 
         private void ConsistentInterface()
@@ -588,24 +606,41 @@ namespace GuessTheNumberGame
             int ratio = 0;
             if (this.WindowState == FormWindowState.Normal) // fullscreen interface :3
             {
+                ratio = 1080 / 720;
                 WindowLabel.Text = "[]]";
-                ratio = this.Height / 720;
                 this.WindowState = FormWindowState.Maximized;
+
+                
+
             }
             else // normal window interface
             {
-                ratio = 1;
+                ratio = 720 / 1080;
                 WindowLabel.Text = "[]";
                 this.WindowState = FormWindowState.Normal;
-                this.Size = new Size(1280, 720);
+                this.Size = new Size(1280, 720);    
             }
 
-            GuessTheNumberLogo.Location = new Point(((this.Size.Width / 2) - 
-                                                      GuessTheNumberLogo.Width / 2),
-                                                      GuessTheNumberLogo.Location.Y * ratio);
-            GuessTheNumberLogo.Size = new Size((int)(GuessTheNumberLogo.Location.X * ratio),
-                                               (int)(GuessTheNumberLogo.Location.Y * ratio));
-            GuessTheNumberLogo.Size = new Size(720, 360);
+            // main menu
+
+            // difficulty stuff
+            DifficultySectionPicture.Location = new Point(78, 1077);
+            EasyPicture.Location = new Point(830, 1145);
+            NormalPicture.Location = new Point(830, 1288);
+            HardPicture.Location = new Point(830, 1430);
+            GoHome.Location = new Point(12, 1619);
+
+            //guessing game stuff
+            GuessingPanel.Hide();
+
+            // game over stuff
+            CountdownLabel.Text = "0:00";
+            CountingDownLabel.Hide();
+            GameOverPicture.Location = new Point(343, 1109);
+            GoHome.Size = new Size(294, 1100);
+            GoHome.Location = new Point((MainMenuPanel.Width / 2) -
+                                        (GoHome.Width / 2), 1549);
+            GameOverLabel.Location = new Point(446, 1360);
         }
 
         #endregion

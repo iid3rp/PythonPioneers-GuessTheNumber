@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PythonPioneersGuessTheGameLogo.ico" />
+    <None Include="Resources\GuessingPanel.png" />
     <None Include="Resources\GuessingBackground.png" />
     <None Include="Resources\GuessTheNumberLogo.png" />
     <None Include="Resources\GameOver.png" />
