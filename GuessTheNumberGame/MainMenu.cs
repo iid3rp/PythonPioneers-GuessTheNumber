@@ -21,15 +21,18 @@ namespace GuessTheNumberGame
 
         #region Private values goes here: :3
         private bool
+        IsGuessed = false,  // the boolean if the user has guessed the random number 
         IsDragging = false, // the dragging boolean for the form moving in normal form size
         IsANumber = false, // boolean for if the input dosent have characters
         IsDifficultyImage = false, // just to make sure if the picture in the difficulty section is in the difficulty section.
         IsGuessingProcess = false; //boolean for if the guessing has started.
 
         private int
-        MainMenuSwitch = 1, // the main menu interface number holder for the methods.
         CountingDownStart = 3, // counting down when the guessing starts.
-
+        // difficulty stuff (winners list)
+        easy = 0,
+        normal = 0,
+        hard = 0,
         // guessing number variables
         CurrentNumber = 0, // current number holder
         GuessingLimit = 0, // guessing limit numebr to use the limit in the number guess
@@ -45,26 +48,59 @@ namespace GuessTheNumberGame
         Offset; // the offset location that will track each time the cursor moves
 
         private static string
-        StringHolder = "";
+        StringHolder = "",
+        DifficultyName = null,
+        programFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "PythonPioneers-GuessTheNumber"),
+        WinnersFilePath = Path.Combine(programFolderPath, "Winners.txt"),
+        DistributionFilePath = Path.Combine(programFolderPath, "Distribution.txt");
 
-        private double MainRatio()
+        private readonly string[] TipsText =
         {
-            double ratio = this.Height / 720;
-            return MainRatio();
-        }
+            "Start with a Lucky Number. Today's might be your day!",
+            "Try to follow with a fibonacci sequence.",
+            "Close your eyes and guess whatever.",
+            "Dive into the world of primes and see if the answer lies within.",
+            "Eliminate possibilities step by step.",
+            "Leap Year Luck: Is it a leap year? Leap into a guess!",
+            "Try a number in the middle.",
+            "Try to guess in thirds as well.",
+            "See if the reversed number holds the secret.",
+            "Try a palindrome number.",
+            "Maybe the nature will tell you whats the number.",
+            "Take a quantum leap of faith.",
+            "Ask a Professor for a random number",
+            "Try to be more practical. Guess or forfeit.",
+            "Try to guess within the Golden Ratio.",
+            "Apply Sudoku strategies to your guessing game.",
+            "Let's guess for something!",
+            "Mathematical Magic: Sprinkle some math spells.",
+            "Maybe ask chatGPT for a random number.",
+            "Maybe ask yourself where did the number go.",
+            "What's the number? Who knows, honestly? :3",
+            "Maybe ask google for a random number.",
+            "Ask for a friend.",
+            "Pick a number with a pirate's swagger.",
+            "Debate the number with your friends.",
+            "Please play this game!!!!",
+            "Also please also play for other booths :3",
+            "Try to do lucky numbers like 444 or something lol.",
+            "Look to the python leaves for guidance",
+            "Apply your favorite geeky algorithm for the perfect guess.",
+            "Channel your inner artist and paint the number in your mind.",
+            "Try to focus for a number that you dont know.",
+            "Unhappy go lucky!",
+            "Maybe guess the number with your birthday.",
+            "Try to guess with how many times you have seen people today."
+        };
 
-        private double MiddleLocation()
-        {
-            double middle = this.Width / 2;
-            return MiddleLocation();
-        }
+        private StreamWriter DistributionIni;
 
         #endregion
 
         public MainMenuForm() // the main menu public class :3
         {
-            InitializeFiles(); // the program files of this program to determine the winners and stuff
             InitializeComponent(); // the main menu panel interface goes here :3
+            InitializeFiles(); // the program files of this program to determine the winners and stuff
 
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Opacity = 0;
@@ -72,10 +108,7 @@ namespace GuessTheNumberGame
 
         private void InitializeFiles()
         {
-            string programFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "PythonPioneers-GuessTheNumber");
-            string WinnersFilePath = Path.Combine(programFolderPath, "Winners.txt");
-            string DistributionFilePath = Path.Combine(programFolderPath, "Distribution.txt");
-            for(;;)
+            for (; ; )
             {
                 // checking the files
                 if (!Directory.Exists(programFolderPath))
@@ -93,41 +126,76 @@ namespace GuessTheNumberGame
                                                  "Easy: " + 0 + "\n" +
                                                  "Normal: " + 0 + "\n" +
                                                  "Hard: " + 0 + "\n");
-                        }                        
+                        }
+                        WinnersIni.Close();
                     }
-                    else if(!File.Exists(DistributionFilePath))
+
+                    if (!File.Exists(DistributionFilePath))
                     {
-                        StreamWriter DistributionIni = new StreamWriter(DistributionFilePath);
+                        DistributionIni = new StreamWriter(DistributionFilePath);
                         using (DistributionIni)
                         {
                             DistributionIni.WriteLine("Python Pioneers | Guess The Game\n" +
-                                                      "Random distribution count:");
+                                                      "Random distribution count:\n\n" +
+                                                      "    Date & Time     |  Difficulty  |  Random Number  |  Guessed\n");
                         }
                     }
 
-                    // using the files:
-
+                    WinnersFileRead();
                     break;
                 }
             }
         }
-
-        private void MainMenuProcess() // the whole form process goes here :3
+        private void WinnersFileRead() // read the winners text file
         {
-            switch(MainMenuSwitch)
+            using (StreamReader WinnersRead = new StreamReader(WinnersFilePath))
             {
-                case 1: // the main menu stuff.
-                    MainMenuInterface();
-                    break;
-                case 2: // the difficulty section
-                    DifficultyMenuInterface();
-                    break;
-                case 3: // the starting process
-                    GuessingGameInterface();
-                    break;
-                case 4:
-                    GameOver();
-                    break;
+                // Read the header line ("winners:")
+                WinnersRead.ReadLine();
+
+                // Read and parse the easy, normal, and hard lines
+                easy = ParseWinnersLine(WinnersRead.ReadLine());
+                normal = ParseWinnersLine(WinnersRead.ReadLine());
+                hard = ParseWinnersLine(WinnersRead.ReadLine());
+
+                // Display the results
+
+                WinnersLabel.Text = "Winners: \n" +
+                                    "Easy: " + easy + "\n" +
+                                    "Normal: " + normal + "\n" +
+                                    "Hard: " + hard + "\n";
+            }
+        }
+
+        private int ParseWinnersLine(string line)
+        {
+            // Split the line into parts using ':' as the separator
+            string[] parts = line.Split(':');
+
+            // Assuming the number is the second part after splitting
+            if (parts.Length > 1)
+            {
+                int value;
+                // Try to parse the number, if successful, return it; otherwise, return 0
+                return int.TryParse(parts[1].Trim(), out value) ? value : 0;
+            }
+            return 0; // Default value if parsing fails
+        }
+
+        private void DistributionVoid()
+        {
+            string PastText = null;
+            using (StreamReader DistributionFileRead = new StreamReader(DistributionFilePath))
+            {
+                PastText = DistributionFileRead.ReadToEnd();
+            }
+
+            using (DistributionIni = new StreamWriter(DistributionFilePath))
+            {
+                DistributionIni.Write(PastText);
+                DistributionIni.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") +
+                                          "\t  " + DifficultyName + "\t\t  " +
+                                          RandomNumber + "\t\t  " + IsGuessed);
             }
         }
 
@@ -137,10 +205,12 @@ namespace GuessTheNumberGame
             IsGuessingProcess = false;
 
             // main menu
+            WinnersLabel.Show();
             GuessTheNumberLogo.Location = new Point(264, 35);
             PressAnyButtonLabel.Location = new Point(373, 577);
 
             // difficulty stuff
+            NumberPage.Hide();
             DifficultySectionPicture.Location = new Point(78, 1077);
             EasyPicture.Location = new Point(830, 1145);
             NormalPicture.Location = new Point(830, 1288);
@@ -164,10 +234,12 @@ namespace GuessTheNumberGame
         private void DifficultyMenuInterface()
         {
             // main menu
+            WinnersLabel.Hide();
             GuessTheNumberLogo.Location = new Point(280, -1035);
             PressAnyButtonLabel.Location = new Point(373, -507);
 
             // difficulty stuff
+            NumberPage.Show();
             DifficultySectionPicture.Location = new Point(78, 77);
             EasyPicture.Location = new Point(830, 145);
             NormalPicture.Location = new Point(830, 288);
@@ -197,6 +269,7 @@ namespace GuessTheNumberGame
         {
             GuessingPanel.Hide();
 
+            DistributionVoid();
             this.BackgroundImage = Properties.Resources.DarkBackground;
             CountingDownLabel.Hide();
             GameOverPicture.Location = new Point(343, 109);
@@ -223,6 +296,7 @@ namespace GuessTheNumberGame
             TimeToday.Start(); // starting the time and date process :3
             OpeningTime.Start(); // fading in within the form itself
             OpeningTransition.Start(); // opening transitions
+            TipAppearance.Start(); // strting of the ticking process
         }
 
         #region window form location moving and stuff goes here :3
@@ -306,7 +380,16 @@ namespace GuessTheNumberGame
             Attempts = 4;
             minutesLeft = 1;
             secondsLeft = 0;
+            DifficultyName = "Easy";
             GuessingGameStart();
+        }
+
+        private void TipTick(object sender, EventArgs e)
+        {
+            TipAppearance.Interval = 3000;
+            TipLabel.Text = TipsText[rand.Next(0, TipsText.Length - 1)];
+            TipLabel.Location = new Point((MainMenuPanel.Width / 2) -
+                                          (TipLabel.Width / 2), 646);
         }
 
         private void NormalPicture_Click(object sender, EventArgs e)
@@ -316,6 +399,7 @@ namespace GuessTheNumberGame
             Attempts = 6;
             minutesLeft = 1;
             secondsLeft = 30;
+            DifficultyName = "Hard";
             GuessingGameStart();
         }
 
@@ -326,6 +410,7 @@ namespace GuessTheNumberGame
             Attempts = 8;
             minutesLeft = 2;
             secondsLeft = 0;
+            DifficultyName = "Hard";
             GuessingGameStart();
         }
 
@@ -336,7 +421,12 @@ namespace GuessTheNumberGame
 
         private void TutorialPictureClick(object sender, EventArgs e)
         {
-            if(IsDifficultyImage)
+            PictureScene();
+        }
+
+        private void PictureScene()
+        {
+            if (IsDifficultyImage)
             {
                 DifficultySectionPicture.Image = Properties.Resources.GameBasics;
                 IsDifficultyImage = false;
@@ -351,6 +441,7 @@ namespace GuessTheNumberGame
         private void CountingDownTick(object sender, EventArgs e)
         {
             CountingDownTimer.Interval = 1000;
+            NumberPage.Hide();
             this.BackgroundImage = Properties.Resources.DarkBackground;
             if(CountingDownStart > -1)
             {
@@ -414,28 +505,6 @@ namespace GuessTheNumberGame
             {
                 OpeningTime.Stop();
             }
-        }
-
-        private void WindowChecking()
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                WindowLabel.Text = "[]]";
-                GitHubPicture.Size = new Size(40, 40);
-                GitHubPicture.Location = new Point(GitHubPicture.Location.X, (GitHubPicture.Location.Y - 20));
-                GuessTheNumberLogo.Size = new Size(1280, 640);
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                WindowLabel.Text = "[]";
-                GuessTheNumberLogo.Size = new Size(720, 360);
-                GitHubPicture.Size = new Size(20, 20);
-                GitHubPicture.Location = new Point(GitHubPicture.Location.X, (GitHubPicture.Location.Y + 20));
-                this.WindowState = FormWindowState.Normal;
-                this.Size = new Size(1280, 720);
-            }
-            GuessTheNumberLogo.Location = new Point(((this.Size.Width / 2) - GuessTheNumberLogo.Width / 2), -35);
         }
         #endregion
 
@@ -544,12 +613,14 @@ namespace GuessTheNumberGame
                                 CountdownLabel.Text = $"{minutesLeft}:{secondsLeft:D2}\n";
                                 AttemptLabel.Text = "Attempts: " + Attempts;
                             }
-                            else
+                            else if(CurrentNumber == RandomNumber)
                             {
-                                GuidingLabel.Text = "You won! Yippie :3";
-                                GameOver();
+                                GameOverLabel.Text = "You won! Yippie :3";
+                                IsGuessed = true;
+                                Yippie();
                                 CountdownLabel.Text = null;
-                                CountdownTimer.Stop();
+                                GameOver();
+                                CountdownTimer.Stop();           
                             }
 
                             if (Attempts == 0)
@@ -567,6 +638,7 @@ namespace GuessTheNumberGame
                                                          "Current Number = " + CurrentNumber + "\n" +
                                                          "Correct Number = " + RandomNumber;
                                 }
+                                IsGuessed = false;
                                 IsANumber = false;
                                 GameOver();
                                 CountdownTimer.Stop();
@@ -587,6 +659,11 @@ namespace GuessTheNumberGame
             else
             {
                 DifficultyMenuInterface();
+
+                if(e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+                {
+                    PictureScene();
+                }
             }
             
         }
@@ -601,12 +678,10 @@ namespace GuessTheNumberGame
             GuidingLabel.Location = new Point(centerPoint.X - (GuidingLabel.Width / 2), 360);
         }
 
-        private void ConsistentInterface()
+        private void ConsistentInterface() // deprecated value
         {
-            int ratio = 0;
             if (this.WindowState == FormWindowState.Normal) // fullscreen interface :3
             {
-                ratio = 1080 / 720;
                 WindowLabel.Text = "[]]";
                 this.WindowState = FormWindowState.Maximized;
 
@@ -615,7 +690,6 @@ namespace GuessTheNumberGame
             }
             else // normal window interface
             {
-                ratio = 720 / 1080;
                 WindowLabel.Text = "[]";
                 this.WindowState = FormWindowState.Normal;
                 this.Size = new Size(1280, 720);    
@@ -641,6 +715,34 @@ namespace GuessTheNumberGame
             GoHome.Location = new Point((MainMenuPanel.Width / 2) -
                                         (GoHome.Width / 2), 1549);
             GameOverLabel.Location = new Point(446, 1360);
+        }
+
+        private void Yippie()
+        {
+            switch(GuessingLimit)
+            {
+                case 250:
+                    DifficultyName = "Easy";
+                    easy++;
+                    break;
+                case 500:
+                    DifficultyName = "Normal";
+                    normal++;
+                    break;
+                case 1000:
+                    DifficultyName = "Hard";
+                    hard++;
+                    break;
+            }
+
+            using (StreamWriter WinnersWrite = new StreamWriter(WinnersFilePath))
+            {
+                WinnersWrite.WriteLine("Winners:\n" +
+                                        "Easy: " + easy + "\n" +
+                                        "Normal: " + normal + "\n" +
+                                        "Hard: " + hard + "\n");
+            }
+                WinnersFileRead();
         }
 
         #endregion
