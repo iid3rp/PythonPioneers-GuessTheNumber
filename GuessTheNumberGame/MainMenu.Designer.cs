@@ -55,7 +55,6 @@ namespace GuessTheNumberGame
             this.GitHubPicture = new System.Windows.Forms.PictureBox();
             this.TimeLabel = new System.Windows.Forms.Label();
             this.MinimizeLabel = new System.Windows.Forms.Label();
-            this.WindowLabel = new System.Windows.Forms.Label();
             this.ClosingLabel = new System.Windows.Forms.Label();
             this.PressAnyButtonLabel = new System.Windows.Forms.Label();
             this.ClosingTime = new System.Windows.Forms.Timer(this.components);
@@ -102,7 +101,6 @@ namespace GuessTheNumberGame
             this.MainMenuPanel.Controls.Add(this.GitHubPicture);
             this.MainMenuPanel.Controls.Add(this.TimeLabel);
             this.MainMenuPanel.Controls.Add(this.MinimizeLabel);
-            this.MainMenuPanel.Controls.Add(this.WindowLabel);
             this.MainMenuPanel.Controls.Add(this.ClosingLabel);
             this.MainMenuPanel.Controls.Add(this.PressAnyButtonLabel);
             this.MainMenuPanel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -352,29 +350,13 @@ namespace GuessTheNumberGame
             this.MinimizeLabel.BackColor = System.Drawing.Color.Transparent;
             this.MinimizeLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimizeLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.MinimizeLabel.Location = new System.Drawing.Point(1188, 5);
+            this.MinimizeLabel.Location = new System.Drawing.Point(1212, 5);
             this.MinimizeLabel.Name = "MinimizeLabel";
             this.MinimizeLabel.Size = new System.Drawing.Size(23, 18);
             this.MinimizeLabel.TabIndex = 4;
             this.MinimizeLabel.Text = "---";
             this.MinimizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.MinimizeLabel.Click += new System.EventHandler(this.MinimizeLabelClick);
-            // 
-            // WindowLabel
-            // 
-            this.WindowLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.WindowLabel.AutoSize = true;
-            this.WindowLabel.BackColor = System.Drawing.Color.Transparent;
-            this.WindowLabel.Enabled = false;
-            this.WindowLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WindowLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.WindowLabel.Location = new System.Drawing.Point(1217, 5);
-            this.WindowLabel.Name = "WindowLabel";
-            this.WindowLabel.Size = new System.Drawing.Size(18, 18);
-            this.WindowLabel.TabIndex = 3;
-            this.WindowLabel.Text = "[]";
-            this.WindowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.WindowLabel.Click += new System.EventHandler(this.WindowLabelClick);
             // 
             // ClosingLabel
             // 
@@ -467,7 +449,6 @@ namespace GuessTheNumberGame
 
         private Label PressAnyButtonLabel;
         private Label ClosingLabel;
-        private Label WindowLabel;
         private Label MinimizeLabel;
         private Panel MainMenuPanel;
         private Timer TimeToday;

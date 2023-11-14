@@ -68,7 +68,7 @@ namespace GuessTheNumberGame
             "Maybe press three random numbers in the keyboard.",
             "See if the reversed number holds the secret.",
             "Try a palindrome number.",
-            "Ask for a therapist for a random number."
+            "Ask for a therapist for a random number.",
             "Maybe the nature will tell you whats the number.",
             "Take a quantum leap of faith.",
             "Ask a Professor for a random number",
@@ -90,7 +90,7 @@ namespace GuessTheNumberGame
             "Debate the number with your friends.",
             "Please play this game!!!!",
             "Hello World!",
-            "Let's go CLuster 2!!",
+            "Let's go Cluster 2!!",
             "Also please also play for other booths :3",
             "Try to do lucky numbers like 444 or something lol.",
             "Look to the python leaves for guidance",
@@ -205,7 +205,7 @@ namespace GuessTheNumberGame
                 DistributionIni.Write(PastText);
                 DistributionIni.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") +
                                           "\t  " + DifficultyName + "\t\t  " +
-                                          RandomNumber + "\t\t  " + IsGuessed);
+                                          RandomNumber + "\t\t " + IsGuessed);
             }
         }
 
@@ -233,11 +233,12 @@ namespace GuessTheNumberGame
             // game over stuff
             CountdownLabel.Text = "0:00";
             CountingDownLabel.Hide();
-            GameOverPicture.Location = new Point(343, 1109);
+            GameOverPicture.Location = new Point((MainMenuPanel.Width / 2) - 
+                                                 (GameOverPicture.Width/2), 1109);
             GoHome.Size = new Size(294, 1100);
             GoHome.Location = new Point((MainMenuPanel.Width / 2) -
                                         (GoHome.Width / 2), 1549);
-            GameOverLabel.Location = new Point(446, 1360);
+            GameOverLabel.Location = new Point(446, 1340);
 
         }
 
@@ -282,12 +283,13 @@ namespace GuessTheNumberGame
             DistributionVoid();
             this.BackgroundImage = Properties.Resources.DarkBackground;
             CountingDownLabel.Hide();
-            GameOverPicture.Location = new Point(343, 109);
+            GameOverPicture.Location = new Point((MainMenuPanel.Width / 2) -
+                                                 (GameOverPicture.Width / 2), 109);
             GoHome.Size = new Size(294, 100);
             GoHome.Location = new Point((MainMenuPanel.Width / 2) -
-                                        (GoHome.Width / 2), 549);
+                                        (GoHome.Width / 2), 529);
             GameOverLabel.Location = new Point((this.Width / 2) -
-                                               (GameOverLabel.Width / 2), 360);
+                                               (GameOverLabel.Width / 2), 340);
         }
 
         #region Main Menu stuff goes here :3
@@ -692,7 +694,6 @@ namespace GuessTheNumberGame
         {
             if (this.WindowState == FormWindowState.Normal) // fullscreen interface :3
             {
-                WindowLabel.Text = "[]]";
                 this.WindowState = FormWindowState.Maximized;
 
                 
@@ -700,7 +701,6 @@ namespace GuessTheNumberGame
             }
             else // normal window interface
             {
-                WindowLabel.Text = "[]";
                 this.WindowState = FormWindowState.Normal;
                 this.Size = new Size(1280, 720);    
             }
