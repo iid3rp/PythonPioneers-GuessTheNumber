@@ -61,7 +61,7 @@ namespace GuessTheNumberGame
             "Close your eyes and guess whatever.",
             "Dive into the world of primes and see if the answer lies within.",
             "Eliminate possibilities through step by step.",
-            "Is it a your month? put that month and day into a guess!",
+            "Is it your month? put that month and day into a guess!",
             "Try a number in the middle.",
             "Try to guess in thirds as well.",
             "Maybe ask yourself why do you have to guess the number.",
@@ -98,7 +98,7 @@ namespace GuessTheNumberGame
             "Channel your inner artist and paint the number in your mind.",
             "Try to focus for a number that you dont know.",
             "Unhappy go lucky!",
-            "Saan aabot ang \u0000 10 mo?",
+            "Saan aabot ang \u20B1" + "10 mo?",
             "Maybe guess the number with your birthday.",
             "Try to guess with how many times you have seen people today."
         };
