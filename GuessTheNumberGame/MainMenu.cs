@@ -60,28 +60,37 @@ namespace GuessTheNumberGame
             "Try to follow with a fibonacci sequence.",
             "Close your eyes and guess whatever.",
             "Dive into the world of primes and see if the answer lies within.",
-            "Eliminate possibilities step by step.",
-            "Leap Year Luck: Is it a leap year? Leap into a guess!",
+            "Eliminate possibilities through step by step.",
+            "Is it a your month? put that month and day into a guess!",
             "Try a number in the middle.",
             "Try to guess in thirds as well.",
+            "Maybe ask yourself why do you have to guess the number.",
+            "Maybe press three random numbers in the keyboard.",
             "See if the reversed number holds the secret.",
             "Try a palindrome number.",
+            "Ask for a therapist for a random number."
             "Maybe the nature will tell you whats the number.",
             "Take a quantum leap of faith.",
             "Ask a Professor for a random number",
+            "Think random for today!",
             "Try to be more practical. Guess or forfeit.",
             "Try to guess within the Golden Ratio.",
             "Apply Sudoku strategies to your guessing game.",
             "Let's guess for something!",
+            "Guess, Guess, Guess! (pun intended)",
             "Mathematical Magic: Sprinkle some math spells.",
             "Maybe ask chatGPT for a random number.",
             "Maybe ask yourself where did the number go.",
-            "What's the number? Who knows, honestly? :3",
+            "What's the number? Who knows, honestly. :3",
             "Maybe ask google for a random number.",
             "Ask for a friend.",
+            "...............",
             "Pick a number with a pirate's swagger.",
+            "Have a luck for quite some time!",
             "Debate the number with your friends.",
             "Please play this game!!!!",
+            "Hello World!",
+            "Let's go CLuster 2!!",
             "Also please also play for other booths :3",
             "Try to do lucky numbers like 444 or something lol.",
             "Look to the python leaves for guidance",
@@ -89,6 +98,7 @@ namespace GuessTheNumberGame
             "Channel your inner artist and paint the number in your mind.",
             "Try to focus for a number that you dont know.",
             "Unhappy go lucky!",
+            "Saan aabot ang \u0000 10 mo?",
             "Maybe guess the number with your birthday.",
             "Try to guess with how many times you have seen people today."
         };
@@ -137,7 +147,7 @@ namespace GuessTheNumberGame
                         {
                             DistributionIni.WriteLine("Python Pioneers | Guess The Game\n" +
                                                       "Random distribution count:\n\n" +
-                                                      "    Date & Time     |  Difficulty  |  Random Number  |  Guessed\n");
+                                                      "    Date & Time     |  Difficulty  |  Random Number  |    Guessed\n");
                         }
                     }
 
@@ -327,7 +337,6 @@ namespace GuessTheNumberGame
             }
         }
 
-
         private void ClosingLabelClick(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Do you wish to exit?", 
@@ -516,7 +525,8 @@ namespace GuessTheNumberGame
             {
                 GameOver();
                 CountdownLabel.Text = "0:00";
-                GuidingLabel.Text = "You're out of time boo :<";
+                GameOverLabel.Text = "You're out of time :<\n" +
+                                     "Correct number: " + RandomNumber;
                 CountdownTimer.Stop();
             }
             else
@@ -628,15 +638,15 @@ namespace GuessTheNumberGame
                                 if (Math.Abs(CurrentNumber - RandomNumber) <= 3)
                                 {
                                     GameOverLabel.Text = "You are so close!!!\n" +
-                                                        "Current Number = " + CurrentNumber + "\n" +
-                                                        "Correct Number = " + RandomNumber;
+                                                        "Current Number: " + CurrentNumber + "\n" +
+                                                        "Correct Number: " + RandomNumber;
                                 }
                                 else
                                 {
                                     CountdownLabel.Text = "";
                                     GameOverLabel.Text = "You ran out of attempts :<\n" +
-                                                         "Current Number = " + CurrentNumber + "\n" +
-                                                         "Correct Number = " + RandomNumber;
+                                                         "Current Number: " + CurrentNumber + "\n" +
+                                                         "Correct Number: " + RandomNumber;
                                 }
                                 IsGuessed = false;
                                 IsANumber = false;
@@ -717,7 +727,7 @@ namespace GuessTheNumberGame
             GameOverLabel.Location = new Point(446, 1360);
         }
 
-        private void Yippie()
+        private void Yippie() // this is so autism :sob:
         {
             switch(GuessingLimit)
             {
@@ -744,7 +754,6 @@ namespace GuessTheNumberGame
             }
                 WinnersFileRead();
         }
-
         #endregion
     }
 }
