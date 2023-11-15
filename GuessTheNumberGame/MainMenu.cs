@@ -27,7 +27,7 @@ namespace GuessTheNumberGame
         IsDifficultyImage = false, // just to make sure if the picture in the difficulty section is in the difficulty section.
         IsGuessingProcess = false; //boolean for if the guessing has started.
 
-        private int
+        private static int
         CountingDownStart = 3, // counting down when the guessing starts.
         // difficulty stuff (winners list)
         easy = 0,
@@ -35,7 +35,7 @@ namespace GuessTheNumberGame
         hard = 0,
         // guessing number variables
         CurrentNumber = 0, // current number holder
-        GuessingLimit = 0, // guessing limit numebr to use the limit in the number guess
+        GuessingLimit = 1000, // guessing limit numebr to use the limit in the number guess
         minutesLeft = 0, // minutes left of the timer
         secondsLeft = 0, // seconds left of the timer
         Attempts = 0, // amount of attempts of the game
@@ -68,6 +68,7 @@ namespace GuessTheNumberGame
             "Maybe press three random numbers in the keyboard.",
             "See if the reversed number holds the secret.",
             "Try a palindrome number.",
+            "Either you guess or not, at least you had fun!",
             "Ask for a therapist for a random number.",
             "Maybe the nature will tell you whats the number.",
             "Take a quantum leap of faith.",
@@ -102,6 +103,12 @@ namespace GuessTheNumberGame
             "Maybe guess the number with your birthday.",
             "Try to guess with how many times you have seen people today."
         };
+
+        private static int randomNumberText(int limit)
+        {
+            limit = new Random().Next(0, GuessingLimit);
+            return limit;
+        }
 
         private StreamWriter DistributionIni;
 

@@ -133,7 +133,7 @@ namespace GuessTheNumberGame
             this.WinnersLabel.Name = "WinnersLabel";
             this.WinnersLabel.Size = new System.Drawing.Size(151, 152);
             this.WinnersLabel.TabIndex = 38;
-            this.WinnersLabel.Text = "Winners:\r\nEasy - 0\r\nNormal - h\r\nHard - 0";
+            this.WinnersLabel.Text = "Winners:\r\nEasy - 0\r\nNormal - 0\r\nHard - 0";
             // 
             // NumberPage
             // 
