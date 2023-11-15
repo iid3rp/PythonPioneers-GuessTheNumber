@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("GuessTheNumberGame")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Optimized By: FLYNN ONLINE GAMING SYSTEM")]
-[assembly: AssemblyProduct("GuessTheNumberGame")]
-[assembly: AssemblyCopyright("Copyright © Optimized By: FLYNN ONLINE GAMING SYSTEM 2023")]
+[assembly: AssemblyCompany("Optimized By: Python Pioneers (SITS-Cluster 2)")]
+[assembly: AssemblyProduct("Guess The Number")]
+[assembly: AssemblyCopyright("Copyright © Optimized By: Francis (@iid3rp) Madanlo")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.1")]
+[assembly: AssemblyFileVersion("1.1.1")]
