@@ -1,0 +1,10 @@
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\bin\Debug\Guess The Number!.exe.config
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\bin\Debug\Guess The Number!.exe
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\bin\Debug\Guess The Number!.pdb
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\GuessTheNumberGame.MainMenuForm.resources
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\GuessTheNumberGame.Properties.Resources.resources
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.GenerateResource.cache
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\Guess The Number!.exe
+C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\Guess The Number!.pdb
