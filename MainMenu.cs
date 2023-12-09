@@ -204,9 +204,18 @@ namespace GuessTheNumberGame
             using (DistributionIni = new StreamWriter(DistributionFilePath))
             {
                 DistributionIni.Write(PastText);
-                DistributionIni.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") +
+                if (DifficultyName == "Normal")
+                {
+                    DistributionIni.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") +
+                                              "\t  " + DifficultyName + "\t  " +
+                                              RandomNumber + "\t\t " + IsGuessed);
+                }
+                else
+                {
+                    DistributionIni.WriteLine(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") +
                                           "\t  " + DifficultyName + "\t\t  " +
                                           RandomNumber + "\t\t " + IsGuessed);
+                }
             }
         }
 
@@ -411,7 +420,7 @@ namespace GuessTheNumberGame
             Attempts = 6;
             minutesLeft = 1;
             secondsLeft = 30;
-            DifficultyName = "Hard";
+            DifficultyName = "Normal";
             GuessingGameStart();
         }
 
