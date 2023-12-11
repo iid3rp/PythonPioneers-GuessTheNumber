@@ -15,6 +15,62 @@ public class InitialFrame
     
     public static JFrame initialFrame;
     public static JPanel initialPanel;
+    private static ImageIcon backgroundImage;
+
+    // this.components = new System.ComponentModel.Container();
+//     System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
+//     this.TimeToday = new System.Windows.Forms.Timer(this.components);
+//     this.MainMenuPanel = new System.Windows.Forms.Panel();
+//     this.TipLabel = new System.Windows.Forms.Label();
+//     this.WinnersLabel = new System.Windows.Forms.Label();
+//     this.NumberPage = new System.Windows.Forms.Label();
+//     this.GameOverLabel = new System.Windows.Forms.Label();
+//     this.GuessingPanel = new System.Windows.Forms.Panel();
+//     this.AttemptLabel = new System.Windows.Forms.Label();
+//     this.NumberHolderLabel = new System.Windows.Forms.Label();
+//     this.GuidingLabel = new System.Windows.Forms.Label();
+//     this.CountdownLabel = new System.Windows.Forms.Label();
+//     this.GameOverPicture = new System.Windows.Forms.PictureBox();
+//     this.GoHome = new System.Windows.Forms.PictureBox();
+//     this.HardPicture = new System.Windows.Forms.PictureBox();
+//     this.NormalPicture = new System.Windows.Forms.PictureBox();
+//     this.EasyPicture = new System.Windows.Forms.PictureBox();
+//     this.DifficultySectionPicture = new System.Windows.Forms.PictureBox();
+//     this.CountingDownLabel = new System.Windows.Forms.Label();
+//     this.GuessTheNumberLogo = new System.Windows.Forms.PictureBox();
+//     this.GitHubPicture = new System.Windows.Forms.PictureBox();
+//     this.TimeLabel = new System.Windows.Forms.Label();
+//     this.MinimizeLabel = new System.Windows.Forms.Label();
+//     this.ClosingLabel = new System.Windows.Forms.Label();
+//     this.PressAnyButtonLabel = new System.Windows.Forms.Label();
+//     this.ClosingTime = new System.Windows.Forms.Timer(this.components);
+//     this.OpeningTime = new System.Windows.Forms.Timer(this.components);
+//     this.OpeningTransition = new System.Windows.Forms.Timer(this.components);
+//     this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
+//     this.CountingDownTimer = new System.Windows.Forms.Timer(this.components);
+//     this.TipAppearance = new System.Windows.Forms.Timer(this.components);
+//     this.MainMenuPanel.SuspendLayout();
+//     this.GuessingPanel.SuspendLayout();
+
+    public static JLabel exitOnClose;
+    public static JLabel minimizeLabel;
+    public static JLabel mainMenuTitle;
+    public static JLabel timeDateLabel;
+    public static JLabel pressAnyButton;
+    public static JLabel easyLabel;
+    public static JLabel normalLabel;
+    public static JLabel hardLabel;
+    public static JLabel gitHubPicture;
+    public static JLabel tipLabel;
+    public static JLabel numberPage;
+    public static JLabel difficultySection;
+    public static JLabel countDownLabel;
+    public static JLabel gameOverLabel;
+    public static JLabel timerLabel;
+    public static JLabel numberHolderLabel;
+    public static JLabel attemptLabel;
+    public static JLabel goHomeLabel;
+    public static JLabel winnersLabel;
     
     public static Point offset;
     public static boolean isDragging = false;
@@ -25,6 +81,32 @@ public class InitialFrame
         initialPanel = createInitialPanel();
         initialFrame.add(initialPanel);
         initialFrame.setContentPane(initialPanel);
+
+        // the stuff in the window thingy
+        exitOnClose = createExitLabel();
+        minimizeLabel = createMinimizeLabel();
+        mainMenuTitle = createTitle();
+        timeDateLabel = createTimeDate();
+        pressAnyButton = createPressAny();
+        easyLabel = createEasyLabel();
+        normalLabel = createNormalLabel();
+        hardLabel = createHardLabel();
+        gitHubPicture = createGitHub();
+        tipLabel = createTipLabel();
+        numberPage = createNumberPage();
+        difficultySection = createDifficultySection();
+        countDownLabel = createCountDown();
+        gameOverLabel = createGameOver();
+        timerLabel = createTimerLabel();
+        numberHolderLabel = createNumberHolder();
+        attemptLabel = createAttemptLabel();
+        goHomeLabel = createGoHome();
+        winnersLabel = createWinnersLabel();
+        
+        // adding the stuff in the panel:
+        initialPanel.add(exitOnClose);
+        initialPanel.add(minimizeLabel);
+        initialPanel.add(mainMenuTitle);
         
         // making sure they're in so that the events will work
         initialFrame.setVisible(true);
@@ -41,12 +123,42 @@ public class InitialFrame
         initialFrame.setUndecorated(true);
         initialFrame.setLocationRelativeTo(null);
         
+        initialFrame.addKeyListener(new KeyAdapter() 
+        {
+            @Override
+            public void keyPressed(KeyEvent e) 
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
+                {
+                    exitConfirmation();
+                }
+                System.out.println("clicked."); // debugging
+            }
+        });
+        
         return initialFrame;
     }
     
     public static JPanel createInitialPanel()
     {
-        initialPanel = new JPanel();
+        initialPanel = new JPanel() 
+        {
+            static final long serialVersionUID = 1L;
+            {
+                backgroundImage = new ImageIcon("Resources/MainMenuBackground.png");
+                Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
+                backgroundImage = new ImageIcon(scaledImage);
+            }
+    
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+    
+                // Draw the stretched image
+                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
         initialPanel.setOpaque(false);
         initialPanel.setLayout(null);
         
@@ -77,7 +189,7 @@ public class InitialFrame
             @Override
             public void mouseDragged(MouseEvent e)
             {
-                if (isDragging)
+                if(isDragging)
                 {
                     Point currentMouse = e.getLocationOnScreen();
 
@@ -89,6 +201,255 @@ public class InitialFrame
             }
         });
         return initialPanel;
+    }
+
+    public static JLabel createExitLabel()
+    {
+        exitOnClose = new JLabel("X");
+        exitOnClose.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
+        Dimension d = exitOnClose.getPreferredSize();
+        exitOnClose.setBounds((int)(initialFrame.getWidth() - 10 - d.getWidth()), 5, 
+                              (int)d.getWidth(), (int)d.getHeight());
+        exitOnClose.setForeground(Color.WHITE);
+        exitOnClose.setVisible(true);
+        
+        exitOnClose.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                exitConfirmation();
+            }
+        });
+        return exitOnClose;
+    }
+    
+    public static JLabel createMinimizeLabel()
+    {
+        minimizeLabel = new JLabel("_");
+        minimizeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
+        Dimension d = minimizeLabel.getPreferredSize();
+        minimizeLabel.setBounds((int)(initialFrame.getWidth() - 10 - 20 - d.getWidth()), 3, 
+                              (int)d.getWidth(), (int)d.getHeight());
+        minimizeLabel.setForeground(Color.WHITE);
+        minimizeLabel.setVisible(true);
+        
+        minimizeLabel.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                initialFrame.setState(Frame.ICONIFIED);
+            }
+        });
+        return minimizeLabel;
+        
+    }
+    
+    public static JLabel createTitle()
+    {
+        mainMenuTitle = new JLabel() 
+        {
+            static ImageIcon titleImage = new ImageIcon("Resources/MainMenuBackground.png");
+            Image title = titleImage.getImage();
+            
+            int newWidth = 753;
+            int newHeight = 300;
+
+            BufferedImage bufferedOriginal = new BufferedImage(
+                    title.getWidth(null),
+                    title.getHeight(null),
+                    BufferedImage.TYPE_INT_ARGB
+            );
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                    
+                Graphics2D g2d = bufferedOriginal.createGraphics();
+                g2d.drawImage(title, 0, 0, null);
+                g2d.dispose();
+            }
+        };
+        mainMenuTitle.setVisible(true);
+        Dimension d = mainMenuTitle.getPreferredSize();
+        mainMenuTitle.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 33, (int)d.getWidth(), (int)d.getHeight());
+        mainMenuTitle.setVisible(true);
+        return mainMenuTitle;
+    }
+    
+    public static JLabel createTimeDate()
+    {
+        timeDateLabel = new JLabel("Time and Date goes here :3");
+        timeDateLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        timeDateLabel.setForeground(Color.WHITE);
+        Dimension d = timeDateLabel.getPreferredSize();
+        timeDateLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return timeDateLabel;
+    }
+    
+    public static JLabel createPressAny()
+    {
+        pressAnyButton = new JLabel("- Press Anything To Continue -");
+        pressAnyButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        pressAnyButton.setForeground(Color.WHITE);
+        Dimension d = pressAnyButton.getPreferredSize();
+        pressAnyButton.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return pressAnyButton;
+    }
+    
+    public static JLabel createEasyLabel()
+    {
+       easyLabel = new JLabel();
+       easyLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+       easyLabel.setForeground(Color.WHITE);
+       Dimension d = easyLabel.getPreferredSize();
+       easyLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+       return easyLabel;
+    }
+    
+    public static JLabel createNormalLabel()
+    {
+        normalLabel = new JLabel();
+        normalLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        normalLabel.setForeground(Color.WHITE);
+        Dimension d = normalLabel.getPreferredSize();
+        normalLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return normalLabel;
+    }
+    
+    public static JLabel createHardLabel()
+    {
+        hardLabel = new JLabel();
+        hardLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        hardLabel.setForeground(Color.WHITE);
+        Dimension d = hardLabel.getPreferredSize();
+        hardLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return hardLabel;
+    }
+    
+    public static JLabel createGitHub()
+    {
+        gitHubPicture = new JLabel();
+        gitHubPicture.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        gitHubPicture.setForeground(Color.WHITE);
+        Dimension d = gitHubPicture.getPreferredSize();
+        gitHubPicture.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return gitHubPicture;
+    }
+    
+    public static JLabel createTipLabel()
+    {
+        tipLabel = new JLabel();
+        tipLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        tipLabel.setForeground(Color.WHITE);
+        Dimension d = tipLabel.getPreferredSize();
+        tipLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return tipLabel;
+    }
+    
+    public static JLabel createNumberPage()
+    {
+        numberPage = new JLabel();
+        numberPage.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        numberPage.setForeground(Color.WHITE);
+        Dimension d = numberPage.getPreferredSize();
+        numberPage.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return numberPage;
+    }
+    
+    public static JLabel createDifficultySection()
+    {
+        difficultySection = new JLabel();
+        difficultySection.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        difficultySection.setForeground(Color.WHITE);
+        Dimension d = difficultySection.getPreferredSize();
+        difficultySection.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return difficultySection;
+    }
+    
+    public static JLabel createCountDown()
+    {
+        countDownLabel = new JLabel();
+        countDownLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        countDownLabel.setForeground(Color.WHITE);
+        Dimension d = countDownLabel.getPreferredSize();
+        countDownLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return countDownLabel;
+    }
+    
+    public static JLabel createGameOver()
+    {
+        gameOverLabel = new JLabel();
+        gameOverLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        gameOverLabel.setForeground(Color.WHITE);
+        Dimension d = gameOverLabel.getPreferredSize();
+        gameOverLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return gameOverLabel;
+    }
+    
+    public static JLabel createTimerLabel()
+    {
+        timerLabel = new JLabel();
+        timerLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        timerLabel.setForeground(Color.WHITE);
+        Dimension d = timerLabel.getPreferredSize();
+        timerLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return timerLabel;
+    }
+    
+    public static JLabel createNumberHolder()
+    {
+        numberHolderLabel = new JLabel();
+        numberHolderLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        numberHolderLabel.setForeground(Color.WHITE);
+        Dimension d = numberHolderLabel.getPreferredSize();
+        numberHolderLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return numberHolderLabel;
+    }
+    
+    public static JLabel createAttemptLabel()
+    {
+        attemptLabel = new JLabel();
+        attemptLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        attemptLabel.setForeground(Color.WHITE);
+        Dimension d = attemptLabel.getPreferredSize();
+        attemptLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return attemptLabel;
+    }
+    
+    public static JLabel createGoHome()
+    {
+        goHomeLabel = new JLabel();
+        goHomeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        goHomeLabel.setForeground(Color.WHITE);
+        Dimension d = goHomeLabel.getPreferredSize();
+        goHomeLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return goHomeLabel;
+    }
+    
+    public static JLabel createWinnersLabel()
+    {
+        winnersLabel = new JLabel();
+        winnersLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        winnersLabel.setForeground(Color.WHITE);
+        Dimension d = winnersLabel.getPreferredSize();
+        winnersLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        return winnersLabel;
+    }
+    
+    public static void exitConfirmation()
+    {
+        int result = JOptionPane.showConfirmDialog(initialFrame,
+                                                   "Do you wish to exit?",
+                                                   "Exit Confirmation",
+                                                   JOptionPane.YES_NO_OPTION,
+                                                   JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION)
+        {
+            // Perform cleanup or any other exit actions
+            System.exit(0);
+        }
     }
 
     public static void main(String[] args) 
