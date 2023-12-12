@@ -7,11 +7,61 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class InitialFrame
 {
     public static String[] args; // argument stated
+    public static final String[] TipsText =
+    {
+        "Start with a Lucky Number. Today's might be your day!",
+        "Try to follow with a fibonacci sequence.",
+        "Close your eyes and guess whatever.",
+        "Dive into the world of primes and see if the answer lies within.",
+        "Eliminate possibilities through step by step.",
+        "Is it your month? put that month and day into a guess!",
+        "Try a number in the middle.",
+        "Try to guess in thirds as well.",
+        "Maybe ask yourself why do you have to guess the number.",
+        "Maybe press three random numbers in the keyboard.",
+        "See if the reversed number holds the secret.",
+        "Try a palindrome number.",
+        "Either you guess or not, at least you had fun!",
+        "Ask for a therapist for a random number.",
+        "Maybe the nature will tell you whats the number.",
+        "Take a quantum leap of faith.",
+        "Ask a Professor for a random number",
+        "Think random for today!",
+        "Try to be more practical. Guess or forfeit.",
+        "Try to guess within the Golden Ratio.",
+        "Apply Sudoku strategies to your guessing game.",
+        "Let's guess for something!",
+        "Guess, Guess, Guess! (pun intended)",
+        "Mathematical Magic: Sprinkle some math spells.",
+        "Maybe ask chatGPT for a random number.",
+        "Maybe ask yourself where did the number go.",
+        "What's the number? Who knows, honestly. :3",
+        "Maybe ask google for a random number.",
+        "Ask for a friend.",
+        "...............",
+        "Pick a number with a pirate's swagger.",
+        "Have a luck for quite some time!",
+        "Debate the number with your friends.",
+        "Please play this game!!!!",
+        "Hello World!",
+        "Let's go Cluster 2!!",
+        "Also please also play for other booths :3",
+        "Try to do lucky numbers like 444 or something lol.",
+        "Look to the python leaves for guidance",
+        "Apply your favorite geeky algorithm for the perfect guess.",
+        "Channel your inner artist and paint the number in your mind.",
+        "Try to focus for a number that you dont know.",
+        "Unhappy go lucky!",
+        "Saan aabot ang \u20B1" + "10 mo?",
+        "Maybe guess the number with your birthday.",
+        "Try to guess with how many times you have seen people today."
+    };
     
     public static JFrame initialFrame;
     public static JPanel initialPanel;
@@ -72,6 +122,9 @@ public class InitialFrame
     public static JLabel goHomeLabel;
     public static JLabel winnersLabel;
     
+    public static javax.swing.Timer timeDateTimer;
+    public static javax.swing.Timer tipTimer;
+    
     public static Point offset;
     public static boolean isDragging = false;
 
@@ -103,10 +156,27 @@ public class InitialFrame
         goHomeLabel = createGoHome();
         winnersLabel = createWinnersLabel();
         
+        // #region of the adding of the containers in the 
         // adding the stuff in the panel:
+        //
         initialPanel.add(exitOnClose);
         initialPanel.add(minimizeLabel);
         initialPanel.add(mainMenuTitle);
+        initialPanel.add(timeDateLabel);
+        
+        // difficulty section addition
+        initialPanel.add(easyLabel);
+        initialPanel.add(normalLabel);
+        initialPanel.add(hardLabel);
+        //
+        // #endregion
+        
+        timeDateTimer = createTimeDateTimer();
+        tipTimer = createTipTimer();
+        
+        timeDateTimer.start();
+        tipTimer.start();
+        
         
         // making sure they're in so that the events will work
         initialFrame.setVisible(true);
@@ -139,24 +209,29 @@ public class InitialFrame
         return initialFrame;
     }
     
+    //
+    // ImageIcon backgroundImage = new ImageIcon("Resources/MainMenuBackground.png");
+//             Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
+//             ImageIcon bgImage = new ImageIcon(scaledImage);
+//             @Override
+//             protected void paintComponent(Graphics g) 
+//             {
+//                 super.paintComponent(g);
+//                 g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+//             }
+    
     public static JPanel createInitialPanel()
     {
         initialPanel = new JPanel() 
         {
-            static final long serialVersionUID = 1L;
-            {
-                backgroundImage = new ImageIcon("Resources/MainMenuBackground.png");
-                Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
-                backgroundImage = new ImageIcon(scaledImage);
-            }
-    
+            ImageIcon backgroundImage = new ImageIcon("Resources/MainMenuBackground.png");
+            Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon bgImage = new ImageIcon(scaledImage);
             @Override
             protected void paintComponent(Graphics g) 
             {
                 super.paintComponent(g);
-    
-                // Draw the stretched image
-                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+                g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
             }
         };
         initialPanel.setOpaque(false);
@@ -300,21 +375,44 @@ public class InitialFrame
     
     public static JLabel createEasyLabel()
     {
-       easyLabel = new JLabel();
+       easyLabel = new JLabel()
+       {
+           ImageIcon backgroundImage = new ImageIcon("Resources/EasyPicture.png");
+           Image scaledImage = backgroundImage.getImage().getScaledInstance(295, 100, Image.SCALE_SMOOTH);
+           ImageIcon bgImage = new ImageIcon(scaledImage);
+           @Override
+           protected void paintComponent(Graphics g) 
+           {
+               super.paintComponent(g);
+               g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+           }
+       };
        easyLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
        easyLabel.setForeground(Color.WHITE);
        Dimension d = easyLabel.getPreferredSize();
-       easyLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+       easyLabel.setBounds(530, 145, (int)d.getWidth(), (int)d.getHeight());
+       
        return easyLabel;
     }
     
     public static JLabel createNormalLabel()
     {
-        normalLabel = new JLabel();
+        normalLabel = new JLabel()
+        {
+           ImageIcon backgroundImage = new ImageIcon("Resources/NormalPicture.png");
+           Image scaledImage = backgroundImage.getImage().getScaledInstance(295, 100, Image.SCALE_SMOOTH);
+           ImageIcon bgImage = new ImageIcon(scaledImage);
+           @Override
+           protected void paintComponent(Graphics g) 
+           {
+               super.paintComponent(g);
+               g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+           }
+        };
         normalLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         normalLabel.setForeground(Color.WHITE);
         Dimension d = normalLabel.getPreferredSize();
-        normalLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        normalLabel.setBounds(530, 288, (int)d.getWidth(), (int)d.getHeight());
         return normalLabel;
     }
     
@@ -324,13 +422,24 @@ public class InitialFrame
         hardLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         hardLabel.setForeground(Color.WHITE);
         Dimension d = hardLabel.getPreferredSize();
-        hardLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        hardLabel.setBounds(530, 430, (int)d.getWidth(), (int)d.getHeight());
         return hardLabel;
     }
     
     public static JLabel createGitHub()
     {
-        gitHubPicture = new JLabel();
+        gitHubPicture = new JLabel()
+        {
+           ImageIcon backgroundImage = new ImageIcon("Resources/HardPicture.png");
+           Image scaledImage = backgroundImage.getImage().getScaledInstance(295, 100, Image.SCALE_SMOOTH);
+           ImageIcon bgImage = new ImageIcon(scaledImage);
+           @Override
+           protected void paintComponent(Graphics g) 
+           {
+               super.paintComponent(g);
+               g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+           }
+        };
         gitHubPicture.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         gitHubPicture.setForeground(Color.WHITE);
         Dimension d = gitHubPicture.getPreferredSize();
@@ -436,6 +545,40 @@ public class InitialFrame
         Dimension d = winnersLabel.getPreferredSize();
         winnersLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
         return winnersLabel;
+    }
+    
+    public static javax.swing.Timer createTimeDateTimer()
+    {
+        timeDateTimer = new javax.swing.Timer(1, new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                timeDateLabel.setText();
+                timeDateTimer.setDelay(1000);
+                Dimension d = timeDateLabel.getPreferredSize();
+                timeDateLabel.setBounds(10, 10, (int) d.getWidth(), (int) d.getHeight());
+            }
+        });
+        return timeDateTimer;
+    }
+    
+    public static javax.swing.Timer createTipTimer()
+    {
+        timeDateTimer = new javax.swing.Timer(1, new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd, yyyy | HH:mm:ss");
+                String timeDateNow = sdf.format(new Date());
+                timeDateLabel.setText(timeDateNow);
+                timeDateTimer.setDelay(1000);
+                Dimension d = timeDateLabel.getPreferredSize();
+                timeDateLabel.setBounds(10, 10, (int) d.getWidth(), (int) d.getHeight());
+            }
+        });
+        return timeDateTimer;
     }
     
     public static void exitConfirmation()
