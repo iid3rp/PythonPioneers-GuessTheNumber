@@ -62,7 +62,11 @@ public class InitialFrame
         "Maybe guess the number with your birthday.",
         "Try to guess with how many times you have seen people today."
     };
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2d98acf5235a63cde491ee41d47c8cfc340bbd51
     public static JFrame initialFrame;
     public static JPanel initialPanel;
     private static ImageIcon backgroundImage;
