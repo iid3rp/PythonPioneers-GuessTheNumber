@@ -9,11 +9,12 @@ import java.awt.geom.Ellipse2D;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.net.*;
 
 public class InitialFrame
 {
     public static String[] args; // argument stated
-    public static final String[] TipsText =
+    public static final String[] tipsText =
     {
         "Start with a Lucky Number. Today's might be your day!",
         "Try to follow with a fibonacci sequence.",
@@ -62,11 +63,6 @@ public class InitialFrame
         "Maybe guess the number with your birthday.",
         "Try to guess with how many times you have seen people today."
     };
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 2d98acf5235a63cde491ee41d47c8cfc340bbd51
     public static JFrame initialFrame;
     public static JPanel initialPanel;
     private static ImageIcon backgroundImage;
@@ -167,6 +163,8 @@ public class InitialFrame
         initialPanel.add(minimizeLabel);
         initialPanel.add(mainMenuTitle);
         initialPanel.add(timeDateLabel);
+        initialPanel.add(tipLabel);
+        initialPanel.add(gitHubPicture);
         
         // difficulty section addition
         initialPanel.add(easyLabel);
@@ -185,6 +183,7 @@ public class InitialFrame
         // making sure they're in so that the events will work
         initialFrame.setVisible(true);
         initialPanel.setVisible(true);
+        gitHubPicture.setVisible(true);
         JavaMainMenu.main(args);
     }
     
@@ -394,8 +393,8 @@ public class InitialFrame
        easyLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
        easyLabel.setForeground(Color.WHITE);
        Dimension d = easyLabel.getPreferredSize();
-       easyLabel.setBounds(530, 145, (int)d.getWidth(), (int)d.getHeight());
-       
+       easyLabel.setBounds(830, 145, 295, 100);
+       easyLabel.setVisible(true);
        return easyLabel;
     }
     
@@ -416,7 +415,7 @@ public class InitialFrame
         normalLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         normalLabel.setForeground(Color.WHITE);
         Dimension d = normalLabel.getPreferredSize();
-        normalLabel.setBounds(530, 288, (int)d.getWidth(), (int)d.getHeight());
+        normalLabel.setBounds(830, 288, 295, 100);
         return normalLabel;
     }
     
@@ -426,7 +425,7 @@ public class InitialFrame
         hardLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         hardLabel.setForeground(Color.WHITE);
         Dimension d = hardLabel.getPreferredSize();
-        hardLabel.setBounds(530, 430, (int)d.getWidth(), (int)d.getHeight());
+        hardLabel.setBounds(830, 430, (int)d.getWidth(), (int)d.getHeight());
         return hardLabel;
     }
     
@@ -434,8 +433,8 @@ public class InitialFrame
     {
         gitHubPicture = new JLabel()
         {
-           ImageIcon backgroundImage = new ImageIcon("Resources/HardPicture.png");
-           Image scaledImage = backgroundImage.getImage().getScaledInstance(295, 100, Image.SCALE_SMOOTH);
+           ImageIcon backgroundImage = new ImageIcon("Resources/GitHub40p.png");
+           Image scaledImage = backgroundImage.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
            ImageIcon bgImage = new ImageIcon(scaledImage);
            @Override
            protected void paintComponent(Graphics g) 
@@ -446,8 +445,24 @@ public class InitialFrame
         };
         gitHubPicture.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         gitHubPicture.setForeground(Color.WHITE);
-        Dimension d = gitHubPicture.getPreferredSize();
-        gitHubPicture.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        gitHubPicture.setBounds(initialFrame.getWidth() - 30, initialFrame.getHeight() - 30, 20, 20);
+        gitHubPicture.setVisible(true);
+        
+        gitHubPicture.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                try 
+                {
+                    Desktop.getDesktop().browse(new URI("https://github.com/iid3rp/PythonPioneers-GuessTheNumber"));
+                } 
+                catch(IOException | URISyntaxException ex) 
+                {
+                    ex.printStackTrace(); // Handle the exception appropriately
+                }
+            }
+        });
         return gitHubPicture;
     }
     
@@ -558,7 +573,9 @@ public class InitialFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                timeDateLabel.setText();
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd, yyyy | HH:mm:ss");
+                String timeDateNow = sdf.format(new Date());
+                timeDateLabel.setText(timeDateNow);
                 timeDateTimer.setDelay(1000);
                 Dimension d = timeDateLabel.getPreferredSize();
                 timeDateLabel.setBounds(10, 10, (int) d.getWidth(), (int) d.getHeight());
@@ -569,20 +586,18 @@ public class InitialFrame
     
     public static javax.swing.Timer createTipTimer()
     {
-        timeDateTimer = new javax.swing.Timer(1, new ActionListener()
+        tipTimer = new javax.swing.Timer(1, new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd, yyyy | HH:mm:ss");
-                String timeDateNow = sdf.format(new Date());
-                timeDateLabel.setText(timeDateNow);
-                timeDateTimer.setDelay(1000);
-                Dimension d = timeDateLabel.getPreferredSize();
-                timeDateLabel.setBounds(10, 10, (int) d.getWidth(), (int) d.getHeight());
+                tipLabel.setText(tipsText[new Random().nextInt(tipsText.length)]);
+                tipTimer.setDelay(3000);
+                Dimension d = tipLabel.getPreferredSize();
+                tipLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), (initialFrame.getHeight() - (int) d.getHeight() - 10), (int) d.getWidth(), (int) d.getHeight());
             }
         });
-        return timeDateTimer;
+        return tipTimer;
     }
     
     public static void exitConfirmation()
