@@ -12,7 +12,56 @@ import java.util.*;
 public class InitialFrame
 {
     public static String[] args; // argument stated
-    
+    public static final String[] TipsText =
+    {
+        "Start with a Lucky Number. Today's might be your day!",
+        "Try to follow with a fibonacci sequence.",
+        "Close your eyes and guess whatever.",
+        "Dive into the world of primes and see if the answer lies within.",
+        "Eliminate possibilities through step by step.",
+        "Is it your month? put that month and day into a guess!",
+        "Try a number in the middle.",
+        "Try to guess in thirds as well.",
+        "Maybe ask yourself why do you have to guess the number.",
+        "Maybe press three random numbers in the keyboard.",
+        "See if the reversed number holds the secret.",
+        "Try a palindrome number.",
+        "Either you guess or not, at least you had fun!",
+        "Ask for a therapist for a random number.",
+        "Maybe the nature will tell you whats the number.",
+        "Take a quantum leap of faith.",
+        "Ask a Professor for a random number",
+        "Think random for today!",
+        "Try to be more practical. Guess or forfeit.",
+        "Try to guess within the Golden Ratio.",
+        "Apply Sudoku strategies to your guessing game.",
+        "Let's guess for something!",
+        "Guess, Guess, Guess! (pun intended)",
+        "Mathematical Magic: Sprinkle some math spells.",
+        "Maybe ask chatGPT for a random number.",
+        "Maybe ask yourself where did the number go.",
+        "What's the number? Who knows, honestly. :3",
+        "Maybe ask google for a random number.",
+        "Ask for a friend.",
+        "...............",
+        "Pick a number with a pirate's swagger.",
+        "Have a luck for quite some time!",
+        "Debate the number with your friends.",
+        "Please play this game!!!!",
+        "Hello World!",
+        "Let's go Cluster 2!!",
+        "Also please also play for other booths :3",
+        "Try to do lucky numbers like 444 or something lol.",
+        "Look to the python leaves for guidance",
+        "Apply your favorite geeky algorithm for the perfect guess.",
+        "Channel your inner artist and paint the number in your mind.",
+        "Try to focus for a number that you dont know.",
+        "Unhappy go lucky!",
+        "Saan aabot ang \u20B1" + "10 mo?",
+        "Maybe guess the number with your birthday.",
+        "Try to guess with how many times you have seen people today."
+    };
+
     public static JFrame initialFrame;
     public static JPanel initialPanel;
     private static ImageIcon backgroundImage;
