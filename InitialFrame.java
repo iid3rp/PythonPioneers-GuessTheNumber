@@ -64,45 +64,24 @@ public class InitialFrame
         "Maybe guess the number with your birthday.",
         "Try to guess with how many times you have seen people today."
     };
+    //
+    // The Frame and the panels goes here
+    //
     public static JFrame initialFrame;
     public static JPanel initialPanel;
+    public static JPanel guessingPanel;
     public static ImageIcon backgroundImage;
     //
-    // this.components = new System.ComponentModel.Container();
-//     System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuForm));
-//     this.TimeToday = new System.Windows.Forms.Timer(this.components);
-//     this.MainMenuPanel = new System.Windows.Forms.Panel();
-//     this.TipLabel = new System.Windows.Forms.Label();
-//     this.WinnersLabel = new System.Windows.Forms.Label();
-//     this.NumberPage = new System.Windows.Forms.Label();
-//     this.GameOverLabel = new System.Windows.Forms.Label();
-//     this.GuessingPanel = new System.Windows.Forms.Panel();
-//     this.AttemptLabel = new System.Windows.Forms.Label();
-//     this.NumberHolderLabel = new System.Windows.Forms.Label();
-//     this.GuidingLabel = new System.Windows.Forms.Label();
-//     this.CountdownLabel = new System.Windows.Forms.Label();
-//     this.GameOverPicture = new System.Windows.Forms.PictureBox();
-//     this.GoHome = new System.Windows.Forms.PictureBox();
-//     this.HardPicture = new System.Windows.Forms.PictureBox();
-//     this.NormalPicture = new System.Windows.Forms.PictureBox();
-//     this.EasyPicture = new System.Windows.Forms.PictureBox();
-//     this.DifficultySectionPicture = new System.Windows.Forms.PictureBox();
+    // The JLabels goes here
+
 //     this.CountingDownLabel = new System.Windows.Forms.Label();
-//     this.GuessTheNumberLogo = new System.Windows.Forms.PictureBox();
-//     this.GitHubPicture = new System.Windows.Forms.PictureBox();
 //     this.TimeLabel = new System.Windows.Forms.Label();
-//     this.MinimizeLabel = new System.Windows.Forms.Label();
-//     this.ClosingLabel = new System.Windows.Forms.Label();
-//     this.PressAnyButtonLabel = new System.Windows.Forms.Label();
-//     this.ClosingTime = new System.Windows.Forms.Timer(this.components);
-//     this.OpeningTime = new System.Windows.Forms.Timer(this.components);
-//     this.OpeningTransition = new System.Windows.Forms.Timer(this.components);
 //     this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
 //     this.CountingDownTimer = new System.Windows.Forms.Timer(this.components);
 //     this.TipAppearance = new System.Windows.Forms.Timer(this.components);
 //     this.MainMenuPanel.SuspendLayout();
 //     this.GuessingPanel.SuspendLayout();
-
+    //
     public static JLabel exitOnClose;
     public static JLabel minimizeLabel;
     public static JLabel mainMenuTitle;
@@ -122,6 +101,7 @@ public class InitialFrame
     public static JLabel attemptLabel;
     public static JLabel goHomeLabel;
     public static JLabel winnersLabel;
+    public static JLabel guidingLabel;
     //
     // Timers goes here
     //
@@ -146,6 +126,8 @@ public class InitialFrame
     public static String winnersString = "";
     public static float frameOpacity = 0.0f;
     public static float currentOpacity = 0.0f;
+    public static boolean isMainMenu, isDifficultySection, isGuessing;
+    public static Image scaledImage;
     //
     // File Manipulation process
     //
@@ -240,17 +222,21 @@ public class InitialFrame
         }
         return 0; // Default value if parsing fails
     }
-
+    
     public static void initializeComponent() 
     {
         initializeFiles(); // THE MAIN CHARACTER :3
-        
+        //
+        // Frame and panel initialization
+        //
         initialFrame = createInitialFrame();
         initialPanel = createInitialPanel();
+        guessingPanel = createGuessingPanel();
         initialFrame.add(initialPanel);
         initialFrame.setContentPane(initialPanel);
-
+        //
         // the stuff in the window thingy
+        //
         exitOnClose = createExitLabel();
         minimizeLabel = createMinimizeLabel();
         mainMenuTitle = createTitle();
@@ -270,10 +256,13 @@ public class InitialFrame
         attemptLabel = createAttemptLabel();
         goHomeLabel = createGoHome();
         winnersLabel = createWinnersLabel();
-        
-        // #region of the adding of the containers in the 
-        // adding the stuff in the panel:
+        guidingLabel = createGuidingLabel();
         //
+        ///
+        //// #region ---------------------------------------------
+        ///  adding the stuff in the panel:
+        //
+        initialPanel.add(guessingPanel);
         initialPanel.add(exitOnClose);
         initialPanel.add(minimizeLabel);
         initialPanel.add(mainMenuTitle);
@@ -283,28 +272,41 @@ public class InitialFrame
         initialPanel.add(mainMenuTitle);
         initialPanel.add(winnersLabel);
         initialPanel.add(pressAnyButton);
+        //
         // difficulty section addition
+        //
         initialPanel.add(easyLabel);
         initialPanel.add(normalLabel);
         initialPanel.add(hardLabel);
+        initialPanel.add(difficultySection);
         //
-        // #endregion
-        
+        // countdownlabel
+        //
+        initialPanel.add(countDownLabel);
+        //
+        ///
+        //// #endregion ------------------------------------------
+        ///
+        //
+        // Timers goes here
         timeDateTimer = createTimeDateTimer();
         tipTimer = createTipTimer();
         openingWindow = createOpening();
         closingWindow = createClosing();
-        
+        //
+        // Timers starting in load:
         timeDateTimer.start();
         tipTimer.start();
-        
-        
-        // making sure they're in so that the events will work
+        //
+        // Frame and other visibility stuff
+        //
+        scalingImage("Resources/MainMenuBackground.png");
         initialFrame.setVisible(true);
         initialPanel.setVisible(true);
         gitHubPicture.setVisible(true);
         JavaMainMenu.main(args);
         initialFrame.setOpacity(0.0f);
+        isMainMenu = true;
         createOpening().start();
     }
     
@@ -324,38 +326,43 @@ public class InitialFrame
             {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
                 {
-                    exitConfirmation();
+                    if(!isMainMenu)
+                    {
+                        difficultySectionVisible(false);
+                        mainMenuSectionVisible(true);
+                        isMainMenu = true;
+                    }
+                    else
+                    {
+                        exitConfirmation();
+                    }
+                }
+                else
+                {
+                    if(isMainMenu)
+                    {
+                        difficultySectionVisible(true);
+                        mainMenuSectionVisible(false);
+                        isMainMenu = false;
+                    }
                 }
                 System.out.println("clicked."); // debugging
             }
         });
-        
+        ImageIcon icon = new ImageIcon("PythonPioneersGuessTheNumber.png");
+        initialFrame.setIconImage(icon.getImage());
         return initialFrame;
     }
-    
-    //
-    // ImageIcon backgroundImage = new ImageIcon("Resources/MainMenuBackground.png");
-//             Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
-//             ImageIcon bgImage = new ImageIcon(scaledImage);
-//             @Override
-//             protected void paintComponent(Graphics g) 
-//             {
-//                 super.paintComponent(g);
-//                 g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
-//             }
     
     public static JPanel createInitialPanel()
     {
         initialPanel = new JPanel() 
         {
-            ImageIcon backgroundImage = new ImageIcon("Resources/MainMenuBackground.png");
-            Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon bgImage = new ImageIcon(scaledImage);
             @Override
             protected void paintComponent(Graphics g) 
             {
                 super.paintComponent(g);
-                g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+                g.drawImage(new ImageIcon(scaledImage).getImage(), 0, 0, getWidth(), getHeight(), null);
             }
         };
         initialPanel.setOpaque(false);
@@ -400,6 +407,52 @@ public class InitialFrame
             }
         });
         return initialPanel;
+    }
+    
+    public static void difficultySectionVisible(boolean b)
+    {
+        easyLabel.setVisible(b);
+        normalLabel.setVisible(b);
+        hardLabel.setVisible(b);
+        difficultySection.setVisible(b);
+        if(b)
+        {
+            pressAnyButton.setText("- Click Panel or Left / Right keys |  Escape to exit -");
+            Dimension d = pressAnyButton.getPreferredSize();
+            pressAnyButton.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 620, (int)d.getWidth(), (int)d.getHeight());
+        }
+    }
+    
+    public static void mainMenuSectionVisible(boolean b)
+    {
+        mainMenuTitle.setVisible(b);
+        winnersLabel.setVisible(b);
+        if(b)
+        {
+            pressAnyButton.setText("- Press Anything To Continue -");
+            Dimension d = pressAnyButton.getPreferredSize();
+            pressAnyButton.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 620, (int)d.getWidth(), (int)d.getHeight());
+        }
+    }
+
+    public static JPanel createGuessingPanel()
+    {
+        guessingPanel = new JPanel()
+        {
+            ImageIcon backgroundImage = new ImageIcon("Resources/GuessingPanel.png");
+            Image scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon bgImage = new ImageIcon(scaledImage);
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
+        guessingPanel.setOpaque(false);
+        guessingPanel.setVisible(false);
+        guessingPanel.setBounds((initialFrame.getWidth() / 2) - 250, (initialFrame.getHeight() / 2) - 250, 500, 500);
+        return guessingPanel;
     }
 
     public static JLabel createExitLabel()
@@ -505,6 +558,16 @@ public class InitialFrame
        Dimension d = easyLabel.getPreferredSize();
        easyLabel.setBounds(830, 145, 295, 100);
        easyLabel.setVisible(false);
+       easyLabel.addMouseListener(new MouseAdapter()
+       {
+           @Override
+           public void mouseClicked(MouseEvent e)
+           {
+               difficultySectionVisible(false);
+               scalingImage("Resources/DarkBackground.png");
+               guessingProcess(250, 4, 1, 0);
+           }
+       });
        return easyLabel;
     }
     
@@ -532,11 +595,22 @@ public class InitialFrame
     
     public static JLabel createHardLabel()
     {
-        hardLabel = new JLabel();
+        hardLabel = new JLabel()
+        {
+            ImageIcon backgroundImage = new ImageIcon("Resources/HardPicture.png");
+            Image scaledImage = backgroundImage.getImage().getScaledInstance(295, 100, Image.SCALE_SMOOTH);
+            ImageIcon bgImage = new ImageIcon(scaledImage);
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
+            }
+        };
         hardLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         hardLabel.setForeground(Color.WHITE);
         Dimension d = hardLabel.getPreferredSize();
-        hardLabel.setBounds(830, 430, (int)d.getWidth(), (int)d.getHeight());
+        hardLabel.setBounds(830, 430, 295, 100);
         hardLabel.setVisible(false);
         return hardLabel;
     }
@@ -602,7 +676,7 @@ public class InitialFrame
     {
         difficultySection = new JLabel()
         {
-           ImageIcon backgroundImage = new ImageIcon("Resources/TutorialImage.png");
+           ImageIcon backgroundImage = new ImageIcon("Resources/GameBasics.png");
            Image scaledImage = backgroundImage.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
            ImageIcon bgImage = new ImageIcon(scaledImage);
            @Override
@@ -616,17 +690,28 @@ public class InitialFrame
         difficultySection.setForeground(Color.WHITE);
         Dimension d = difficultySection.getPreferredSize();
         difficultySection.setBounds(78, 77, 500, 500);
+        difficultySection.setVisible(false);
         return difficultySection;
     }
     
     public static JLabel createCountDown()
     {
-        countDownLabel = new JLabel();
-        countDownLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 48));
+        countDownLabel = new JLabel("3");
+        countDownLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 72));
         countDownLabel.setForeground(Color.WHITE);
         Dimension d = countDownLabel.getPreferredSize();
         countDownLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getHeight() / 2), (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), (int)d.getWidth(), (int)d.getHeight());
         return countDownLabel;
+    }
+
+    public static JLabel createGuidingLabel()
+    {
+        guidingLabel = new JLabel();
+        guidingLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+        guidingLabel.setForeground(Color.WHITE);
+        Dimension d = guidingLabel.getPreferredSize();
+        guidingLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getHeight() / 2), (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), (int)d.getWidth(), (int)d.getHeight());
+        return guidingLabel;
     }
     
     public static JLabel createGameOver()
@@ -652,7 +737,7 @@ public class InitialFrame
     
     public static JLabel createTimerLabel()
     {
-        timerLabel = new JLabel();
+        timerLabel = new JLabel("0:00");
         timerLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         timerLabel.setForeground(Color.WHITE);
         Dimension d = timerLabel.getPreferredSize();
@@ -662,8 +747,8 @@ public class InitialFrame
     
     public static JLabel createNumberHolder()
     {
-        numberHolderLabel = new JLabel();
-        numberHolderLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        numberHolderLabel = new JLabel("_______");
+        numberHolderLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 72));
         numberHolderLabel.setForeground(Color.WHITE);
         Dimension d = numberHolderLabel.getPreferredSize();
         numberHolderLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
@@ -672,8 +757,8 @@ public class InitialFrame
     
     public static JLabel createAttemptLabel()
     {
-        attemptLabel = new JLabel();
-        attemptLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        attemptLabel = new JLabel("Attempts: 0");
+        attemptLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
         attemptLabel.setForeground(Color.WHITE);
         Dimension d = attemptLabel.getPreferredSize();
         attemptLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
@@ -796,6 +881,18 @@ public class InitialFrame
         {
             createClosing().start();
         }
+    }
+    
+    public static void guessingProcess(int limit, int attempts, int minutes, int seconds)
+    {
+        
+    }
+    
+    public static void scalingImage(String image)
+    {
+        ImageIcon backgroundImage = new ImageIcon(image);
+        scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
+        initialFrame.repaint();
     }
 
     public static void main(String[] args) 
