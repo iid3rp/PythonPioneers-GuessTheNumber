@@ -109,6 +109,7 @@ public class InitialFrame
     public static javax.swing.Timer tipTimer;
     public static javax.swing.Timer openingWindow;
     public static javax.swing.Timer closingWindow;
+    public static javax.swing.Timer countDownTimer;
     //
     // The window dragging values
     //
@@ -293,6 +294,7 @@ public class InitialFrame
         tipTimer = createTipTimer();
         openingWindow = createOpening();
         closingWindow = createClosing();
+        countDownTimer = createCountDownTimer();
         //
         // Timers starting in load:
         timeDateTimer.start();
@@ -565,6 +567,8 @@ public class InitialFrame
            {
                difficultySectionVisible(false);
                scalingImage("Resources/DarkBackground.png");
+               countDownLabel.setVisible(true);
+               countDownTimer.start();
                guessingProcess(250, 4, 1, 0);
            }
        });
@@ -698,9 +702,10 @@ public class InitialFrame
     {
         countDownLabel = new JLabel("3");
         countDownLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 72));
-        countDownLabel.setForeground(Color.WHITE);
+        countDownLabel.setForeground(new Color(152, 251, 152));
         Dimension d = countDownLabel.getPreferredSize();
         countDownLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getHeight() / 2), (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), (int)d.getWidth(), (int)d.getHeight());
+        countDownLabel.setVisible(false);
         return countDownLabel;
     }
 
@@ -708,7 +713,7 @@ public class InitialFrame
     {
         guidingLabel = new JLabel();
         guidingLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
-        guidingLabel.setForeground(Color.WHITE);
+        guidingLabel.setForeground(new Color(152, 251, 152));
         Dimension d = guidingLabel.getPreferredSize();
         guidingLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getHeight() / 2), (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), (int)d.getWidth(), (int)d.getHeight());
         return guidingLabel;
@@ -739,7 +744,7 @@ public class InitialFrame
     {
         timerLabel = new JLabel("0:00");
         timerLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        timerLabel.setForeground(Color.WHITE);
+        timerLabel.setForeground(new Color(152, 251, 152));
         Dimension d = timerLabel.getPreferredSize();
         timerLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
         return timerLabel;
@@ -749,7 +754,7 @@ public class InitialFrame
     {
         numberHolderLabel = new JLabel("_______");
         numberHolderLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 72));
-        numberHolderLabel.setForeground(Color.WHITE);
+        numberHolderLabel.setForeground(new Color(152, 251, 152));
         Dimension d = numberHolderLabel.getPreferredSize();
         numberHolderLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
         return numberHolderLabel;
@@ -759,7 +764,7 @@ public class InitialFrame
     {
         attemptLabel = new JLabel("Attempts: 0");
         attemptLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
-        attemptLabel.setForeground(Color.WHITE);
+        attemptLabel.setForeground(new Color(152, 251, 152));
         Dimension d = attemptLabel.getPreferredSize();
         attemptLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
         return attemptLabel;
@@ -868,6 +873,40 @@ public class InitialFrame
             }
         });
         return closingWindow;
+    }
+    
+    public static javax.swing.Timer createCountDownTimer()
+    {
+        countDownTimer = new javax.swing.Timer(1, new ActionListener()
+        {
+            int countDown = 5;
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(countDown > 0)
+                {
+                    if(countDown == 1)
+                    {
+                        countDownLabel.setText("Start Guessing!");                
+                    }
+                    else
+                    {
+                        countDownLabel.setText(countDown - 1+ "");
+                    }
+                    countDown--;
+                    countDownTimer.setDelay(1000);
+                    Dimension d = countDownLabel.getPreferredSize();
+                    countDownLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 
+                                             (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), 
+                                             (int) d.getWidth(), (int) d.getHeight());
+                }
+                else
+                {
+                    scalingImage("Properties/MainMenuBackground.png");
+                }
+            }
+        });
+        return countDownTimer;
     }
     
     public static void exitConfirmation()
