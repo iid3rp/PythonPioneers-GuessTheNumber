@@ -15,6 +15,11 @@ import java.nio.file.*;
 public class InitialFrame
 {
     public static String[] args; // argument stated
+    public static ImageIcon[] difficultySectionImages =
+    {
+        new ImageIcon("Resources/GameBasics.png"),
+        new ImageIcon("Resources/DifficultyImage.png")
+    };
     public static final String[] tipsText =
     {
         "Start with a Lucky Number. Today's might be your day!",
@@ -73,14 +78,6 @@ public class InitialFrame
     public static ImageIcon backgroundImage;
     //
     // The JLabels goes here
-
-//     this.CountingDownLabel = new System.Windows.Forms.Label();
-//     this.TimeLabel = new System.Windows.Forms.Label();
-//     this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
-//     this.CountingDownTimer = new System.Windows.Forms.Timer(this.components);
-//     this.TipAppearance = new System.Windows.Forms.Timer(this.components);
-//     this.MainMenuPanel.SuspendLayout();
-//     this.GuessingPanel.SuspendLayout();
     //
     public static JLabel exitOnClose;
     public static JLabel minimizeLabel;
@@ -102,6 +99,7 @@ public class InitialFrame
     public static JLabel goHomeLabel;
     public static JLabel winnersLabel;
     public static JLabel guidingLabel;
+    public static JLabel numberLabel;
     //
     // Timers goes here
     //
@@ -110,6 +108,7 @@ public class InitialFrame
     public static javax.swing.Timer openingWindow;
     public static javax.swing.Timer closingWindow;
     public static javax.swing.Timer countDownTimer;
+    public static javax.swing.Timer guessingTimer;
     //
     // The window dragging values
     //
@@ -127,8 +126,20 @@ public class InitialFrame
     public static String winnersString = "";
     public static float frameOpacity = 0.0f;
     public static float currentOpacity = 0.0f;
-    public static boolean isMainMenu, isDifficultySection, isGuessing;
-    public static Image scaledImage;
+    public static boolean isMainMenu, isDifficultySection, isGuessing, isANumber, isGuessed;
+    public static Image scaledImage, difficultySectionImage;
+    public static String stringHolder = "";
+    public static int 
+    //
+    /// integer values
+        index = 1,
+        attempts = 0,
+        secondsTime = 0,
+        minutesTime = 0,
+        guessingLimit = 0,
+        currentNumber = 0,
+        randomNumber = 0;
+    /// endregion    
     //
     // File Manipulation process
     //
@@ -258,6 +269,7 @@ public class InitialFrame
         goHomeLabel = createGoHome();
         winnersLabel = createWinnersLabel();
         guidingLabel = createGuidingLabel();
+        numberLabel = createNumberLabel();
         //
         ///
         //// #region ---------------------------------------------
@@ -285,6 +297,14 @@ public class InitialFrame
         //
         initialPanel.add(countDownLabel);
         //
+        // Guessing section goes here
+        //
+        guessingPanel.add(attemptLabel);
+        guessingPanel.add(numberHolderLabel);
+        guessingPanel.add(guidingLabel);
+        guessingPanel.add(timerLabel);
+        guessingPanel.add(numberLabel);
+        //
         ///
         //// #endregion ------------------------------------------
         ///
@@ -295,8 +315,9 @@ public class InitialFrame
         openingWindow = createOpening();
         closingWindow = createClosing();
         countDownTimer = createCountDownTimer();
+        guessingTimer = createGuessingTimer();
         //
-        // Timers starting in load:
+        // Timers starting in JFrame load:
         timeDateTimer.start();
         tipTimer.start();
         //
@@ -326,29 +347,153 @@ public class InitialFrame
             @Override
             public void keyPressed(KeyEvent e) 
             {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE) 
                 {
-                    if(!isMainMenu)
+                    if(isDifficultySection)
                     {
                         difficultySectionVisible(false);
                         mainMenuSectionVisible(true);
-                        isMainMenu = true;
+                        isDifficultySection = false;
                     }
                     else
                     {
                         exitConfirmation();
                     }
                 }
+                else if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT)
+                {
+                    if(!isMainMenu)
+                    {
+                        changingDifficultyImage();
+                    }
+                }
                 else
                 {
-                    if(isMainMenu)
+                    if(isGuessing)
+                    {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                        {
+                            if(numberLabel.getText().equals("getnum")) 
+                            {
+                                guidingLabel.setText("Random Number: " + randomNumber);
+                            } 
+                            else if (isANumber) 
+                            {
+                                if (!stringHolder.isEmpty()) 
+                                {
+                                    numberLabel.setText("0");
+                                    currentNumber = Integer.parseInt(stringHolder);
+                                }
+
+                                if (currentNumber > guessingLimit) 
+                                {
+                                    guidingLabel.setText("<html>Number should not be greater than the guessing limit.</html>");
+                                } 
+                                else 
+                                {
+                                    if(currentNumber > randomNumber) 
+                                    {
+                                        guidingLabel.setText("<html>Hint: Current number is greater<br>than the random number.<br>"
+                                                + "Current Number: " + currentNumber + "</html>");
+                                        attempts--;
+                                        countDownLabel.setText(String.format("%d:%02d%n", minutesTime, secondsTime));
+                                        attemptLabel.setText("Attempts: " + attempts);
+                                    } 
+                                    else if(currentNumber < randomNumber) 
+                                    {
+                                        guidingLabel.setText("<html>Hint: Current number is less<br>than the random number.<br>"
+                                                + "Current Number: " + currentNumber + "</html>");
+                                        attempts--;
+                                        countDownLabel.setText(String.format("%d:%02d%n", minutesTime, secondsTime));
+                                        attemptLabel.setText("Attempts: " + attempts);
+                                    } 
+                                    else if(currentNumber == randomNumber) 
+                                    {
+                                        countDownLabel.setText(null);
+                                        countDownTimer.stop();
+                                    }
+
+                                    if(attempts == 0) {
+                                        if(Math.abs(currentNumber - randomNumber) <= 3) 
+                                        {
+                                            gameOverLabel.setText("<html>" + 
+                                                                  "You are so close!!!" + "<br>"
+                                                                + "Current Number: " + currentNumber + "<br>"
+                                                                + "Correct Number: " + randomNumber + 
+                                                                  "</html>");
+                                        }
+                                        else
+                                        {
+                                            countDownLabel.setText("");
+                                            gameOverLabel.setText("<html>" 
+                                                                + "You ran out of attempts :" + "<br>"
+                                                                + "Current Number: " + currentNumber + "<br>"
+                                                                + "Correct Number: " + randomNumber 
+                                                                + "</html>");
+                                        }
+                                        isGuessed = false;
+                                        isANumber = false;
+                                        countDownTimer.stop();
+                                    }
+                                }
+                                isANumber = false;
+                            }
+
+                            stringHolder = "";
+                            numberLabel.setText("0");
+                        } 
+                        else if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE && !stringHolder.isEmpty()) 
+                        {
+                            stringHolder = stringHolder.substring(0, stringHolder.length() - 1);
+                            numberLabel.setText(stringHolder);
+                        }
+                        middleChecking();
+                    }
+                    else
                     {
                         difficultySectionVisible(true);
                         mainMenuSectionVisible(false);
-                        isMainMenu = false;
+                        changingDifficultyImage();
+                        isDifficultySection = true;
                     }
                 }
                 System.out.println("clicked."); // debugging
+            }
+            @Override
+            public void keyTyped(KeyEvent e) 
+            {
+                if (isGuessing) 
+                {
+                    if (stringHolder.length() > 6) 
+                    {
+                        e.consume(); // Consume the event to prevent more characters being added
+                    } else if (Character.isLetterOrDigit(e.getKeyChar())) 
+                    {
+                        stringHolder += e.getKeyChar();
+                        stringHolder = stringHolder.trim();
+                        numberLabel.setText(stringHolder);
+        
+                        if (!isInteger(stringHolder))
+                        {
+                            guidingLabel.setText("Input should not contain characters.");
+                            isANumber = false;
+                        } 
+                        else 
+                        {
+                            guidingLabel.setText("Number must be 0 - " + guessingLimit);
+                            isANumber = true;
+                        }
+                    } 
+                    else 
+                    {
+                        e.consume(); // Consume the event to prevent non-letter or non-digit characters
+                    }
+                } 
+                else 
+                {
+                    // Handle other cases when guessing is not in progress
+                }
+                middleChecking();
             }
         });
         ImageIcon icon = new ImageIcon("PythonPioneersGuessTheNumber.png");
@@ -436,6 +581,11 @@ public class InitialFrame
             pressAnyButton.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 620, (int)d.getWidth(), (int)d.getHeight());
         }
     }
+    
+    public static void guessingSectionVisible(boolean b)
+    {
+        guessingPanel.setVisible(b);
+    }
 
     public static JPanel createGuessingPanel()
     {
@@ -452,6 +602,7 @@ public class InitialFrame
             }
         };
         guessingPanel.setOpaque(false);
+        guessingPanel.setLayout(null);
         guessingPanel.setVisible(false);
         guessingPanel.setBounds((initialFrame.getWidth() / 2) - 250, (initialFrame.getHeight() / 2) - 250, 500, 500);
         return guessingPanel;
@@ -594,6 +745,18 @@ public class InitialFrame
         Dimension d = normalLabel.getPreferredSize();
         normalLabel.setBounds(830, 288, 295, 100);
         normalLabel.setVisible(false);
+        normalLabel.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                difficultySectionVisible(false);
+                scalingImage("Resources/DarkBackground.png");
+                countDownLabel.setVisible(true);
+                countDownTimer.start();
+                guessingProcess(500, 6, 1, 30);
+            }
+        });
         return normalLabel;
     }
     
@@ -616,6 +779,18 @@ public class InitialFrame
         Dimension d = hardLabel.getPreferredSize();
         hardLabel.setBounds(830, 430, 295, 100);
         hardLabel.setVisible(false);
+        easyLabel.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                difficultySectionVisible(false);
+                scalingImage("Resources/DarkBackground.png");
+                countDownLabel.setVisible(true);
+                countDownTimer.start();
+                guessingProcess(1000, 8, 2, 0);
+            }
+        });
         return hardLabel;
     }
     
@@ -680,12 +855,10 @@ public class InitialFrame
     {
         difficultySection = new JLabel()
         {
-           ImageIcon backgroundImage = new ImageIcon("Resources/GameBasics.png");
-           Image scaledImage = backgroundImage.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
-           ImageIcon bgImage = new ImageIcon(scaledImage);
            @Override
            protected void paintComponent(Graphics g) 
            {
+               ImageIcon bgImage = new ImageIcon(difficultySectionImage);
                super.paintComponent(g);
                g.drawImage(bgImage.getImage(), 0, 0, getWidth(), getHeight(), null);
            }
@@ -695,6 +868,14 @@ public class InitialFrame
         Dimension d = difficultySection.getPreferredSize();
         difficultySection.setBounds(78, 77, 500, 500);
         difficultySection.setVisible(false);
+        difficultySection.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                changingDifficultyImage();
+            }
+        });
         return difficultySection;
     }
     
@@ -704,18 +885,21 @@ public class InitialFrame
         countDownLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 72));
         countDownLabel.setForeground(new Color(152, 251, 152));
         Dimension d = countDownLabel.getPreferredSize();
-        countDownLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getHeight() / 2), (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), (int)d.getWidth(), (int)d.getHeight());
+        countDownLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 
+                                 (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), 
+                                 (int) d.getWidth(), (int) d.getHeight());
         countDownLabel.setVisible(false);
         return countDownLabel;
     }
 
     public static JLabel createGuidingLabel()
     {
-        guidingLabel = new JLabel();
-        guidingLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+        guidingLabel = new JLabel("Guess any number!!");
+        guidingLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         guidingLabel.setForeground(new Color(152, 251, 152));
         Dimension d = guidingLabel.getPreferredSize();
-        guidingLabel.setBounds((initialFrame.getWidth() / 2) - (int)(d.getHeight() / 2), (initialFrame.getHeight() / 2) - (int)(d.getHeight() / 2), (int)d.getWidth(), (int)d.getHeight());
+        guidingLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d.getWidth() / 2), 350, (int)d.getWidth(), (int)d.getHeight());
+        guidingLabel.setVisible(true);
         return guidingLabel;
     }
     
@@ -742,21 +926,34 @@ public class InitialFrame
     
     public static JLabel createTimerLabel()
     {
-        timerLabel = new JLabel("0:00");
-        timerLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        timerLabel = new JLabel("Time Left:  0m, 00s");
+        timerLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
         timerLabel.setForeground(new Color(152, 251, 152));
         Dimension d = timerLabel.getPreferredSize();
-        timerLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        timerLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d.getWidth() / 2), 50, (int)d.getWidth(), (int)d.getHeight());
+        timerLabel.setVisible(true);
         return timerLabel;
+    }
+    
+    public static JLabel createNumberLabel()
+    {
+        numberLabel = new JLabel("0");
+        numberLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 60));
+        numberLabel.setForeground(new Color(152, 251, 152));
+        Dimension d = numberLabel.getPreferredSize();
+        numberLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d.getWidth() / 2), 220, (int)d.getWidth(), (int)d.getHeight());
+        numberLabel.setVisible(true);
+        return numberLabel;
     }
     
     public static JLabel createNumberHolder()
     {
-        numberHolderLabel = new JLabel("_______");
-        numberHolderLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 72));
+        numberHolderLabel = new JLabel("___________");
+        numberHolderLabel.setFont(new Font("Consolas", Font.PLAIN, 50));
         numberHolderLabel.setForeground(new Color(152, 251, 152));
         Dimension d = numberHolderLabel.getPreferredSize();
-        numberHolderLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        numberHolderLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d.getWidth() / 2), 250, (int)d.getWidth(), (int)d.getHeight());
+        numberHolderLabel.setVisible(true);
         return numberHolderLabel;
     }
     
@@ -766,7 +963,8 @@ public class InitialFrame
         attemptLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
         attemptLabel.setForeground(new Color(152, 251, 152));
         Dimension d = attemptLabel.getPreferredSize();
-        attemptLabel.setBounds(10, 10, (int)d.getWidth(), (int)d.getHeight());
+        attemptLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d.getWidth() / 2), 150, (int)d.getWidth(), (int)d.getHeight());
+        attemptLabel.setVisible(true);
         return attemptLabel;
     }
     
@@ -875,11 +1073,45 @@ public class InitialFrame
         return closingWindow;
     }
     
+    public static javax.swing.Timer createGuessingTimer()
+    {
+        guessingTimer = new javax.swing.Timer(1000, new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (minutesTime == 0 && secondsTime == 0)
+                {
+                    //GameOver();
+                    timerLabel.setText("0:00");
+                    gameOverLabel.setText("<html>You're out of time :<br>"
+                            + "Correct number: " + randomNumber + "</html>");
+                    countDownTimer.stop();
+                }
+                else
+                {
+                    if (secondsTime == 0)
+                    {
+                        minutesTime--;
+                        secondsTime = 59;
+                    }
+                    else
+                    {
+                        secondsTime--;
+                    }
+                    timerLabel.setText(String.format("Time Left: %dm, %02ds%n", minutesTime, secondsTime));
+                }
+                middleChecking();
+            }
+        });
+        return guessingTimer;
+    }
+    
     public static javax.swing.Timer createCountDownTimer()
     {
         countDownTimer = new javax.swing.Timer(1, new ActionListener()
         {
-            int countDown = 5;
+            int countDown = 4;
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -891,7 +1123,7 @@ public class InitialFrame
                     }
                     else
                     {
-                        countDownLabel.setText(countDown - 1+ "");
+                        countDownLabel.setText(Integer.toString(countDown - 1));
                     }
                     countDown--;
                     countDownTimer.setDelay(1000);
@@ -902,11 +1134,28 @@ public class InitialFrame
                 }
                 else
                 {
-                    scalingImage("Properties/MainMenuBackground.png");
+                    scalingImage("Resources/MainMenuBackground.png");
+                    countDownLabel.setVisible(false);
+                    guessingPanel.setVisible(true);
+                    pressAnyButton.setText("");
+                    guessingTimer.start();
                 }
             }
         });
         return countDownTimer;
+    }
+    
+    private static boolean isInteger(String s) 
+    {
+        try 
+        {
+            Integer.parseInt(s);
+            return true;
+        } 
+        catch(NumberFormatException e) 
+        {
+            return false;
+        }
     }
     
     public static void exitConfirmation()
@@ -922,9 +1171,15 @@ public class InitialFrame
         }
     }
     
-    public static void guessingProcess(int limit, int attempts, int minutes, int seconds)
+    public static void guessingProcess(int limit, int att, int min, int sec)
     {
-        
+        attempts = att;
+        guessingLimit = limit;
+        randomNumber = new Random().nextInt(limit);
+        minutesTime = min;
+        secondsTime = sec;
+        isDifficultySection = false;
+        isGuessing = true;
     }
     
     public static void scalingImage(String image)
@@ -932,6 +1187,36 @@ public class InitialFrame
         ImageIcon backgroundImage = new ImageIcon(image);
         scaledImage = backgroundImage.getImage().getScaledInstance(initialFrame.getWidth(), initialFrame.getHeight(), Image.SCALE_SMOOTH);
         initialFrame.repaint();
+    }
+
+    public static void changingDifficultyImage()
+    {
+        if(index == 0)
+        {
+            difficultySectionImage = difficultySectionImages[1].getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+            index++;
+        }
+        else
+        {
+            difficultySectionImage = difficultySectionImages[0].getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+            index--;
+        }
+        difficultySection.repaint();
+    }
+    
+    public static void middleChecking()
+    {
+        Dimension[] d =
+        {
+            timerLabel.getPreferredSize(),
+            numberLabel.getPreferredSize(),
+            attemptLabel.getPreferredSize(),
+            guidingLabel.getPreferredSize()
+        };
+        timerLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[0].getWidth() / 2), 50, (int)d[0].getWidth(), (int)d[0].getHeight());
+        numberLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[1].getWidth() / 2), 220, (int)d[1].getWidth(), (int)d[1].getHeight());
+        attemptLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[2].getWidth() / 2), 150, (int)d[2].getWidth(), (int)d[2].getHeight());
+        guidingLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[3].getWidth() / 2), 350, (int)d[3].getWidth(), (int)d[3].getHeight());
     }
 
     public static void main(String[] args) 
