@@ -429,6 +429,12 @@ public class InitialFrame
                                     else if(currentNumber == randomNumber) 
                                     {
                                         countDownLabel.setText(null);
+                                        isGuessing = false;
+                                        isANumber = false;
+										winnerVoid();
+                                        distributionVoid();
+                                        gameOverVisible(true);
+                                        isGameOver = true;
                                         guessingTimer.stop();
                                     }
 
@@ -455,8 +461,9 @@ public class InitialFrame
                                         }
                                         isGuessing = false;
                                         isANumber = false;
+                                        distributionVoid();
                                         gameOverVisible(true);
-                                        isGameOver = true;  
+                                        isGameOver = true;
                                         guessingTimer.stop();
                                     }
                                 }
@@ -763,7 +770,7 @@ public class InitialFrame
                scalingImage("Resources/DarkBackground.png");
                countDownLabel.setVisible(true);
                countDownTimer.start();
-               guessingProcess(250, 4, 1, 0);
+               guessingProcess(250, "Easy", 4, 1, 0);
            }
        });
        return easyLabel;
@@ -797,7 +804,7 @@ public class InitialFrame
                 scalingImage("Resources/DarkBackground.png");
                 countDownLabel.setVisible(true);
                 countDownTimer.start();
-                guessingProcess(500, 6, 1, 30);
+                guessingProcess(500, "Normal", 6, 1, 30);
             }
         });
         return normalLabel;
@@ -822,7 +829,7 @@ public class InitialFrame
         Dimension d = hardLabel.getPreferredSize();
         hardLabel.setBounds(830, 430, 295, 100);
         hardLabel.setVisible(false);
-        easyLabel.addMouseListener(new MouseAdapter()
+        hardLabel.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
@@ -831,7 +838,7 @@ public class InitialFrame
                 scalingImage("Resources/DarkBackground.png");
                 countDownLabel.setVisible(true);
                 countDownTimer.start();
-                guessingProcess(1000, 8, 2, 0);
+                guessingProcess(1000, "Hard",8, 2, 0);
             }
         });
         return hardLabel;
@@ -1145,6 +1152,9 @@ public class InitialFrame
                     Dimension d = pressAnyButton.getPreferredSize();
                     pressAnyButton.setBounds((initialFrame.getWidth() / 2) - (int)(d.getWidth() / 2), 620, (int)d.getWidth(), (int)d.getHeight());
                     isGuessing = false;
+                    isANumber = false;
+                    distributionVoid();
+                    gameOverVisible(true);
                     isGameOver = true;
                     guessingTimer.stop();
                 }
@@ -1231,10 +1241,11 @@ public class InitialFrame
         }
     }
     
-    public static void guessingProcess(int limit, int att, int min, int sec)
+    public static void guessingProcess(int limit, String diff, int att, int min, int sec)
     {
         attempts = att;
         guessingLimit = limit;
+        difficultyName = diff;
         randomNumber = new Random().nextInt(limit);
         minutesTime = min;
         secondsTime = sec;
@@ -1279,6 +1290,62 @@ public class InitialFrame
         guidingLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[3].getWidth() / 2), 350, (int)d[3].getWidth(), (int)d[3].getHeight());
     }
 
+    private void distributionVoid() 
+    {
+        String pastText = null;
+        try (BufferedReader distributionFileRead = new BufferedReader(new FileReader(distributionFilePath)))
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+        while ((line = distributionFileRead.readLine()) != null) 
+        {
+            stringBuilder.append(line).append("\n");
+        }
+        pastText = stringBuilder.toString();
+    }
+    catch (IOException e) 
+    {
+        e.printStackTrace(); // Handle the exception appropriately
+    }
+
+    try (PrintWriter distributionIni = new PrintWriter(new FileWriter(distributionFilePath))) 
+	{
+        distributionIni.print(pastText);
+        if ("Normal".equals(difficultyName)) 
+        {
+            distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
+                            "\t  " + difficultyName + "\t  " +
+                            randomNumber + "\t\t " + isGuessed);
+        }
+        else
+        {
+            distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
+                            "\t  " + difficultyName + "\t\t  " +
+                            randomNumber + "\t\t " + isGuessed);
+        }
+    }
+catch (IOException e) 
+{
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+    }
+
+    public static void winnerVoid();
+	{
+        try (PrintWriter winnersWrite = new PrintWriter(new FileWriter(winnersFilePath))) 
+		{
+            winnersWrite.println("Winners:\n" +
+                         "Easy: " + easy + "\n" +
+                         "Normal: " + normal + "\n" +
+                         "Hard: " + hard + "\n");
+        }
+	    catch(IOException e)
+		{
+            e.printStackTrace(); // Handle the exception appropriately
+		}
+    winnersFileRead();
+	}
+	
     public static void main(String[] args) 
     {
         initializeComponent();
