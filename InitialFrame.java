@@ -1280,95 +1280,97 @@ public class InitialFrame
         difficultySection.repaint();
     }
 
-    public static void middleChecking() 
+    public static void middleChecking()
     {
-        Dimension[] d = 
+        Dimension[] d =
         {
-            timerLabel.getPreferredSize(), numberLabel.getPreferredSize(), attemptLabel.getPreferredSize(), guidingLabel.getPreferredSize()};
-            timerLabel.setBounds((guessingPanel.getWidth() / 2) - (int) (d[0].getWidth() / 2), 50, (int) d[0].getWidth(), (int) d[0].getHeight());
-            numberLabel.setBounds((guessingPanel.getWidth() / 2) - (int) (d[1].getWidth() / 2), 220, (int) d[1].getWidth(), (int) d[1].getHeight());
-            attemptLabel.setBounds((guessingPanel.getWidth() / 2) - (int) (d[2].getWidth() / 2), 150, (int) d[2].getWidth(), (int) d[2].getHeight());
-            guidingLabel.setBounds((guessingPanel.getWidth() / 2) - (int) (d[3].getWidth() / 2), 350, (int) d[3].getWidth(), (int) d[3].getHeight());
-        }
-    }
+            timerLabel.getPreferredSize(),
+            numberLabel.getPreferredSize(),
+            attemptLabel.getPreferredSize(),
+            guidingLabel.getPreferredSize()
+        };
+        timerLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[0].getWidth() / 2), 50, (int)d[0].getWidth(), (int)d[0].getHeight());
+        numberLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[1].getWidth() / 2), 220, (int)d[1].getWidth(), (int)d[1].getHeight());
+        attemptLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[2].getWidth() / 2), 150, (int)d[2].getWidth(), (int)d[2].getHeight());
+        guidingLabel.setBounds((guessingPanel.getWidth() / 2) - (int)(d[3].getWidth() / 2), 350, (int)d[3].getWidth(), (int)d[3].getHeight());
+   }
 
-    public static void distributionVoid() 
-    {
-        String pastText = null;
-        try (BufferedReader distributionFileRead = new BufferedReader(new FileReader(distributionFilePath)))
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = distributionFileRead.readLine()) != null) 
-            {
-                stringBuilder.append(line).append("\n");
-            }
-            pastText = stringBuilder.toString();
-        }
-        catch (IOException e) 
-        {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
-   
-        try (PrintWriter distributionIni = new PrintWriter(new FileWriter(distributionFilePath))) 
-        {
-            distributionIni.print(pastText);
-            if ("Normal".equals(difficultyName)) 
-            {
-                distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
-                       "\t  " + difficultyName + "\t  " +
-                       randomNumber + "\t\t " + isGuessed);
-            }
-            else
-            {
-                distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
-                       "\t  " + difficultyName + "\t\t  " +
-                       randomNumber + "\t\t " + isGuessed);
-            }
-        }
-        catch (IOException e) 
-        {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
-    }
+	public static void distributionVoid() 
+	{
+		String pastText = null;
+		try (BufferedReader distributionFileRead = new BufferedReader(new FileReader(distributionFilePath)))
+		{
+			StringBuilder stringBuilder = new StringBuilder();
+			String line;
+			while ((line = distributionFileRead.readLine()) != null) 
+			{
+				stringBuilder.append(line).append("\n");         
+			}
+			pastText = stringBuilder.toString();
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace(); // Handle the exception appropriately
+		}
+		   
+		try (PrintWriter distributionIni = new PrintWriter(new FileWriter(distributionFilePath))) 
+		{
+			distributionIni.print(pastText);
+			if ("Normal".equals(difficultyName)) 
+			{
+				distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
+																					"\t  " + difficultyName + "\t  " +
+																					randomNumber + "\t\t " + isGuessed);
+			}
+			else
+			{
+				distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
+																				"\t  " + difficultyName + "\t\t  " +
+																				randomNumber + "\t\t " + isGuessed);
+			}
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace(); // Handle the exception appropriately
+		}
+	}
 
-   
-    public static void winnerVoid()
-    {
-        try (PrintWriter winnersWrite = new PrintWriter(new FileWriter(winnersFilePath))) 
-        {
-            switch(guessingLimit)
-            {
-                case 250:
-                {
-                    easy++;
-                    break;
-                }
-                case 500:
-                {
-                    normal++;
-                    break;
-                }
-                case 1000:
-                {
-                    hard++;
-                    break;
-		};
-            }
-            winnersWrite.println("Winners:\n" +
-                    "Easy: " + easy + "\n" +
-                      "Normal: " + normal + "\n" +
-                      "Hard: " + hard + "\n");
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
-        winnersFileRead();
-    }
-	
+	public static void winnerVoid()
+	{
+		try (PrintWriter winnersWrite = new PrintWriter(new FileWriter(winnersFilePath))) 
+		{
+			switch(guessingLimit)
+			{
+				case 250:
+				{
+					easy++;
+					break;
+				}
+				case 500:
+				{
+					normal++;
+					break;
+				}
+				case 1000:
+				{
+					hard++;
+					break;
+				}
+			}
+			winnersWrite.println("Winners:\n" +
+			                     "Easy: " + easy + "\n" +
+			                     "Normal: " + normal + "\n" +
+			                     "Hard: " + hard + "\n");
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace(); // Handle the exception appropriately
+		}
+		winnersFileRead();
+	}
+
     public static void main(String[] args) 
     {
-       initializeComponent();
+        initializeComponent();
     }
 }
