@@ -24,16 +24,52 @@ public class InitialFrame
     };
     public static final String[] tipsText = 
     {
-        "Start with a Lucky Number. Today's might be your day!", "Try to follow with a fibonacci sequence.", "Close your eyes and guess whatever.", "Dive into the world of primes and see if the answer lies within.",
-        "Eliminate possibilities through step by step.", "Is it your month? put that month and day into a guess!", "Try a number in the middle.", "Try to guess in thirds as well.", "Maybe ask yourself why do you have to guess the number.", "Maybe press three random numbers in the keyboard.",
-        "See if the reversed number holds the secret.", "Try a palindrome number.", "Either you guess or not, at least you had fun!", "Ask for a therapist for a random number.", "Maybe the nature will tell you whats the number.", "Take a quantum leap of faith.",
-        "Ask a Professor for a random number", "Think random for today!", "Try to be more practical. Guess or forfeit.", "Try to guess within the Golden Ratio.", "Apply Sudoku strategies to your guessing game.", "Let's guess for something!", "Guess, Guess, Guess! (pun intended)",
-        "Mathematical Magic: Sprinkle some math spells.", "Maybe ask chatGPT for a random number.", "Maybe ask yourself where did the number go.", "What's the number? Who knows, honestly. :3", "Maybe ask google for a random number.", "Ask for a friend.", "...............",
-        "Pick a number with a pirate's swagger.", "Have a luck for quite some time!", "Debate the number with your friends.", "Please play this game!!!!", "Hello World!", "Let's go Cluster 2!!", "Also please also play for other booths :3", "Try to do lucky numbers like 444 or something lol.",
-        "Look to the python leaves for guidance", "Apply your favorite geeky algorithm for the perfect guess.", "Channel your inner artist and paint the number in your mind.", "Try to focus for a number that you dont know.", "Unhappy go lucky!",
-        "Saan aabot ang \u20B1"
-            + "10 mo?",
-        "Maybe guess the number with your birthday.", "Try to guess with how many times you have seen people today."
+        "Start with a Lucky Number. Today's might be your day!", 
+        "Try to follow with a fibonacci sequence.", 
+	"Close your eyes and guess whatever.",
+        "Dive into the world of primes and see if the answer lies within.",
+        "Eliminate possibilities through step by step.", 
+	"Is it your month? put that month and day into a guess!", 
+	"Try a number in the middle.", 
+	"Try to guess in thirds as well.",
+        "Maybe ask yourself why do you have to guess the number.", 
+	"Maybe press three random numbers in the keyboard.",
+        "See if the reversed number holds the secret.", 
+	"Try a palindrome number.", 
+        "Either you guess or not, at least you had fun!", 
+	"Ask for a therapist for a random number.", 
+	"Maybe the nature will tell you whats the number.", 
+        "Take a quantum leap of faith.",
+        "Ask a Professor for a random number", 
+	"Think random for today!", 
+	"Try to be more practical. Guess or forfeit.", 
+	"Try to guess within the Golden Ratio.", 
+	"Apply Sudoku strategies to your guessing game.", 
+	"Let's guess for something!",
+	"Guess, Guess, Guess! (pun intended)",
+        "Mathematical Magic: Sprinkle some math spells.", 
+	"Maybe ask chatGPT for a random number.", 
+	"Maybe ask yourself where did the number go.", 
+	"What's the number? Who knows, honestly. :3", 
+        "Maybe ask google for a random number.", 
+	"Ask for a friend.", 
+        "...............",
+        "Pick a number with a pirate's swagger.",
+	"Have a luck for quite some time!", 
+	"Debate the number with your friends.", 
+	"Please play this game!!!!", 
+	"Hello World!", 
+	"Let's go Cluster 2!!", 
+	"Also please also play for other booths :3", 
+	"Try to do lucky numbers like 444 or something lol.",
+        "Look to the python leaves for guidance", 
+	"Apply your favorite geeky algorithm for the perfect guess.", 
+	"Channel your inner artist and paint the number in your mind.", 
+	"Try to focus for a number that you dont know.", 
+	"Unhappy go lucky!",
+        "Saan aabot ang \u20B1" + "10 mo?",
+        "Maybe guess the number with your birthday.",
+        "Try to guess with how many times you have seen people today."
     };
     //
     // The Frame and the panels goes here
@@ -1259,7 +1295,7 @@ public class InitialFrame
     public static void distributionVoid() 
     {
         String pastText = null;
-        try (BufferedReader distributionFileRead = new BufferedReader(new FileReader(distributionFilePath))) 
+        try (BufferedReader distributionFileRead = new BufferedReader(new FileReader(distributionFilePath)))
         {
             StringBuilder stringBuilder = new StringBuilder();
             String line;
@@ -1268,56 +1304,61 @@ public class InitialFrame
                 stringBuilder.append(line).append("\n");
             }
             pastText = stringBuilder.toString();
-        } 
-        catch(IOException e) 
+        }
+        catch (IOException e) 
         {
             e.printStackTrace(); // Handle the exception appropriately
         }
-
+   
         try (PrintWriter distributionIni = new PrintWriter(new FileWriter(distributionFilePath))) 
         {
             distributionIni.print(pastText);
             if ("Normal".equals(difficultyName)) 
             {
-                distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) + "\t  " + difficultyName + "\t  " + randomNumber + "\t\t " + isGuessed);
-            } 
-            else 
-            {
-                distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) + "\t  " + difficultyName + "\t\t  " + randomNumber + "\t\t " + isGuessed);
+                distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
+                       "\t  " + difficultyName + "\t  " +
+                       randomNumber + "\t\t " + isGuessed);
             }
-        } 
+            else
+            {
+                distributionIni.println(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()) +
+                       "\t  " + difficultyName + "\t\t  " +
+                       randomNumber + "\t\t " + isGuessed);
+            }
+        }
         catch (IOException e) 
         {
             e.printStackTrace(); // Handle the exception appropriately
         }
     }
-    
+
+   
     public static void winnerVoid()
     {
         try (PrintWriter winnersWrite = new PrintWriter(new FileWriter(winnersFilePath))) 
         {
             switch(guessingLimit)
             {
-              case 250:
-               {
-                  easy++;
-                  break;
-               }
-               case 500:
-               {
-                  normal++;
-                  break;
-               }
-               case 1000:
-               {
-                  hard++;
-                  break;
-               }
-           }
-           winnersWrite.println("Winners:\n" +
-                       "Easy: " + easy + "\n" +
-                       "Normal: " + normal + "\n" +
-                       "Hard: " + hard + "\n");
+                case 250:
+                {
+                    easy++;
+                    break;
+                }
+                case 500:
+                {
+                    normal++;
+                    break;
+                }
+                case 1000:
+                {
+                    hard++;
+                    break;
+		};
+            }
+            winnersWrite.println("Winners:\n" +
+                    "Easy: " + easy + "\n" +
+                      "Normal: " + normal + "\n" +
+                      "Hard: " + hard + "\n");
         }
         catch(IOException e)
         {
@@ -1328,6 +1369,6 @@ public class InitialFrame
 	
     public static void main(String[] args) 
     {
-        initializeComponent();
+       initializeComponent();
     }
 }
