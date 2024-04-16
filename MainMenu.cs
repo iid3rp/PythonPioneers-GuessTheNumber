@@ -119,7 +119,7 @@ namespace GuessTheNumberGame
 
         private void InitializeFiles()
         {
-            for (; ; )
+            for (;;)
             {
                 // checking the files
                 if (!Directory.Exists(programFolderPath))
@@ -151,7 +151,6 @@ namespace GuessTheNumberGame
                                                       "    Date & Time     |  Difficulty  |  Random Number  |   Guessed\n");
                         }
                     }
-
                     WinnersFileRead();
                     break;
                 }
@@ -411,6 +410,11 @@ namespace GuessTheNumberGame
             TipLabel.Text = TipsText[rand.Next(0, TipsText.Length - 1)];
             TipLabel.Location = new Point((MainMenuPanel.Width / 2) -
                                           (TipLabel.Width / 2), 646);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void NormalPicture_Click(object sender, EventArgs e)

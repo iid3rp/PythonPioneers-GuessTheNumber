@@ -106,8 +106,9 @@ namespace GuessTheNumberGame
             this.MainMenuPanel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuPanel.ForeColor = System.Drawing.Color.Transparent;
             this.MainMenuPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainMenuPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MainMenuPanel.Name = "MainMenuPanel";
-            this.MainMenuPanel.Size = new System.Drawing.Size(1264, 681);
+            this.MainMenuPanel.Size = new System.Drawing.Size(1685, 838);
             this.MainMenuPanel.TabIndex = 0;
             this.MainMenuPanel.Click += new System.EventHandler(this.MainMenuClick);
             this.MainMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WindowDown);
@@ -118,9 +119,10 @@ namespace GuessTheNumberGame
             // 
             this.TipLabel.AutoSize = true;
             this.TipLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.TipLabel.Location = new System.Drawing.Point(601, 646);
+            this.TipLabel.Location = new System.Drawing.Point(801, 795);
+            this.TipLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TipLabel.Name = "TipLabel";
-            this.TipLabel.Size = new System.Drawing.Size(122, 23);
+            this.TipLabel.Size = new System.Drawing.Size(158, 28);
             this.TipLabel.TabIndex = 39;
             this.TipLabel.Text = "Tips Goes Here";
             // 
@@ -129,9 +131,10 @@ namespace GuessTheNumberGame
             this.WinnersLabel.AutoSize = true;
             this.WinnersLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WinnersLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.WinnersLabel.Location = new System.Drawing.Point(12, 517);
+            this.WinnersLabel.Location = new System.Drawing.Point(16, 636);
+            this.WinnersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.WinnersLabel.Name = "WinnersLabel";
-            this.WinnersLabel.Size = new System.Drawing.Size(151, 152);
+            this.WinnersLabel.Size = new System.Drawing.Size(187, 188);
             this.WinnersLabel.TabIndex = 38;
             this.WinnersLabel.Text = "Winners:\r\nEasy - 0\r\nNormal - 0\r\nHard - 0";
             // 
@@ -139,9 +142,10 @@ namespace GuessTheNumberGame
             // 
             this.NumberPage.AutoSize = true;
             this.NumberPage.ForeColor = System.Drawing.Color.PaleGreen;
-            this.NumberPage.Location = new System.Drawing.Point(1008, 646);
+            this.NumberPage.Location = new System.Drawing.Point(1344, 795);
+            this.NumberPage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NumberPage.Name = "NumberPage";
-            this.NumberPage.Size = new System.Drawing.Size(203, 23);
+            this.NumberPage.Size = new System.Drawing.Size(251, 28);
             this.NumberPage.TabIndex = 37;
             this.NumberPage.Text = "Left - Right or Click Panel";
             // 
@@ -151,9 +155,10 @@ namespace GuessTheNumberGame
             this.GameOverLabel.BackColor = System.Drawing.Color.Transparent;
             this.GameOverLabel.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GameOverLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.GameOverLabel.Location = new System.Drawing.Point(446, 1360);
+            this.GameOverLabel.Location = new System.Drawing.Point(595, 1674);
+            this.GameOverLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.GameOverLabel.Name = "GameOverLabel";
-            this.GameOverLabel.Size = new System.Drawing.Size(362, 135);
+            this.GameOverLabel.Size = new System.Drawing.Size(446, 168);
             this.GameOverLabel.TabIndex = 36;
             this.GameOverLabel.Text = "Out Of Attempts :<\r\nCurrent Number = 000\r\nCorrect Number = 000\r\n";
             this.GameOverLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -167,9 +172,10 @@ namespace GuessTheNumberGame
             this.GuessingPanel.Controls.Add(this.NumberHolderLabel);
             this.GuessingPanel.Controls.Add(this.GuidingLabel);
             this.GuessingPanel.Controls.Add(this.CountdownLabel);
-            this.GuessingPanel.Location = new System.Drawing.Point(382, 1072);
+            this.GuessingPanel.Location = new System.Drawing.Point(509, 1319);
+            this.GuessingPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GuessingPanel.Name = "GuessingPanel";
-            this.GuessingPanel.Size = new System.Drawing.Size(500, 500);
+            this.GuessingPanel.Size = new System.Drawing.Size(667, 615);
             this.GuessingPanel.TabIndex = 35;
             // 
             // AttemptLabel
@@ -178,9 +184,10 @@ namespace GuessTheNumberGame
             this.AttemptLabel.AutoSize = true;
             this.AttemptLabel.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AttemptLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.AttemptLabel.Location = new System.Drawing.Point(163, 190);
+            this.AttemptLabel.Location = new System.Drawing.Point(217, 234);
+            this.AttemptLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AttemptLabel.Name = "AttemptLabel";
-            this.AttemptLabel.Size = new System.Drawing.Size(178, 38);
+            this.AttemptLabel.Size = new System.Drawing.Size(221, 47);
             this.AttemptLabel.TabIndex = 14;
             this.AttemptLabel.Text = "Attempts: #";
             this.AttemptLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -191,9 +198,10 @@ namespace GuessTheNumberGame
             this.NumberHolderLabel.AutoSize = true;
             this.NumberHolderLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumberHolderLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.NumberHolderLabel.Location = new System.Drawing.Point(141, 252);
+            this.NumberHolderLabel.Location = new System.Drawing.Point(188, 310);
+            this.NumberHolderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NumberHolderLabel.Name = "NumberHolderLabel";
-            this.NumberHolderLabel.Size = new System.Drawing.Size(220, 90);
+            this.NumberHolderLabel.Size = new System.Drawing.Size(278, 112);
             this.NumberHolderLabel.TabIndex = 13;
             this.NumberHolderLabel.Text = "-------";
             this.NumberHolderLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -203,9 +211,10 @@ namespace GuessTheNumberGame
             this.GuidingLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.GuidingLabel.AutoSize = true;
             this.GuidingLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.GuidingLabel.Location = new System.Drawing.Point(156, 359);
+            this.GuidingLabel.Location = new System.Drawing.Point(208, 442);
+            this.GuidingLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.GuidingLabel.Name = "GuidingLabel";
-            this.GuidingLabel.Size = new System.Drawing.Size(191, 23);
+            this.GuidingLabel.Size = new System.Drawing.Size(238, 28);
             this.GuidingLabel.TabIndex = 9;
             this.GuidingLabel.Text = "Number must be 0 - 250";
             this.GuidingLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -216,9 +225,10 @@ namespace GuessTheNumberGame
             this.CountdownLabel.AutoSize = true;
             this.CountdownLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CountdownLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.CountdownLabel.Location = new System.Drawing.Point(167, 56);
+            this.CountdownLabel.Location = new System.Drawing.Point(223, 69);
+            this.CountdownLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CountdownLabel.Name = "CountdownLabel";
-            this.CountdownLabel.Size = new System.Drawing.Size(174, 90);
+            this.CountdownLabel.Size = new System.Drawing.Size(218, 112);
             this.CountdownLabel.TabIndex = 11;
             this.CountdownLabel.Text = "0:00\r\n";
             this.CountdownLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -226,9 +236,10 @@ namespace GuessTheNumberGame
             // GameOverPicture
             // 
             this.GameOverPicture.Image = global::GuessTheNumberGame.Properties.Resources.GameOver;
-            this.GameOverPicture.Location = new System.Drawing.Point(343, 1109);
+            this.GameOverPicture.Location = new System.Drawing.Point(457, 1365);
+            this.GameOverPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GameOverPicture.Name = "GameOverPicture";
-            this.GameOverPicture.Size = new System.Drawing.Size(531, 180);
+            this.GameOverPicture.Size = new System.Drawing.Size(708, 222);
             this.GameOverPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.GameOverPicture.TabIndex = 33;
             this.GameOverPicture.TabStop = false;
@@ -236,9 +247,10 @@ namespace GuessTheNumberGame
             // GoHome
             // 
             this.GoHome.Image = ((System.Drawing.Image)(resources.GetObject("GoHome.Image")));
-            this.GoHome.Location = new System.Drawing.Point(12, 1619);
+            this.GoHome.Location = new System.Drawing.Point(16, 1993);
+            this.GoHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GoHome.Name = "GoHome";
-            this.GoHome.Size = new System.Drawing.Size(147, 50);
+            this.GoHome.Size = new System.Drawing.Size(196, 62);
             this.GoHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.GoHome.TabIndex = 32;
             this.GoHome.TabStop = false;
@@ -248,9 +260,10 @@ namespace GuessTheNumberGame
             // 
             this.HardPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.HardPicture.Image = ((System.Drawing.Image)(resources.GetObject("HardPicture.Image")));
-            this.HardPicture.Location = new System.Drawing.Point(830, 1430);
+            this.HardPicture.Location = new System.Drawing.Point(1107, 1760);
+            this.HardPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.HardPicture.Name = "HardPicture";
-            this.HardPicture.Size = new System.Drawing.Size(295, 100);
+            this.HardPicture.Size = new System.Drawing.Size(393, 123);
             this.HardPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.HardPicture.TabIndex = 31;
             this.HardPicture.TabStop = false;
@@ -260,9 +273,10 @@ namespace GuessTheNumberGame
             // 
             this.NormalPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NormalPicture.Image = ((System.Drawing.Image)(resources.GetObject("NormalPicture.Image")));
-            this.NormalPicture.Location = new System.Drawing.Point(830, 1288);
+            this.NormalPicture.Location = new System.Drawing.Point(1107, 1585);
+            this.NormalPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NormalPicture.Name = "NormalPicture";
-            this.NormalPicture.Size = new System.Drawing.Size(295, 100);
+            this.NormalPicture.Size = new System.Drawing.Size(393, 123);
             this.NormalPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.NormalPicture.TabIndex = 30;
             this.NormalPicture.TabStop = false;
@@ -272,9 +286,10 @@ namespace GuessTheNumberGame
             // 
             this.EasyPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.EasyPicture.Image = ((System.Drawing.Image)(resources.GetObject("EasyPicture.Image")));
-            this.EasyPicture.Location = new System.Drawing.Point(830, 1145);
+            this.EasyPicture.Location = new System.Drawing.Point(1107, 1409);
+            this.EasyPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.EasyPicture.Name = "EasyPicture";
-            this.EasyPicture.Size = new System.Drawing.Size(295, 100);
+            this.EasyPicture.Size = new System.Drawing.Size(393, 123);
             this.EasyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.EasyPicture.TabIndex = 29;
             this.EasyPicture.TabStop = false;
@@ -284,9 +299,10 @@ namespace GuessTheNumberGame
             // 
             this.DifficultySectionPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DifficultySectionPicture.Image = ((System.Drawing.Image)(resources.GetObject("DifficultySectionPicture.Image")));
-            this.DifficultySectionPicture.Location = new System.Drawing.Point(78, 1077);
+            this.DifficultySectionPicture.Location = new System.Drawing.Point(104, 1326);
+            this.DifficultySectionPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DifficultySectionPicture.Name = "DifficultySectionPicture";
-            this.DifficultySectionPicture.Size = new System.Drawing.Size(500, 500);
+            this.DifficultySectionPicture.Size = new System.Drawing.Size(667, 615);
             this.DifficultySectionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.DifficultySectionPicture.TabIndex = 23;
             this.DifficultySectionPicture.TabStop = false;
@@ -298,9 +314,10 @@ namespace GuessTheNumberGame
             this.CountingDownLabel.AutoSize = true;
             this.CountingDownLabel.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CountingDownLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.CountingDownLabel.Location = new System.Drawing.Point(624, 1290);
+            this.CountingDownLabel.Location = new System.Drawing.Point(832, 1588);
+            this.CountingDownLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CountingDownLabel.Name = "CountingDownLabel";
-            this.CountingDownLabel.Size = new System.Drawing.Size(77, 90);
+            this.CountingDownLabel.Size = new System.Drawing.Size(96, 112);
             this.CountingDownLabel.TabIndex = 22;
             this.CountingDownLabel.Text = "3";
             this.CountingDownLabel.Visible = false;
@@ -309,9 +326,10 @@ namespace GuessTheNumberGame
             // 
             this.GuessTheNumberLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.GuessTheNumberLogo.Image = ((System.Drawing.Image)(resources.GetObject("GuessTheNumberLogo.Image")));
-            this.GuessTheNumberLogo.Location = new System.Drawing.Point(269, 1033);
+            this.GuessTheNumberLogo.Location = new System.Drawing.Point(359, 1271);
+            this.GuessTheNumberLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GuessTheNumberLogo.Name = "GuessTheNumberLogo";
-            this.GuessTheNumberLogo.Size = new System.Drawing.Size(753, 300);
+            this.GuessTheNumberLogo.Size = new System.Drawing.Size(1004, 369);
             this.GuessTheNumberLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.GuessTheNumberLogo.TabIndex = 7;
             this.GuessTheNumberLogo.TabStop = false;
@@ -320,9 +338,10 @@ namespace GuessTheNumberGame
             // 
             this.GitHubPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.GitHubPicture.Image = global::GuessTheNumberGame.Properties.Resources.GitHub40p;
-            this.GitHubPicture.Location = new System.Drawing.Point(1232, 649);
+            this.GitHubPicture.Location = new System.Drawing.Point(1643, 799);
+            this.GitHubPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GitHubPicture.Name = "GitHubPicture";
-            this.GitHubPicture.Size = new System.Drawing.Size(20, 20);
+            this.GitHubPicture.Size = new System.Drawing.Size(27, 25);
             this.GitHubPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.GitHubPicture.TabIndex = 6;
             this.GitHubPicture.TabStop = false;
@@ -334,9 +353,10 @@ namespace GuessTheNumberGame
             this.TimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.TimeLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.TimeLabel.Location = new System.Drawing.Point(12, 9);
+            this.TimeLabel.Location = new System.Drawing.Point(16, 11);
+            this.TimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TimeLabel.Name = "TimeLabel";
-            this.TimeLabel.Size = new System.Drawing.Size(209, 23);
+            this.TimeLabel.Size = new System.Drawing.Size(262, 28);
             this.TimeLabel.TabIndex = 5;
             this.TimeLabel.Text = "<DayType>, <DayNum> | <Time24>";
             this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -350,9 +370,10 @@ namespace GuessTheNumberGame
             this.MinimizeLabel.BackColor = System.Drawing.Color.Transparent;
             this.MinimizeLabel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimizeLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.MinimizeLabel.Location = new System.Drawing.Point(1212, 5);
+            this.MinimizeLabel.Location = new System.Drawing.Point(1616, 6);
+            this.MinimizeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.MinimizeLabel.Name = "MinimizeLabel";
-            this.MinimizeLabel.Size = new System.Drawing.Size(23, 18);
+            this.MinimizeLabel.Size = new System.Drawing.Size(31, 24);
             this.MinimizeLabel.TabIndex = 4;
             this.MinimizeLabel.Text = "---";
             this.MinimizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -365,9 +386,10 @@ namespace GuessTheNumberGame
             this.ClosingLabel.BackColor = System.Drawing.Color.Transparent;
             this.ClosingLabel.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClosingLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.ClosingLabel.Location = new System.Drawing.Point(1241, 5);
+            this.ClosingLabel.Location = new System.Drawing.Point(1655, 6);
+            this.ClosingLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ClosingLabel.Name = "ClosingLabel";
-            this.ClosingLabel.Size = new System.Drawing.Size(20, 20);
+            this.ClosingLabel.Size = new System.Drawing.Size(26, 26);
             this.ClosingLabel.TabIndex = 1;
             this.ClosingLabel.Text = "X";
             this.ClosingLabel.Click += new System.EventHandler(this.ClosingLabelClick);
@@ -379,9 +401,10 @@ namespace GuessTheNumberGame
             this.PressAnyButtonLabel.BackColor = System.Drawing.Color.Transparent;
             this.PressAnyButtonLabel.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PressAnyButtonLabel.ForeColor = System.Drawing.Color.PaleGreen;
-            this.PressAnyButtonLabel.Location = new System.Drawing.Point(373, -507);
+            this.PressAnyButtonLabel.Location = new System.Drawing.Point(497, -624);
+            this.PressAnyButtonLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PressAnyButtonLabel.Name = "PressAnyButtonLabel";
-            this.PressAnyButtonLabel.Size = new System.Drawing.Size(535, 45);
+            this.PressAnyButtonLabel.Size = new System.Drawing.Size(663, 56);
             this.PressAnyButtonLabel.TabIndex = 0;
             this.PressAnyButtonLabel.Text = "-  Press Any Button to Continue   -";
             // 
@@ -412,17 +435,18 @@ namespace GuessTheNumberGame
             // 
             // MainMenuForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.ClientSize = new System.Drawing.Size(1685, 838);
             this.Controls.Add(this.MainMenuPanel);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainMenuForm";
             this.Text = "Python Pioneers | Guess The Number";
             this.TransparencyKey = System.Drawing.SystemColors.ActiveBorder;

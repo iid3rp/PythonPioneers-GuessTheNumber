@@ -8,3 +8,13 @@ C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Deb
 C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\Guess The Number!.exe
 C:\Users\Administrator\Source\Repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\Guess The Number!.pdb
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\bin\Debug\Guess The Number!.exe.config
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\bin\Debug\Guess The Number!.exe
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\bin\Debug\Guess The Number!.pdb
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.AssemblyReference.cache
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\GuessTheNumberGame.MainMenuForm.resources
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\GuessTheNumberGame.Properties.Resources.resources
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.GenerateResource.cache
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\PythonPioneersGuessTheNumber.csproj.CoreCompileInputs.cache
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\Guess The Number!.exe
+C:\Users\iid3rp\source\repos\iid3rp\PythonPioneers-GuessTheNumber\obj\Debug\Guess The Number!.pdb
