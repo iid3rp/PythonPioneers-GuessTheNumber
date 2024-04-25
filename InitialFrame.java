@@ -113,7 +113,7 @@ public class InitialFrame
     //
     // File manipulation values
     //
-    public static String programFolderPath = InitialFrame.class + "/PythonPioneers-GuessTheNumber";
+    public static String programFolderPath = "/PythonPioneers-GuessTheNumber";
     public static String winnersFilePath = programFolderPath + "/Winners.txt"; // Provide the actual path
     public static String distributionFilePath = programFolderPath + "/Distribution.txt"; // Provide the actual path
     //
@@ -123,20 +123,17 @@ public class InitialFrame
     public static boolean isMainMenu, isDifficultySection, isGuessing, isANumber, isGuessed, isGameOver;
     public static Image scaledImage, difficultySectionImage;
     public static String stringHolder = "", difficultyName = "";
-    public static int
-    //
-    /// integer values
-    index = 1,
-    attempts = 0, 
-    secondsTime = 0, 
-    minutesTime = 0, 
-    guessingLimit = 0, 
-    currentNumber = 0, 
-    randomNumber = 0, 
-    countDown = 4,
-    easy = 0, 
-    normal = 0, 
-    hard = 0;
+    public static int index = 1;
+    public static int attempts = 0;
+    public static int secondsTime = 0;
+    public static int minutesTime = 0;
+    public static int guessingLimit = 0;
+    public static int currentNumber = 0;
+    public static int randomNumber = 0;
+    public static int countDown = 4;
+    public static int easy = 0;
+    public static int normal = 0;
+    public static int hard = 0;
     /// endregion
     //
     // File Manipulation process 
@@ -231,7 +228,7 @@ public class InitialFrame
                 catch (NumberFormatException e) 
                 {
                     e.printStackTrace();
-                    return 0; // if some thing is invalid within the file...
+                    return 0; // if something is invalid within the file...
                 }
             }
         }
@@ -818,7 +815,7 @@ public class InitialFrame
         easyLabel.setForeground(new Color(152, 251, 152));
         easyLabel.setBounds(830, 145, 295, 100);
         easyLabel.setVisible(false);
-        easyLabel.addMouseListener(new MouseAdapter() 
+        easyLabel.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e) 

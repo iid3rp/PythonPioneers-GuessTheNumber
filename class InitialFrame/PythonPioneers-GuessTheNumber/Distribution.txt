@@ -1,7 +1,0 @@
-Python Pioneers | Guess The Game
-Random distribution count:
-
-    Date & Time     |  Difficulty  |  Random Number  |   Guessed
-04/15/2024 10:43:18	  Hard		  771		 false
-04/15/2024 10:52:33	  Normal	  265		 false
-04/15/2024 10:56:00	  Hard		  211		 false
